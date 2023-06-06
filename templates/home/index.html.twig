@@ -1,7 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil - Ligne bleue
+{% endblock %}
 
 {% block body %}
+	<div class="white-stripe text-center mt-3">
+		<img src="{{ asset('build/images/logo.png') }}" alt="">
+	</div>
+	<div class="">
+		<h1 class="text-center mb-5 mt-3 text-light">
+			Bienvenue sur
+			{{ website }}
+			!
+		</h1>
+	</div>
+	<div class="bg-secondary p-4 mb-5 text-center">{{ slogan }}</div>
+	<div class="container">
+		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1">
+			<div class="col m-auto fw-bold text-center h4 text-light">Prêt à te former 
+				au numérique ?<br>Enregistre toi !</div>
+			<div class="col m-auto text-center">
+				<button type="button" class="btn btn-secondary m-auto mb-3 btn-lg w-75 text-uppercase">Connexion</button>
+				<button type="button" class="btn btn-secondary m-auto mb-3 btn-lg w-75 text-uppercase">Inscription</button>
+				<button type="button" class="btn btn-success m-auto mb-3 btn-lg w-75 text-uppercase">Je veux tester sans m'enregistrer</button>
+			</div>
+			<div class="col m-auto d-none d-lg-block text-light">“La Ligne Bleue est un site dédié à accompagner les personnes qui rencontrent
+            des difficultés avec les nouvelles technologies. Il offre une variété de tutoriels pour aider les 
+            utilisateurs à maîtriser différents outils et applications. En créant un compte, les utilisateurs 
+            peuvent suivre leur progression et accéder à des formations personnalisées, leur permettant ainsi 
+            de développer leurs compétences technologiques à leur propre rythme.”</div>
+		</div>
+	</div>
 
 {% endblock %}
