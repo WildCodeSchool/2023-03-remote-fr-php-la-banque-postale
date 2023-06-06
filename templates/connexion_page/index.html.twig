@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConnexionPageController!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center text-light">On se connaît déjà ?</h1>
+		<div class="row">
+			<div class="col-6 offset-3">
+				<div class="card m-auto bg-secondary align-items-center">
+					<div class="card-body">
+						<h4 class="card-title text-center">Connexion</h4>
+						<form>
+							<div class="form-group">
+								<label for="exampleInputEmail1">E-mail ou nom d'utilisateur</label>
+								<input type="email" class="form-control bg-primary text-light" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tape ici">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Mot de passe</label>
+								<input type="password" class="form-control bg-primary text-light" id="exampleInputPassword1" placeholder="Tape ici">
+								<a class="form-text text-muted" href="#" id="emailHelp">Oublié ?</a>
+							</div>
+							<div class="text-center">
+								<a href="#" class="btn btn-success">Clique ici pour te connecter</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}
