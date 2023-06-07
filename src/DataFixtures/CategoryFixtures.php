@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
-{   
+{
     public const CATEGORIES = [
         'Ligne bleue',
         'Utiliser mon téléphone',
