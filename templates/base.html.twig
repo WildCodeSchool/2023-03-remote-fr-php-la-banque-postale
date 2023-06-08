@@ -1,47 +1,31 @@
-<!DOCTYPE html>
-<html lang="fr" class="h-100">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
+
+        <link rel="icon" type="image/png" href="{{ asset('build/images/logo.png') }}"/>
+
         <title>
-            {% block title %}Projet 3 Name{% endblock %}
+            {% block title %}Projet 3 Name
+            {% endblock %}
         </title>
-        {# Run composer require symfony/webpack-encore-bundle to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="icon" type="image/png" href="{{ asset('build/images/logo.png') }}"/>
-		<title>
-			{% block title %}Projet 3 Name
-			{% endblock %}
-		</title>
-		{# Run composer require symfony/webpack-encore-bundle to start using Symfony UX #}
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-		{% endblock %}
-        <script src="https://kit.fontawesome.com/feed0b9777.js" crossorigin="anonymous"></script>
-	</head>
+
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        <script src="https://kit.fontawesome.com/feed0b9777.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary h-100">
-        {% block body %}{% endblock %}
-    </body>
-	<body class="bg-primary h-100">
+
+    <body class="bg-primary h-100 d-flex flex-column justify-content-center">
 
         {% include 'include/_navbar.html.twig' %}
-		{% block body %}
-		{% endblock %}
-
-
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
-	</body>
+        {% block body %}{% endblock %}
+    </body>
 </html>
