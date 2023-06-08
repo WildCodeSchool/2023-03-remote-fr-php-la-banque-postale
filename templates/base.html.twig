@@ -26,9 +26,10 @@
 
 	<body class="bg-primary h-100 d-flex flex-column justify-content-center">
 
-		{% block nav %} {% include 'include/_navbar.html.twig' %} {% endblock nav %}
-		
-		{% block body %}{% endblock %}
+		{% block nav %}
+			{% include 'include/_navbar.html.twig' %}
+		{% endblock nav %}
+
 		{% block body %}{% endblock %}
 	</body>
 </html>
