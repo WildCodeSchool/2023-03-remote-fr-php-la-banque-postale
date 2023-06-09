@@ -10,15 +10,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SearchType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('query', TextType::class, [
-                'attr'=>[
+                'attr' => [
                     'placeholder' => 'Recherche'
-                ]
-                ]);
-        
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -26,7 +25,7 @@ class SearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => SearchData::class,
             'method' => 'GET',
-            'csrf protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }

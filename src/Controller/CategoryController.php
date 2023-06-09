@@ -11,24 +11,23 @@ use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 
-
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'index_category')]
-    public function index(CategoryRepository $categoryRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(CategoryRepository $categoryRepository, Request $request): Response
     {
         $categories = $categoryRepository->findAll();
 
         $searchData = new SearchData();
         $form = $this->createForm(SearchType::class, $searchData);
-        
+
         $form->handleRequest($request);
-        
-        if($form->isSubmitted() && $form->isValid()){
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $searchData->page = $request->query->getInt('page', 1);
             $pagination = $categoryRepository->findBySearch($searchData);
-        
+
             return $this->render('category/index.html.twig', [
                 'form' => $form->createView(),
                 'pagination' => $pagination,
@@ -36,14 +35,9 @@ class CategoryController extends AbstractController
             ]);
         }
 
-        return $this->render('category/index.html.twig', [         
+        return $this->render('category/index.html.twig', [
             'form' => $form->createView(),
             'categories' => $categories,
         ]);
     }
 }
-
-
-    
-    
-
