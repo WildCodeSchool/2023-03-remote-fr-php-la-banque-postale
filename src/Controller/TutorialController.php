@@ -17,4 +17,21 @@ class TutorialController extends AbstractController
             'tutorials' => $tutorials,
         ]);
     }
+    /*#[Route('/tutorial/{tutorialTitle}', name: 'tutorial_show')]
+    public function show(string $categoryTutorial, TutorialRepository $tutorialRepository, ProgramRepository $programRepository) : Response
+    {
+        $tutorial = $tutorialRepository->findOneBy(['name' => $tutorialName]);
+
+        if (!$tutorial) {
+            throw $this->createNotFoundException('Ce tutoriel n\'a pas été trouvé);
+    }
+        $tutorials = $tutorialRepository->findBy(
+        ['tutorial' => $tutorial],
+        [ 'id' => 'DESC'],
+    ); 
+    
+        return $this->render('tutorial/show.html.twig',[
+        'tutorial' => $tutorial,
+        
+    }*/
 }
