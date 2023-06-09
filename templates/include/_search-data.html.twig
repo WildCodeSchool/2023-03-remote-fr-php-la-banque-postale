@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+
+<div class="container">
+	<form>
+    
+		<div class="input-group m-3 ">
+			<button class="input-group-text bg-primary text-light border-3" id="basic-addon1 type="submit">
+				<i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+			</button>{{ form_widget(form.query, {'attr':{'class': 'form-control bg-primary text-light border-top-0 border-end-0 rounded-0'}}) }}
+			{# <input type="search" class="form-control bg-primary text-light border-top-0 border-end-0 rounded-0" placeholder="RECHERCHE" aria-label="Search">
+		</div> #}
+	</form>
+	{{ form_end(form) }}

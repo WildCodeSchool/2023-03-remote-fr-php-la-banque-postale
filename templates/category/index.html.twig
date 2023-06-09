@@ -4,13 +4,20 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
-			{% for category in categories %}
-				<div class="col">
-					<button type="button" class="btn btn-secondary p-4 mb-5 w-75">{{category.title}}</button>
-				</div>
-			{% endfor %}
-		</div>
+
+	{% include 'include/_search-data.html.twig' with{ form: form } only %}
+	<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
+		{% if pagination is defined and pagination|length > 0 %}
+            {% for article in pagination %}
+                <tr {% if loop.index is odd %} class="color" {% endif %}>
+                    <button type="button" class="btn btn-secondary p-0 mb-2 w-0">{{ article.title }}</button>
+                </tr>
+            {% endfor %}
+        {% endif %}
+		{% for category in categories %}
+			<div class="col">
+				<button type="button" class="btn btn-secondary p-4 mb-5 w-75">{{category.title}}</button>
+			</div>
+		{% endfor %}
 	</div>
-{% endblock %}
+</div>{% endblock %}
