@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
+use App\Repository\TutorialRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -15,9 +16,14 @@ use Knp\Component\Pager\PaginatorInterface;
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'index_category')]
-    public function index(CategoryRepository $categoryRepository, Request $request): Response
-    {
+    public function index(
+        CategoryRepository $categoryRepository,
+        TutorialRepository $tutorialRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
         $categories = $categoryRepository->findAll();
+        $tutorials = $tutorialRepository->findAll();
 
         $searchData = new SearchData();
         $form = $this->createForm(SearchType::class, $searchData);
@@ -26,12 +32,18 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $searchData->page = $request->query->getInt('page', 1);
-            $pagination = $categoryRepository->findBySearch($searchData);
+            $queryBuilder = $tutorialRepository->findBySearch($searchData);
 
-            return $this->render('category/index.html.twig', [
+            $pagination = $paginator->paginate(
+                $queryBuilder,
+                $searchData->page,
+                12 // Number of items per page
+            );
+
+            return $this->render('tutorial/searchtutorials.html.twig', [
                 'form' => $form->createView(),
                 'pagination' => $pagination,
-                'categories' => $categories,
+                'tutorials' => $tutorials,
             ]);
         }
 
