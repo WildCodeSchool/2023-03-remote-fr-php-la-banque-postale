@@ -5,30 +5,31 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class="text-center text-light">On se connaît déjà ?</h1>
+		<h1 class="text-center text-light mb-5">On se connaît déjà ?</h1>
 		<div class="row">
-			<div class="col-6 offset-3">
+			<div class="col-4 offset-4">
 				<div class="card m-auto bg-secondary align-items-center">
-					<div class="card-body">
-						<h4 class="card-title text-center">Connexion</h4>
+					<div class="card-body w-75">
+						<h4 class="card-title text-center m-3">Connexion</h4>
 						<form>
-							<div class="form-group">
+							<div class="form-group mb-2">
 								<label for="inputEmail">E-mail ou nom d'utilisateur</label>
-								<input type="email" class="form-control bg-primary text-light" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail ou nom d'utilisateur">
+								<input type="email" class="form-control bg-primary text-light mb-1 p-2" id="inputEmail" aria-describedby="emailHelp" placeholder="E-mail ou nom d'utilisateur">
 							</div>
-							<div class="form-group">
+							<div class="form-group mb-2">
 								<label for="inputPassword">Mot de passe</label>
-								<input type="password" class="form-control bg-primary text-light" id="inputPassword" placeholder="Mot de passe">
-								<a class="form-text text-muted" href="#" id="emailHelp">Oublié ?</a>
-							</div>
-							<div class="text-center">
-								<a href="#" class="btn btn-success">Clique ici pour te connecter</a>
+								<input type="password" class="form-control bg-primary text-light mb-1 p-2" id="inputPassword" placeholder="Mot de passe">
+								<div class="form-text text-end">
+									<a class="text-muted text-decoration-none" href="#" id="emailHelp">Mot de passe oublié ?</a>
+								</div>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
+	</div>
+	<div class="text-center mt-3">
+		<a href="#" class="btn btn-success rounded-pill ps-5 pe-5">Clique ici pour te connecter</a>
 	</div>
 {% endblock %}
