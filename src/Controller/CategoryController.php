@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
-    #[Route('/categorie/{categoryTitle}', name: 'category_show')]
+    #[Route('{categoryTitle}', name: 'category_show')]
     public function show(string $categoryTitle, CategoryRepository $categoryRepository): Response
     {
         $category = $categoryRepository->findOneBy(['title' => $categoryTitle]);
