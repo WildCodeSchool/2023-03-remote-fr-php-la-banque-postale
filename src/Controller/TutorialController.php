@@ -7,9 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/tutorial')]
 class TutorialController extends AbstractController
 {
-    #[Route('/tutorial', name: 'app_tutorial')]
+    #[Route('/', name: 'app_tutorial')]
     public function index(TutorialRepository $tutorialRepository): Response
     {
         $tutorials = $tutorialRepository->findAll();
@@ -17,21 +18,12 @@ class TutorialController extends AbstractController
             'tutorials' => $tutorials,
         ]);
     }
-    /*#[Route('/tutorial/{tutorialTitle}', name: 'tutorial_show')]
-    public function show(string $categoryTutorial, TutorialRepository $tutorialRepository, ProgramRepository $programRepository) : Response
+    #[Route('{tutorialName}', name: 'tutorial_show')]
+    public function show(string $tutorialName, TutorialRepository $tutorialRepository): Response
     {
         $tutorial = $tutorialRepository->findOneBy(['name' => $tutorialName]);
-
-        if (!$tutorial) {
-            throw $this->createNotFoundException('Ce tutoriel n\'a pas été trouvé);
+        return $this->render('tutorial/show.html.twig', [
+            'tutorial' => $tutorial,
+        ]);
     }
-        $tutorials = $tutorialRepository->findBy(
-        ['tutorial' => $tutorial],
-        [ 'id' => 'DESC'],
-    ); 
-    
-        return $this->render('tutorial/show.html.twig',[
-        'tutorial' => $tutorial,
-        
-    }*/
 }

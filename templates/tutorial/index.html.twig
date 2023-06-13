@@ -8,7 +8,7 @@
             {% for tutorial in tutorials %}
             {% if tutorial.ispublic %}
                 <div class="col">
-                    <a href="#" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
+                    <a href="{{ path("tutorial_show", { tutorialName: tutorial.name })}}" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
                 </div>
                 {% else %}
                 <div class="col">

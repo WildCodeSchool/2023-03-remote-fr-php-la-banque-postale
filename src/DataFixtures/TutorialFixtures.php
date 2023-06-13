@@ -27,6 +27,7 @@ class TutorialFixtures extends Fixture
         for ($i = 0; $i < 8; $i++) {
             $tutorial = new Tutorial();
             $tutorial->setName($name[$i]);
+            $tutorial->setObjective($faker->word());
             $tutorial->setDescription($faker->paragraphs(3, true));
             $tutorial->setPublic((bool) rand(0, 1));
             $manager->persist($tutorial);
