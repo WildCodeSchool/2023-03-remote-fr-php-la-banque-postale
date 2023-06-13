@@ -18,7 +18,7 @@ class TutorialController extends AbstractController
             'tutorials' => $tutorials,
         ]);
     }
-    #[Route('{tutorialName}', name: 'tutorial_show')]
+    #[Route('/{tutorialName}', name: 'tutorial_show')]
     public function show(string $tutorialName, TutorialRepository $tutorialRepository): Response
     {
         $tutorial = $tutorialRepository->findOneBy(['name' => $tutorialName]);
