@@ -6,6 +6,7 @@ use App\Entity\Tutorial;
 use Faker\Factory;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TutorialFixtures extends Fixture
 {
@@ -20,12 +21,17 @@ class TutorialFixtures extends Fixture
         'Mettre un fond d’écran',
     ];
 
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
 
         foreach (self::TUTORIALS as $tutorialName) {
             $tutorial = new Tutorial();
+            $tutorial->setSlug($this->slugger->slug($tutorialName));
             $tutorial->setObjective($faker->word());
             $tutorial->setName($tutorialName);
             $tutorial->setDescription($faker->paragraphs(3, true));

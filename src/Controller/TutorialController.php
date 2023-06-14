@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Tutorial;
-use App\Repository\CategoryRepository;
 use App\Repository\TutorialRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,10 +19,9 @@ class TutorialController extends AbstractController
             'tutorials' => $tutorials,
         ]);
     }
-    #[Route('/{tutorialName}', name: 'tutorial_show')]
-    public function show(string $tutorialName, TutorialRepository $tutorialRepository): Response
+    #[Route('/{slug}', name: 'tutorial_show')]
+    public function show(Tutorial $tutorial): Response
     {
-        $tutorial = $tutorialRepository->findOneBy(['name' => $tutorialName]);
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
         ]);
