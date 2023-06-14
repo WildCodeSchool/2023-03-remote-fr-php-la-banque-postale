@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MailChoiceController extends AbstractController
 {
-    #[Route('/mail/choice', name: 'app_mail_choice')]
+    #[Route('/choix-mail', name: 'app_mail_choice')]
     public function index(): Response
     {
-        return $this->render('mail_choice/index.html.twig', [
+        return $this->render('choix-mail/index.html.twig', [
             'controller_name' => 'MailChoiceController',
         ]);
     }
