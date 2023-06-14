@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,13 +20,9 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
-    #[Route('{categoryTitle}', name: 'category_show')]
-    public function show(string $categoryTitle, CategoryRepository $categoryRepository): Response
+    #[Route('/{slug}', name: 'category_show')]
+    public function show(Category $category): Response
     {
-        $category = $categoryRepository->findOneBy(['title' => $categoryTitle]);
-        if (!$category) {
-            throw $this->createNotFoundException('The category does not exist');
-        }
         return $this->render('category/show.html.twig', [
             'category' => $category,
         ]);
