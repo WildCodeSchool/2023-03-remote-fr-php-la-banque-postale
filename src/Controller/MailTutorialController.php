@@ -6,13 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MailChoiceController extends AbstractController
+class MailTutorialController extends AbstractController
 {
-    #[Route('/choix-mail', name: 'app_mail_choice')]
+    #[Route('/mail_tutorial', name: 'app_mail_tutorial')]
     public function index(): Response
     {
-        return $this->render('choix-mail/index.html.twig', [
-            'controller_name' => 'MailChoiceController',
-        ]);
+        return $this->render('mail_tutorial/index.html.twig');
     }
 }
