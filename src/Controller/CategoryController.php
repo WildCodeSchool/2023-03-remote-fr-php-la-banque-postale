@@ -22,6 +22,7 @@ class CategoryController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response {
+
         $categories = $categoryRepository->findAll();
         $tutorials = $tutorialRepository->findAll();
 
@@ -55,6 +56,8 @@ class CategoryController extends AbstractController
     #[Route('{categoryTitle}', name: 'category_show')]
     public function show(string $categoryTitle, CategoryRepository $categoryRepository): Response
     {
+        $this->addFlash('info', 'Inscrivez-vous dès maintenant pour profiter de plus d\'avantages !');
+
         $category = $categoryRepository->findOneBy(['title' => $categoryTitle]);
         if (!$category) {
             throw $this->createNotFoundException('The category does not exist');

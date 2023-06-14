@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
 	<h1 class="text-center text-secondary mb-5 text-uppercase">{{ category.title }}</h1>
+	{% for info, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ info }} w-75 me-auto ms-auto text-center">
+            {{ message }} <a href="{{ path('app_inscription') }}"> Inscris-toi !</a>
+        </div>
+    {% endfor %}
+	{% endfor %}
 	<div class="container mt-5">
 		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
 			{% for tutorial in category.tutorials %}
@@ -12,7 +18,7 @@
 					</div>
 				{% else %}
 					<div class="col">
-						<a href="#" class="btn btn-dark p-4 mb-5 w-75 position-relative">
+						<a href="#" class="btn btn-dark p-4 mb-5 w-75 position-relative data-bs-toggle="tooltip" data-bs-placement="top" title="Connectez-vous pour y avoir accès"">
 							<i class="fa-solid fa-lock position-absolute bottom-0 end-0 fa-2x"></i>
 							{{ tutorial.name }}</a>
 					</div>

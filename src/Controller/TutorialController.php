@@ -15,13 +15,13 @@ class TutorialController extends AbstractController
 {
     #[Route('/', name: 'app_tutorial')]
     public function index(TutorialRepository $tutorialRepository): Response
-    {
-        $this->addFlash('info', 'Inscrivez-vous dès maintenant pour profiter de plus d\'avantages !');
+    {   
         $tutorials = $tutorialRepository->findAll();
         return $this->render('tutorial/index.html.twig', [
             'tutorials' => $tutorials,
         ]);
     }
+
     #[Route('/{tutorialName}', name: 'tutorial_show')]
     public function show(string $tutorialName, TutorialRepository $tutorialRepository): Response
     {
