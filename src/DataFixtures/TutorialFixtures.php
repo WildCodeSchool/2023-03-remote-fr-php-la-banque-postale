@@ -19,6 +19,7 @@ class TutorialFixtures extends Fixture
         'Voir la météo',
         'Mettre un fond d’écran',
     ];
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
