@@ -25,6 +25,7 @@ class TutorialFixtures extends Fixture
 
         foreach (self::TUTORIALS as $tutorialName) {
             $tutorial = new Tutorial();
+            $tutorial->setObjective($faker->word());
             $tutorial->setName($tutorialName);
             $tutorial->setDescription($faker->paragraphs(3, true));
             $tutorial->setPublic((bool) rand(0, 1));
