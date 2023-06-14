@@ -2,17 +2,30 @@
 
 
 {% block content %}
+
+	{% include 'include/_search-data.html.twig' with {form: form} only %}
+
 	<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
-	{% if pagination is defined and pagination|length > 0 %}
-		{% for article in pagination %}
-			<tr {% if loop.index is odd %} class="color" {% endif %}>
-				<div class=" col d-flex justify-content-center">
-				<button type="button" class="btn btn-secondary p-3 mb-5 w-75 href='#'">{{ article.name }}</button>
-                </div>
-			</tr>
-		{% endfor %}
-    {% else %}
-        <h1 class= 'text-white m-auto'> Aucun tutorial trouvé. </h1>
-	{% endif %}
-    </div>
+		{% if pagination is defined and pagination|length > 0 %}
+			{% for article in pagination %}
+				<tr {% if loop.index is odd %} class="color" {% endif %}>
+					{% if article.ispublic %}
+						<div class=" col d-flex justify-content-center">
+							<button type="button" class="btn btn-secondary p-3 mb-5 w-75 href='#'">{{ article.name }}</button>
+						</div>
+					{% else %}
+						<div class="col text-center">
+							<div class="btn btn-dark p-4 mb-5 w-75 position-relative">
+								<i class="fa-solid fa-lock position-absolute bottom-0 end-0 fa-2x"></i>
+								{{ article.name }}</div>
+						</div>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		{% else %}
+			<h1 class='text-white m-auto'>
+				Aucun tutorial trouvé.
+			</h1>
+		{% endif %}
+	</div>
 {% endblock %}

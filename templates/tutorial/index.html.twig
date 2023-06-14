@@ -7,11 +7,11 @@
         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
             {% for tutorial in tutorials %}
             {% if tutorial.ispublic %}
-                <div class="col">
-                    <a href="#" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
+                <div class="col text-center">
+                    <a href="{{ path("tutorial_show", { tutorialName: tutorial.name })}}" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
                 </div>
                 {% else %}
-                <div class="col">
+                <div class="col text-center">
                     <div class="btn btn-dark p-4 mb-5 w-75 position-relative"><i class="fa-solid fa-lock position-absolute bottom-0 end-0 fa-2x"></i>{{ tutorial.name }}</div>
                 </div>
                 {% endif %}

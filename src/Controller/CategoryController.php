@@ -12,7 +12,7 @@ use App\Repository\TutorialRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/category')]
+#[Route('/categorie')]
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'index_category')]
@@ -50,6 +50,17 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', [
             'form' => $form->createView(),
             'categories' => $categories,
+        ]);
+    }
+    #[Route('{categoryTitle}', name: 'category_show')]
+    public function show(string $categoryTitle, CategoryRepository $categoryRepository): Response
+    {
+        $category = $categoryRepository->findOneBy(['title' => $categoryTitle]);
+        if (!$category) {
+            throw $this->createNotFoundException('The category does not exist');
+        }
+        return $this->render('category/show.html.twig', [
+            'category' => $category,
         ]);
     }
 }

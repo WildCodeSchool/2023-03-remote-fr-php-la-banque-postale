@@ -23,6 +23,13 @@ class Tutorial
     #[ORM\Column]
     private ?bool $public = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $objective = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tutorials')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +67,30 @@ class Tutorial
     public function setPublic(bool $public): self
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    public function getObjective(): ?string
+    {
+        return $this->objective;
+    }
+
+    public function setObjective(string $objective): self
+    {
+        $this->objective = $objective;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
