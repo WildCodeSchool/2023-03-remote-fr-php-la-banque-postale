@@ -5,7 +5,7 @@
 
 	{% if not app.user %}
 		<div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">			
-			Inscrivez-vous dès maintenant pour profiter de plus d'avantages !  <a href="{{"path(app_connexion)"}}"> Inscris-toi !</a>
+			Inscrivez-vous dès maintenant pour profiter de plus d'avantages !  <a href="{{path("app_mail_choice")}}"> Inscris-toi !</a>
 		</div>
 	{% endif %}
 	<div class="container mt-5">
@@ -13,7 +13,7 @@
 			{% for tutorial in category.tutorials %}
 				{% if tutorial.ispublic %}
 					<div class="col text-center">
-						<a href="#" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
+						<a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
 					</div>
 				{% else %}
 					<div class="col text-center">
@@ -22,8 +22,6 @@
 							{{ tutorial.name }}</a>
 					</div>
 				{% endif %}
-				{# <a href="{{ path("tutorial_show", { id: tutorial.id }) }}">Voir la fiche</a> #}
-
 			{% else %}
 				Aucun tutoriel trouvé dans cette catégorie.
 				<br>
