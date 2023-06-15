@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - Ligne Bleue
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center text-light mb-5">Qui es-tu ?
+			<br>
+			Complète ton pofil !</h1>
+		<div class="row">
+			<div class="col-4 offset-4">
+				<div class="card m-auto bg-secondary align-items-center">
+					<div class="card-body w-75">
+						<h4 class="card-title text-center">Inscription</h4>
+						<form>
+							<div class="form-group mb-2">
+								<label for="email">Adresse e-mail</label>
+								<input type="email" class="form-control bg-primary text-light w-100" id="email" aria-describedby="emailHelp" placeholder="Tape ton adresse e-mail ici">
+							</div>
+							<div class="form-group mb-2">
+								<label for="name">Nom d'utilisateur</label>
+								<input type="name" class="form-control bg-primary text-light" id="name" aria-describedby="nameHelp" placeholder="Tape ton nom d'utilisateur ici">
+							</div>
+							<div class="form-group mb-2">
+								<label for="password">Mot de passe</label>
+								<input type="password" class="form-control bg-primary text-light" id="password" placeholder="Tape ton mot de passe ici">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center mt-3">
+		<a href="{{ path('index_category') }}" class="btn btn-success rounded-pill m-2">Clique ici pour t'inscrire</a>
+	</div>
+{% endblock %}

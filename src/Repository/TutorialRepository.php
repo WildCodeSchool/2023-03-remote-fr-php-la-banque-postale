@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Tutorial;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,21 @@ class TutorialRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findBySearch(SearchData $searchData): array
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        if (!empty($searchData->query)) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('p.name LIKE :query')
+                ->setParameter('query', "%{$searchData->query}%");
+        }
+        $query = $queryBuilder->getQuery();
+        $results = $query->getResult();
+
+        return $results;
     }
 
 //    /**

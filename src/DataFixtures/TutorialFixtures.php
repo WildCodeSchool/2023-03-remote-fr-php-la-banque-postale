@@ -6,14 +6,11 @@ use App\Entity\Tutorial;
 use Faker\Factory;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TutorialFixtures extends Fixture
 {
-    public function load(ObjectManager $manager): void
-    {
-        $faker = Factory::create('fr_FR');
-
-        $name = [
+    public const TUTORIALS = [
         'Faire une photo',
         'Appeler un contact',
         'Ajouter un contact',
@@ -22,13 +19,24 @@ class TutorialFixtures extends Fixture
         'Mettre une alarme',
         'Voir la météo',
         'Mettre un fond d’écran',
-        ];
+    ];
 
-        for ($i = 0; $i < 8; $i++) {
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
+
+    public function load(ObjectManager $manager): void
+    {
+        $faker = Factory::create('fr_FR');
+
+        foreach (self::TUTORIALS as $tutorialName) {
             $tutorial = new Tutorial();
-            $tutorial->setName($name[$i]);
+            $tutorial->setSlug($this->slugger->slug($tutorialName));
+            $tutorial->setObjective($faker->word());
+            $tutorial->setName($tutorialName);
             $tutorial->setDescription($faker->paragraphs(3, true));
             $tutorial->setPublic((bool) rand(0, 1));
+            $tutorial->setCategory($this->getReference('category_' . 1));
             $manager->persist($tutorial);
         }
         $manager->flush();

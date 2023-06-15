@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
@@ -23,9 +24,12 @@
         <script src="https://kit.fontawesome.com/feed0b9777.js" crossorigin="anonymous"></script>
     </head>
 
-    <body class="bg-primary h-100 d-flex flex-column justify-content-center">
+    <body class="bg-primary min-vh-100 d-flex flex-column justify-content-center">
 
-        {% include 'include/_navbar.html.twig' %}
-        {% block body %}{% endblock %}
-    </body>
+		{% block nav %}
+			{% include 'include/_navbar.html.twig' %}
+		{% endblock nav %}
+
+		{% block body %}{% endblock %}
+	</body>
 </html>
