@@ -31,18 +31,23 @@ RUN apk update \
     && apk add nginx
 
 RUN apk add --no-cache \
+    	icu-dev \
       libzip-dev \
       zip \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip pdo_mysql bcmath > /dev/null intl \
+    && docker-php-ext-configure intl
+#    && docker-php-ext-install pdo_mysql bcmath > /dev/null \
+#    && docker-php-ext-configure intl \
+#    && docker-php-ext-enable intl
 
 # silently install 'docker-php-ext-install' extensions
 #RUN set -x
-
-RUN docker-php-ext-install pdo_mysql bcmath > /dev/null
-
-# Install INTL
-RUN apk add icu-dev
-RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
+#
+#RUN docker-php-ext-install pdo_mysql bcmath > /dev/null
+#
+## Install INTL
+#RUN apk add icu-dev
+#RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
