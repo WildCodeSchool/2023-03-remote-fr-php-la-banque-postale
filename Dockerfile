@@ -36,7 +36,7 @@ RUN apk add --no-cache \
     && docker-php-ext-install zip
 
 # silently install 'docker-php-ext-install' extensions
-RUN set -x
+#RUN set -x
 
 RUN docker-php-ext-install pdo_mysql bcmath > /dev/null
 
