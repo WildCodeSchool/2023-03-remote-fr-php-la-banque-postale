@@ -21,7 +21,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private Security $security)
     {
     }
 
@@ -47,7 +47,10 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-         return new RedirectResponse($this->urlGenerator->generate('index_category'));
+        if ($this->security->isGranted("ROLE_ADMIN")) {
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_category_index'));
+        }
+        return new RedirectResponse($this->urlGenerator->generate('index_category'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
