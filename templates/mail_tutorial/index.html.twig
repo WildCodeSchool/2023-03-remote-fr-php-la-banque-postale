@@ -4,39 +4,44 @@
 {% endblock %}
 
 {% block body %}
-	<div class="white-stripe text-center mt-3">
-		<img src="{{ asset('build/images/logo.png') }}" alt="">
-	</div>
-	<div class="">
-		<h1 class="text-center mb-5 mt-3 text-light">
-			Comment créer une adresse mail ?
-		</h1>
-	</div>
-	<div class="bg-secondary rounded m-auto col-10">
-		<h2 class="text-center mb-5 mt-3 text-light">
-			Objectifs <br>
-					. Créer une adresse e-mail <br>
-					. Comprendre à quoi sert une adresse e-mail
-		</h2>
-		<div class="container">
-			<div class="row row-cols-md-2 row-cols-1">
-				<div class="col m-auto fw-bold text-center h4 text-light">Clique sur cette vidéo ! <br><br>
-				<video width="320" height="240" controls>
-      <source src=”https://www.youtube.com/watch?v=Rl1mk-AaR8Q” type=video/ogg> <source src="/build/videos/arcnet.io(7-sec).mp4" type=video/mp4>
-    </video>
-  <video width="320" height="240" controls>
-      <source src=”https://www.youtube.com/watch?v=Rl1mk-AaR8Q” type=video/ogg> <source src="/build/videos/arcnet.io(7-sec).mp4" type=video/mp4>
-    </video>
-				</div>
-				<div class="col m-auto text-center">
-					“Quel est l’utilité d’une adresse e-mail ? <br>                 
-										Une adresse e-mail est un élément clé de notre communication numérique quotidienne. Elle permet d’envoyer et de recevoir des messages avec des personnes situées n’importe où dans le monde, que ce soit pour des échanges personnels ou professionnels. <br><br>
-										Ressources :<br>
-										https://créer_un_mail.fr<br>
-																									https://a_quoi_sert_un_mail.fr
+    <div class="">
+        <h1 class="text-center text-light mt-5">
+            Comment créer une adresse mail ?
+        </h1>
+    </div>
+    <div class="container">
+        <div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
+            <h2 class="text-center mb-2 mt-3"> Objectifs </h2>
+            <ul class="text-center list-unstyled mb-5">
+                <li>
+                    Créer une adresse e-mail
+                </li>
+                <li>
+                    Comprendre à quoi sert une adresse e-mail
+                </li>
+            </ul>
 
-				</div>
-			</div>
-		</div>
-	</div>
+
+            <div class="row-cols-md-2 d-flex flex-column flex-md-row">
+                <div class="col m-auto fw-bold text-center">
+                    <p>Clique sur cette vidéo <i class="fa-solid fa-arrow-down"></i></p>
+                    <video controls class="rounded mb-4 w-100">
+                        <source src=”https://www.youtube.com/watch?v=Rl1mk-AaR8Q” type=video/ogg>
+                    </video>
+                </div>
+                <div class="col m-auto">
+                    <h3 class="mb-3">A quoi sert une adresse e-mail ? </h3>
+                    <p>Une adresse e-mail est un élément clé de notre communication numérique quotidienne. Elle permet
+                        d’envoyer et de recevoir des messages avec des personnes situées n’importe où dans le monde, que
+                        ce
+                        soit pour des échanges personnels ou professionnels. </p>
+                    <ul>
+                        <li><a href="https://fr.tuto.com/blog/2018/04/creer-un-compte-gmail.htm">Cliques ici pour créer
+                                un compte Gmail</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
