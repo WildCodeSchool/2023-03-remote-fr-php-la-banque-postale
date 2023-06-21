@@ -7475,6 +7475,7 @@
             "time": "2023-05-06T11:11:46+00:00"
         },
         {
+<<<<<<< Updated upstream
             "name": "twig/intl-extra",
             "version": "v3.6.0",
             "source": {
@@ -7548,6 +7549,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "twig/twig",
+            "version": "v3.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "7e7d5839d4bec168dfeef0ac66d5c5a2edbabffd"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> Stashed changes
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/7e7d5839d4bec168dfeef0ac66d5c5a2edbabffd",
                 "reference": "7e7d5839d4bec168dfeef0ac66d5c5a2edbabffd",
                 "shasum": ""
