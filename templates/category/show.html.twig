@@ -5,13 +5,13 @@
 
 	{% if not app.user %}
 		<div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
-			Inscrivez-vous dès maintenant pour profiter de plus d'avantages !  <a href="{{path("app_mail_choice")}}"> Inscris-toi !</a>
+			Pour avoir accès à tous nos tutos, <a href="{{path("app_mail_choice")}}"> inscris-toi !</a>
 		</div>
 	{% endif %}
 	<div class="container mt-5">
 		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
 			{% for tutorial in category.tutorials %}
-				{% if tutorial.ispublic %}
+				{% if tutorial.ispublic or app.user %}
 					<div class="col text-center">
 						<a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
 					</div>
