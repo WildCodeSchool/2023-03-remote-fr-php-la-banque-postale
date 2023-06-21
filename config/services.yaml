@@ -6,6 +6,7 @@
 parameters:
 
 services:
+    Knp\Component\Pager\Pagination\PaginationInterface: '@knp_paginator'
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

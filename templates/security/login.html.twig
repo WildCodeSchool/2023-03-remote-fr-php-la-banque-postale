@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConnexionPageController!
+{% endblock %}
+
+{% block body %}
+<form method="post">
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+	<div class="container">
+		<h1 class="text-center text-light mb-5">On se connaît déjà ?</h1>
+		<div class="row">
+			<div class="col-4 offset-4">
+				<div class="card m-auto bg-secondary align-items-center">
+					<div class="card-body w-75">
+						<h4 class="card-title text-center m-3">Connexion</h4>
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+						<form>
+                        <div class="form-group mb-2">
+                            <label for="inputEmail">E-mail ou nom d'utilisateur</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control bg-primary text-light mb-1 p-2" placeholder="E-mail ou nom d'utilisateur" autocomplete="email" required autofocus>
+							</div>
+							<div class="form-group mb-2">
+								<label for="inputPassword">Mot de passe</label>
+								<input type="password" name="password" id="inputPassword" class="form-control bg-primary text-light mb-1 p-2" autocomplete="current-password" placeholder="Mot de passe" required>
+                                <div class="form-text text-end">
+									<a class="text-muted text-decoration-none" href="#" id="emailHelp">Mot de passe oublié ?</a>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+	<div class="text-center mt-3">
+        <button class="btn btn-success rounded-pill ps-5 pe-5" type="submit">Clique ici pour te connecter</button>
+	</div>
+    </form>
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+{% endblock %}
+

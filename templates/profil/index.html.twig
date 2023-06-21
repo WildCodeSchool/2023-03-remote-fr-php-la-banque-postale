@@ -1,0 +1,30 @@
+{% extends 'layout/layout-top.html.twig' %}
+
+{% block title %}Profil
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
+            <div class="text-white">
+                <div class="text-center text-lg-start">
+                    <p>Harry beau</p>
+                    <p>Harrybeau@hotmail.fr</p>
+                    <p>Membre depuis 06/06/2023</p>
+                </div>
+            </div>
+
+            <div class="text-center fw-bold">
+                <button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
+                    <i class="fa-solid fa-people-group"></i>
+                    Ajoute tes amis !
+                </button>
+                <button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
+                    <i class="fa-sharp fa-solid fa-globe"></i>
+                    Partage ta progression
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
