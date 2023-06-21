@@ -3,18 +3,24 @@
 {% block title %}Hello AvatarController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1 class= "text-center">Choisissez votre avatar</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {{ form_start(avatarForm) }}
+        {{ form_row(avatarForm.avatar) }}
+        <!-- <ul>
+            {% for choice in avatarForm.avatar.vars.choices %}
+                {% set avatar = choice.data %}
+                <li>
+                    <img src="{{ asset('build/avatars/' ~ avatar.getPath()) }}" alt="{{ choice.label }}">
+                    <input type="radio"
+                    name="avatar_form[{{avatarForm.avatar.vars.name}}]"
+                    value="{{choice.value}}"
+                    />
+                </li>
+            {% endfor %}
+        </ul> -->
+        <button type="submit">Valider</button>
+    {{ form_end(avatarForm) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/DELL/Desktop/CODING/PROJETS/LIGNE_BLEUE/2023-03-remote-fr-php-la-banque-postale/src/Controller/AvatarController.php'|file_link(0) }}">src/Controller/AvatarController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/DELL/Desktop/CODING/PROJETS/LIGNE_BLEUE/2023-03-remote-fr-php-la-banque-postale/templates/avatar/index.html.twig'|file_link(0) }}">templates/avatar/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
+
