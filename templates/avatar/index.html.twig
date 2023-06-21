@@ -1,26 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AvatarController!{% endblock %}
-
-{% block body %}
-    <h1 class= "text-center">Choisissez votre avatar</h1>
-
-    {{ form_start(avatarForm) }}
-        {{ form_row(avatarForm.avatar) }}
-        <!-- <ul>
-            {% for choice in avatarForm.avatar.vars.choices %}
-                {% set avatar = choice.data %}
-                <li>
-                    <img src="{{ asset('build/avatars/' ~ avatar.getPath()) }}" alt="{{ choice.label }}">
-                    <input type="radio"
-                    name="avatar_form[{{avatarForm.avatar.vars.name}}]"
-                    value="{{choice.value}}"
-                    />
-                </li>
-            {% endfor %}
-        </ul> -->
-        <button type="submit">Valider</button>
-    {{ form_end(avatarForm) }}
-
+{% block title %}Hello AvatarController!
 {% endblock %}
 
+{% block body %}
+	<div class="bg-secondary rounded m-auto col-10">
+		<h1 class="text-center">Choisissez votre avatar</h1>
+
+		{{ form_start(avatarForm) }}
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="list-inline d-flex justify-content-center flex-wrap">
+					{% for avatar in avatarForm.avatar %}
+
+						{{form_row(avatar)}}
+
+					{% endfor %}
+				</div>
+			</div>
+			<!-- <div class="col-12">
+				<ul class="list-inline d-flex justify-content-center flex-wrap">
+					{% set count = 0 %}
+					{% for choice in avatarForm.avatar.vars.choices %}
+						{% set avatar = choice.data %}
+						{% if count >= 6 %}
+						</ul>
+						<ul class="list-inline d-flex justify-content-center">
+							{% set count = 0 %}
+						{% endif %}
+						<li class="list-inline-item text-center">
+							<img src="{{ asset('build/avatars/' ~ avatar.getPath()) }}" alt="{{ choice.label }}">
+							<br>
+							<div class="d-flex justify-content-center">
+								<input type="radio"
+								name="avatar_form[{{ avatarForm.avatar.vars.name }}]"
+								value="{{ choice.value }}" class="custom-radio-input">
+							</div>
+						</li>
+						{% set count = count + 1 %}
+					{% endfor %}
+				</ul>
+			</div> -->
+		</div>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary">Valider</button>
+	</div>
+	{{ form_end(avatarForm) }}
+
+{% endblock %}

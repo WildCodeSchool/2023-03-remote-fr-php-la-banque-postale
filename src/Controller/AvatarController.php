@@ -28,8 +28,9 @@ class AvatarController extends AbstractController
         $avatarForm->handleRequest($request);
 
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+            $user->setAvatar($avatarForm->get('avatar')->getData());
             $this->userRepository->save($user, true);
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_profil');
         }
 
         return $this->render('avatar/index.html.twig', [

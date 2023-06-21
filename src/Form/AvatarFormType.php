@@ -15,7 +15,9 @@ class AvatarFormType extends AbstractType
     {
         $builder
             ->add('avatar', EntityType::class, [
+                'attr' => ['class' => 'list-inline-item text-center'],
                 'label' => 'Choisissez un avatar',
+                'label_html' => true,
                 'class' => Avatar::class,
                 'choice_label' => function (Avatar $avatar) {
                     $label = '<img src="/build/avatars/' . $avatar->getPath() . '">' . $avatar->getName();
