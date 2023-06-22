@@ -1,59 +1,93 @@
 {% if app.user %}
-<ul class="navbar fixed-top justify-content-between list-unstyled">
-    <li>
-        <div class="ms-5">
-            <img src="{{ asset('build/images/logo_v2.png') }}" alt="" class="mt-2">
-        </div>
-    </li>
-    <li>
-        <div class="btn-group me-5">
-            <button type="button" class="btn btn-light dropdown-toggle" id="avatarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-user"></i>
-            </button>
+	<ul class="navbar fixed-top justify-content-between list-unstyled">
+		<li>
+			<div class="ms-5">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+			</div>
+		</li>
+		<li>
+			{% if app.user %}
+				<div class="btn-group me-5">
+					<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="{{ asset('build/avatars/' ~ app.user.avatar.getPath()) }}" alt="Avatar" class="avatar">
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li>
+							<a href="{{ path('app_profil') }}" class="dropdown-item">Mon profil</a>
+						</li>
+						<li>
+							<a href="{{ path('app_select_avatar') }}" class="dropdown-item">Choisir mon avatar</a>
+						</li>
+						<li>
+							<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+						</li>
+					</ul>
+				</div>
+			{% else %}
+				<div class="btn-group me-5">
+					<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa-solid fa-user fa-2x text-primary"></i>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li>
+							<a href="{{ path('app_profil') }}" class="dropdown-item">Mon profil</a>
+						</li>
+						<li>
+							<a href="{{ path('app_select_avatar') }}" class="dropdown-item">Choisir mon avatar</a>
+						</li>
+						<li>
+							<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+						</li>
+					</ul>
+				</div>
+			{% endif %}
+		</li>
 
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                    <a class="dropdown-item" href="#">Mon profil</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Choisir mon avatar</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_logout')  }}" class="dropdown-item">Déconnexion</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-</ul>
-
-{% block javascripts %}
-    <script src="{{ asset('build/app.js') }}"></script>
-    <script src="{{ asset('build/bootstrap.js') }}"></script>
-
-    <script>
-        var avatarDropdown = document.getElementById('avatarDropdown');
-        var avatarImg = document.createElement('img');
-        avatarImg.src = "{{ asset('build/avatars/' ~ app.user.avatar.getPath()) }}";
-        avatarImg.alt = "Avatar de l'utilisateur";
-
-        avatarDropdown.innerHTML = '';
-        avatarDropdown.appendChild(avatarImg);
-    </script>
-{% endblock %}
+	</ul>
+{% else %}
+	<ul class="navbar fixed-top justify-content-between list-unstyled">
+		<li>
+			<div class="ms-5">
+				<img src="{{ asset('build/images/logo_v2.png') }}" alt="" class="mt-2">
+			</div>
+		</li>
+		<li>
+			<div class="btn-group me-5">
+				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa-solid fa-user"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<li>
+						<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
 {% endif %}
 
+
 <ul class="navbar fixed-bottom navbar-light bg-blue d-flex justify-content-around">
-    <li class="nav-item list-unstyled ">
-        <a class="nav-link d-flex align-items-center flex-column-reverse text-light"
-           href="{{ path('index_category') }}">
-            Accueil
-            <i class="fa-solid fa-home fa-3x"></i>
-        </a>
-    </li>
-    <li class="nav-item list-unstyled">
-        <a class="nav-link d-flex align-items-center flex-column-reverse text-light" href="#">
-            Retour
-            <i class="fa-solid fa-arrow-left-long fa-3x"></i>
-        </a>
-    </li>
+	<li class="nav-item list-unstyled ">
+		<a class="nav-link d-flex align-items-center flex-column-reverse text-light" href="{{ path('index_category') }}">
+			Accueil
+			<i class="fa-solid fa-home fa-3x"></i>
+		</a>
+	</li>
+	<li class="nav-item list-unstyled">
+		<a class="nav-link d-flex align-items-center flex-column-reverse text-light" href="#">
+			Retour
+			<i class="fa-solid fa-arrow-left-long fa-3x"></i>
+		</a>
+	</li>
 </ul>
+{% block javascripts %}
+	<script>
+		function rtn() {
+window.history.back();
+}
+	</script>
+{% endblock %}

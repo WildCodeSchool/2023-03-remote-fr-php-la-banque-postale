@@ -20,7 +20,7 @@ class AvatarFormType extends AbstractType
                 'label_html' => true,
                 'class' => Avatar::class,
                 'choice_label' => function (Avatar $avatar) {
-                    $label = '<img src="/build/avatars/' . $avatar->getPath() . '">' . $avatar->getName();
+                    $label = '<img src="/build/avatars/' . $avatar->getPath() . '">';
                     return $label;
                 },
                 'expanded' => true
