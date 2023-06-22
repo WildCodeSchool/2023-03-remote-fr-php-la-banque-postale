@@ -1,29 +1,29 @@
 {% if app.user %}
-<ul class="navbar fixed-top justify-content-between list-unstyled">
-    <li>
-        <div class="ms-5">
-            <img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
-        </div>
-    </li>
-    <li>
-        <div class="btn-group me-5">
-            <button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-user fa-2x text-primary"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                    <a class="dropdown-item" href="#">Mon profil</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Choisir mon avatar</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_logout')  }}" class="dropdown-item">Déconnexion</a>
-                </li>
-            </ul>
-        </div>
-    </li>
-</ul>
+	<ul class="navbar fixed-top justify-content-between list-unstyled">
+		<li>
+			<div class="ms-5">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+			</div>
+		</li>
+		<li>
+			<div class="btn-group me-5">
+				<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ app.user.userIdentifier }}<i class="fa-solid fa-user fa-2x text-primary"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<li>
+						<a class="dropdown-item" href="#">Mon profil</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="#">Choisir mon avatar</a>
+					</li>
+					<li>
+						<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
 {% else %}
     <ul class="navbar fixed-top justify-content-between list-unstyled">
         <li>
