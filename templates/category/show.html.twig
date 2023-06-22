@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1 class="text-center text-secondary mb-5 text-uppercase">{{ category.title }}</h1>
+	<h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }}</h1>
 
 	{% if not app.user %}
-		<div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">			
+		<div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
 			Pour avoir accès à tous nos tutos, <a href="{{path("app_mail_choice")}}"> inscris-toi !</a>
 		</div>
 	{% endif %}
