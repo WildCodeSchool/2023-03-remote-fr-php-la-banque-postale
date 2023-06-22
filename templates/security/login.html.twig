@@ -4,60 +4,63 @@
 {% endblock %}
 
 {% block body %}
-<form method="post">
+	<form method="post">
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+		{% if app.user %}
+			<div class="mb-3">
+				You are logged in as
+				{{ app.user.userIdentifier }},
+				<a href="{{ path('app_logout') }}">Logout</a>
+			</div>
+		{% endif %}
 
-    <div class="container">
-        <h1 class="text-center text-light mb-5">On se connaît déjà ?</h1>
-        <div class="row">
+		<div class="container">
+			<h1 class="text-center text-light mb-5">On se connaît déjà ?</h1>
+			<div class="row">
 
-        <div class="bg-secondary m-auto col-10 col-md-8 col-lg-6 p-5 rounded">
-            <h4 class="text-center">Connexion</h4>
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+				<div class="bg-secondary m-auto col-10 col-md-8 col-lg-6 p-5 rounded">
+					<h4 class="text-center">Connexion</h4>
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
 
-            <form>
-                <div class="form-group mb-3">
-                    <label class="" for="inputEmail">E-mail</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                           class="form-control bg-primary text-light p-2"
-                           placeholder="Tape ton e-mail ici" autocomplete="email" required autofocus>
-                </div>
-                <div class="form-group mb-2">
-                    <label for="inputPassword">Mot de passe</label>
-                    <input type="password" name="password" id="inputPassword"
-                           class="form-control bg-primary text-light p-2" autocomplete="current-password"
-                           placeholder="Tape ton mot de passe ici" required>
-                    <div class="form-text text-end">
-                        <a class="text-muted text-decoration-none" href="#" id="emailHelp">Mot de passe oublié ?</a>
-                    </div>
-                </div>
+					<form>
+						<div class="form-group mb-3">
+							<label class="" for="inputEmail">E-mail</label>
+							<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control bg-primary text-light p-2 border-0" placeholder="Tape ton e-mail ici" autocomplete="email" required autofocus>
+						</div>
+						<div class="form-group mb-2">
+							<label for="inputPassword">Mot de passe</label>
+							<div class="input-group">
+								<input type="password" name="password" id="inputPassword" class="form-control bg-primary text-light p-2 border-0" autocomplete="current-password" placeholder="Tape ton mot de passe ici" required>
+								<span class="input-group-text bg-primary border-0">
+									<a href="#" class="toggle_hide_password">
+										<i id="eyeIcon" class="fa-regular fa-eye-slash text-secondary" aria-hidden="true"></i>
+									</a>
+								</span>
+							</div>
+							<div class="form-text text-end">
+								<a class="text-muted text-decoration-none" href="#" id="emailHelp">Mot de passe oublié ?</a>
+							</div>
+						</div>
 
-            </form>
-        </div>
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-        <div class="text-center mt-3">
-            <button class="btn btn-success rounded-pill ps-5 pe-5" type="submit">Clique ici pour te connecter
-            </button>
-        </div>
-    </div>
-    </div>
-    {#
-    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-    See https://symfony.com/doc/current/security/remember_me.html
-
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
-    </div>
-    #}
-    {% endblock %}
+					</form>
+				</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<div class="text-center mt-3">
+					<button class="btn btn-success rounded-pill ps-5 pe-5" type="submit">Clique ici pour te connecter
+					</button>
+				</div>
+			</div>
+		</div>
+		{#
+								    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+								    See https://symfony.com/doc/current/security/remember_me.html
+		
+								    <div class="checkbox mb-3">
+								        <label>
+								            <input type="checkbox" name="_remember_me"> Remember me
+								        </label>
+								    </div>
+								    #}
+	{% endblock %}

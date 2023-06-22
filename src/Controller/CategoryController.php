@@ -23,7 +23,6 @@ class CategoryController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response {
-
         $categories = $categoryRepository->findAll();
         $tutorials = $tutorialRepository->findAll();
 

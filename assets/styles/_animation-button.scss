@@ -1,8 +1,8 @@
-a {
+.link-animation  {
     transition: transform .1s;
 }
 
-a:hover {
+.link-animation:hover {
     -ms-transform: scale(1.5);
     -webkit-transform: scale(1.5);
     transform: scale(1.1);

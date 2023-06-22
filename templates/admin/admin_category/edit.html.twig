@@ -1,14 +1,14 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}Edit Category
+{% block title %}Modifier catégorie {{ category.title }}
 {% endblock %}
 
 {% block body %}
-	<h1>Edit Category</h1>
+	<h1 class="mt-5 mb-5 text-center">Modifier la catégorie "{{ category.title }}"</h1>
 
-	{{ include('/admin/admin_category/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('/admin/admin_category/_form.html.twig', {'button_label': 'Valider la modification'}) }}
+    {{ include('/admin/admin_category/_delete_form.html.twig') }}
+    <a href="{{ path('app_admin_category_index') }}">Retour à la liste des catégories</a>
 
-	<a href="{{ path('app_admin_category_index') }}">back to list</a>
 
-	{{ include('/admin/admin_category/_delete_form.html.twig') }}
 {% endblock %}
