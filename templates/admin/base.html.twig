@@ -9,7 +9,7 @@
 		<link rel="icon" type="image/png" href="{{ asset('build/images/logo.png') }}"/>
 
 		<title>
-			{% block title %}Projet 3 Name
+			{% block title %}Admin - Ligne bleue
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
@@ -24,6 +24,10 @@
 		<script src="https://kit.fontawesome.com/feed0b9777.js" crossorigin="anonymous"></script>
 	</head>
 
-	<body class="min-vh-100 d-flex flex-column justify-content-center"> {% block nav %}{% endblock nav %}{% block body %}{% endblock %}
+	<body class="min-vh-100 d-flex flex-column">
+    {% block nav %}
+        {% include '/admin/include/_navbar.html.twig' %}
+    {% endblock nav %}
+    {% block body %}{% endblock %}
 		</body>
 	</html>
