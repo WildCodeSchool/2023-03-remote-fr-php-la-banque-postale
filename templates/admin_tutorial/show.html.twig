@@ -1,0 +1,42 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Tutorial{% endblock %}
+
+{% block body %}
+    <h1>Tutorial</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tutorial.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ tutorial.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ tutorial.description }}</td>
+            </tr>
+            <tr>
+                <th>Public</th>
+                <td>{{ tutorial.public ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Objective</th>
+                <td>{{ tutorial.objective }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ tutorial.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_tutorial_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_tutorial_edit', {'id': tutorial.id}) }}">edit</a>
+
+    {{ include('admin_tutorial/_delete_form.html.twig') }}
+{% endblock %}
