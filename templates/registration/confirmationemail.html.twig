@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>New program</title>
+	</head>
+
+	{% block subject %}Bienvenue à Ligne Bleue !
+	{% endblock %}
+
+	{% block body %}
+		<h2>Bienvenue à Ligne Bleue,
+			{{ user.name }}
+			!</h2>
+
+		<p>Merci de vous être inscrit sur notre site. Nous sommes ravis de vous accueillir dans notre communauté.</p>
+
+		<p>À travers Ligne Bleue, vous pourrez apprendre et développer vos compétences numériques afin de profiter pleinement de votre expérience en ligne.</p>
+
+		<p>Si vous avez des questions ou besoin d'aide, n'hésitez pas à nous contacter. Notre équipe se fera un plaisir de vous assister.</p>
+
+		<p>Profitez de votre voyage numérique avec Ligne Bleue !</p>
+
+		<p>Cliquez
+			<a href="http://localhost:8000/categorie/">ici</a>
+			pour accéder à la page principale de notre site.</p>
+
+		<p>Cordialement,<br>
+			L'équipe Ligne Bleue</p>
+	{% endblock %}
+</html>
