@@ -1,4 +1,51 @@
 {% if app.user %}
+<<<<<<< HEAD
+	<ul class="navbar fixed-top justify-content-between list-unstyled">
+		<li>
+			<div class="ms-5">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+			</div>
+		</li>
+		<li>
+			{% if app.user %}
+				<div class="btn-group me-5">
+					<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="{{ asset('build/avatars/' ~ app.user.avatar.getPath()) }}" alt="Avatar" class="avatar">
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li>
+							<a href="{{ path('app_profil') }}" class="dropdown-item">Mon profil</a>
+						</li>
+						<li>
+							<a href="{{ path('app_select_avatar') }}" class="dropdown-item">Choisir mon avatar</a>
+						</li>
+						<li>
+							<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+						</li>
+					</ul>
+				</div>
+			{% else %}
+				<div class="btn-group me-5">
+					<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa-solid fa-user fa-2x text-primary"></i>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li>
+							<a href="{{ path('app_profil') }}" class="dropdown-item">Mon profil</a>
+						</li>
+						<li>
+							<a href="{{ path('app_select_avatar') }}" class="dropdown-item">Choisir mon avatar</a>
+						</li>
+						<li>
+							<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+						</li>
+					</ul>
+				</div>
+			{% endif %}
+		</li>
+
+	</ul>
+=======
 <ul class="navbar fixed-top justify-content-between list-unstyled">
     <li>
         <div class="ms-5">
@@ -25,6 +72,7 @@
         </div>
     </li>
 </ul>
+>>>>>>> 1305f1f0210ff560ad97106563981adb2e4a7de9
 {% else %}
     <ul class="navbar fixed-top justify-content-between list-unstyled">
         <li>
