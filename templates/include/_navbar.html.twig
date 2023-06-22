@@ -8,7 +8,7 @@
 		<li>
 			<div class="btn-group me-5">
 				<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ app.user.userIdentifier }}<i class="fa-solid fa-user fa-2x text-primary"></i>
+					{{ app.user.userIdentifier }}<i class="fa-solid fa-user fa-2x text-primary"></i>
 				</button>
 				<ul class="dropdown-menu dropdown-menu-end">
 					<li>
@@ -25,28 +25,28 @@
 		</li>
 	</ul>
 {% else %}
-    <ul class="navbar fixed-top justify-content-between list-unstyled">
-        <li>
-            <div class="ms-5">
-                <img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
-            </div>
-        </li>
-        <li>
-            <div class="btn-group me-5">
-                <button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-user fa-2x text-primary"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+	<ul class="navbar fixed-top justify-content-between list-unstyled">
+		<li>
+			<div class="ms-5">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+			</div>
+		</li>
+		<li>
+			<div class="btn-group me-5">
+				<button type="button" class="btn btn-light dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa-solid fa-user fa-2x text-primary"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<li>
+						<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
 {% endif %}
 
 <ul class="navbar fixed-bottom navbar-light bg-blue d-flex justify-content-around">
@@ -64,9 +64,9 @@
 	</li>
 </ul>
 {% block javascripts %}
-    <script>
-        function rtn() {
-            window.history.back();
-        }
-    </script>
+	<script>
+		function rtn() {
+window.history.back();
+}
+	</script>
 {% endblock %}
