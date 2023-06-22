@@ -5,8 +5,9 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Answer;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class AnswerFixtures extends Fixture
+class AnswerFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -26,5 +27,12 @@ class AnswerFixtures extends Fixture
         $answer3->setQuestion($this->getReference('question_' . 1));
         $manager->persist($answer3);
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+        QuestionFixtures::class
+        ];
     }
 }
