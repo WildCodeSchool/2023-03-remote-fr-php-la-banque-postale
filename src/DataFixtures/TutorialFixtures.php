@@ -12,59 +12,57 @@ class TutorialFixtures extends Fixture
 {
     public const TUTORIALS = [
         [
-            "Introduction aux tablettes : découvrez les fonctionnalités essentielles",
-            "Utiliser les applications de musique en streaming pour écouter vos chansons préférées",
-            "Naviguer sur Internet pour trouver des informations pratiques sur la santé et le bien-être",
-            "Découvrir les podcasts et les livres audio pour enrichir vos connaissances",
-            "Utiliser les services de streaming vidéo pour regarder des films et des séries en ligne"
+            "Introduction aux tablettes",
+            "Utiliser Ligne Bleue",
+            "Naviguer sur Internet",
+            "Enrichir vos connaissances",
+            "Regarder des séries en ligne"
         ],
         [
             'Faire une photo', 'Appeler un contact', 'Ajouter un contact', 'Envoyer un message',
             'Ecouter la musique'
         ],
         [
-            "Découvrir les jeux mobiles : comment télécharger, installer et jouer",
-            "Utiliser les applications de streaming musical pour créer des playlists personnalisées",
-            "Explorer le monde du podcast : comment trouver, écouter et suivre vos émissions préférées",
-            "Créer et partager des vidéos amusantes avec des applications de montage sur votre téléphone",
-            "Explorer le monde de la lecture numérique : applications pour les livres électroniques et les magazines"
+            "Télécharger des jeux mobiles",
+            "Créer une playlist personnalisée",
+            "Suivre mes émissions préférées",
+            "Faire des montages vidéos",
+            "Lire des livres sur mon téléphone"
         ],
         [
-            "Maîtriser les fonctions de base de votre boîte de réception : lire, écrire et répondre aux e-mails",
-            "Gérer les spams et les courriers indésirables dans votre boîte de réception",
-            "Créer des filtres pour trier automatiquement vos e-mails",
-            "Utiliser les options de mise en forme pour rendre vos e-mails plus attrayants",
-            "Configurer votre boîte de réception sur votre téléphone portable pour recevoir vos e-mails en déplacement"
+            "Lire mes e-mails",
+            "Répondre aux e-mails",
+            "Les mails indésirables",
+            "Trier mes mails",
+            "Gmail sur mon téléphone"
         ],
         [
-            "Naviguer en toute sécurité : reconnaître les sites sûrs et éviter les pièges en ligne",
-            "Utiliser les moteurs de recherche avancés pour des résultats plus précis",
-            "Explorer les blogs et les forums pour trouver des informations spécialisées",
-            "Gérer vos favoris et créer des dossiers pour organiser vos sites préférés",
-            "Utiliser les outils de traduction en ligne pour communiquer avec des personnes du monde entier"
+            "Reconnaître un faux site",
+            "Faire une recherche sur google",
+            "Explorer les blogs",
+            "Organiser mes favoris",
+            "Les outils de traduction en ligne"
         ],
         [
-            "Sécuriser vos comptes en ligne : conseils pour des mots de passe forts et un suivi régulier",
-            "Protéger votre vie privée sur les réseaux sociaux : 
-            paramètres de confidentialité et contrôle des informations",
-            "Reconnaître et éviter les tentatives de phishing par e-mail",
-            "Sauvegarder vos données importantes : méthodes simples et efficaces",
-            "Utiliser un antivirus et un pare-feu pour protéger votre ordinateur contre les menaces en ligne"
+            "Bien choisir mon mot de passe",
+            "Protéger ma vie privée",
+            "Eviter les arnaques",
+            "Mes données bancaires",
+            "Utiliser un antivirus"
         ],
         [
-            "Utiliser les applications de messagerie vocale pour envoyer et recevoir des messages audio",
-            "Participer à des appels vidéo de groupe pour rester connecté avec votre famille élargie",
-            "Utiliser les réseaux sociaux pour partager des moments de votre vie avec vos proches",
-            "Créer et envoyer des cartes virtuelles pour célébrer des occasions spéciales",
-            "Utiliser les applications de messagerie instantanée pour discuter en 
-            temps réel avec vos amis et votre famille"
+            "Envoyer des messages audio",
+            "Lancer des appels vidéo",
+            "Utiliser les réseaux sociaux",
+            "Envoyer des cartes virtuelles",
+            "Utiliser Whatsapp"
         ],
         [
-            "Trouver et réserver des billets de transport en ligne : trains, avions, bus",
-            "Utiliser les applications de navigation en temps réel pour éviter les embouteillages",
-            "Découvrir les applications de partage de vélos et de trottinettes pour des déplacements écologiques",
-            "Comprendre les applications de transport en commun pour planifier vos trajets efficacement",
-            "Utiliser les services de location de voitures pour vos déplacements ponctuels ou vos vacances"
+            "Reserver des transports en ligne",
+            "Utiliser un GPS",
+            "Les déplacements écologiques",
+            "Utiliser Mappy",
+            "Utiliser Uber"
         ]
     ];
 
