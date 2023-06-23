@@ -11,18 +11,18 @@ class AvatarFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $avatars = [
-            'cat.gif',
-            'cocci.gif',
-            'fun.gif',
-            'man.gif',
-            'man2.gif',
-            'man3.gif',
-            'monkey.gif',
-            'pika.gif',
-            'titi.gif',
-            'wolf.gif',
-            'women.gif',
-            'women2.gif',
+            'Avatar_1.png',
+            'Avatar_2.png',
+            'Avatar_3.png',
+            'Avatar_4.png',
+            'Avatar_5.png',
+            'Avatar_6.png',
+            'Avatar_7.png',
+            'Avatar_8.png',
+            'Avatar_9.png',
+            'Avatar_10.png',
+            'Avatar_11.png',
+            'Avatar_12.png',
             // Ajoutez les noms de vos images d'avatar supplémentaires ici
         ];
 
