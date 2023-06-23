@@ -1,0 +1,21 @@
+{% extends 'base404.html.twig' %}
+
+{% block body %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img class="licorne" src="{{ asset('build/images/gif-licorne-qui-danse.gif') }}">
+                </div>
+                <div class="col-sm text-center">
+                    <h1 class="mt-5">Attention !</h1>
+                    <p class="mt-md-5 mb-md-5">Tu t'es trompé de tutoriel... <br><span class="h2">Ici,</span> nous
+                        t'apprenons
+                        à utiliser ton téléphone et ton ordinateur,</p>
+                    <p class="mb-md-5">pas à danser avec une licorne !</p>
+                    <a class="text-dark" href="href="{{ path('index_category') }}">Cliques ici pour retrouver ton chemin</a>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
