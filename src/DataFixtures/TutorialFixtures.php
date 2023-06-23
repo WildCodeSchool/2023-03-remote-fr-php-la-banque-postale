@@ -75,7 +75,7 @@ class TutorialFixtures extends Fixture implements DependentFixtureInterface
         'Mettre un fond d’écran',
     ];
 
-    public static int $numTutorial=0;
+    public static int $numTutorial = 0;
 
     public function __construct(private SluggerInterface $slugger)
     {
