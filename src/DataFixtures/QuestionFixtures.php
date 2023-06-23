@@ -7,7 +7,6 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Question;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-
 class QuestionFixtures extends Fixture implements DependentFixtureInterface
 {
     public const QUESTIONS = [
@@ -21,8 +20,8 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
         foreach (self::QUESTIONS as $key => $questionTitle) {
             $question = new Question();
             $question->setTitle($questionTitle);
-            $question->setTutorial($this->getReference('tutorial_Faire une photo'));
-            $manager->persist($question); 
+            $question->setTutorial($this->getReference('tutorial_0'));
+            $manager->persist($question);
             $this->addReference('question_' . $key, $question);
         }
         $manager->flush();

@@ -44,22 +44,23 @@
 		</div>
 	</div>
 	<div class="container bg-primary d-flex justify-content-center">
-        <h1>Quizz</h1>
-
-        <div id="quiz" class="mt-4;">
-		<div class="question">
+		<h1>Quizz</h1>
 		{% for question in tutorial.questions %}
-		<li>
-			<strong>Question:{{ question.title }}<br></strong>
-		</li>
-		<div class="options">
-		<br>
-		{% for answer in answers %}
-		<li>
-		 <input type="radio" name="q1" value="a"><strong>Réponse:{{ answer.text }}<br></strong></a>
-		</li>
-		<br>
-		{% endfor %}
-	{% endfor %}
-	
-{% endblock %}
+			<div id="quiz" class="mt-4;">
+				<div class="question">
+					<li>
+						<strong>Question:{{ question.title }}<br></strong>
+					</li>
+					<div class="options">
+						<br>
+						{% for answer in answers %}
+							<li>
+								<input type="radio" name="q1" value="a"><strong>Réponse:{{ answer.text }}<br></strong>
+							</li>
+						</a>
+					</li>
+					<br>
+				{% endfor %}
+			{% endfor %}
+
+		{% endblock %}

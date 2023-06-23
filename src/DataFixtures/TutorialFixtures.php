@@ -75,6 +75,8 @@ class TutorialFixtures extends Fixture implements DependentFixtureInterface
         'Mettre un fond d’écran',
     ];
 
+    public static int $numTutorial=0;
+
     public function __construct(private SluggerInterface $slugger)
     {
     }
@@ -85,6 +87,7 @@ class TutorialFixtures extends Fixture implements DependentFixtureInterface
 
         foreach (self::TUTORIALS as $key => $tutorialName) {
             for ($i = 0; $i < 5; $i++) {
+                self::$numTutorial++;
                 $tutorial = new Tutorial();
                 $tutorial->setSlug($this->slugger->slug($tutorialName[$i]));
                 $tutorial->setObjective($faker->sentence(12));
@@ -92,7 +95,7 @@ class TutorialFixtures extends Fixture implements DependentFixtureInterface
                 $tutorial->setDescription($faker->paragraphs(3, true));
                 $tutorial->setPublic((bool) rand(0, 1));
                 $tutorial->setCategory($this->getReference('category_' . $key));
-                $this->addReference('tutorial_' . $tutorialName[$i], $tutorial);
+                $this->addReference('tutorial_' . self::$numTutorial, $tutorial);
                 $manager->persist($tutorial);
             }
         }
