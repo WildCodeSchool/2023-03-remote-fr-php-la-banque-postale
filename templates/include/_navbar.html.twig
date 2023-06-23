@@ -6,18 +6,25 @@
 			</div>
 		</li>
 		<li>
-
 				<div class="btn-group me-5 d-flex align-items-center">
 					<p class='text-white font-weight-bold m-0 me-4'>
 						{{ app.user.name }}</p>
-					<button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill link-animation overflow-hidden" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="{{ asset('build/avatars/' ~ app.user.avatar.getPath()) }}" alt="Avatar" class="avatar">
-					</button>
+                {% if app.user.avatar is null %}
+                    <button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill link-animation overflow-hidden" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user fa-2x text-primary"></i>
+                    </button>
+                {% else %}
+                    <button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill link-animation overflow-hidden" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ asset('build/avatars/' ~ app.user.avatar.getPath()) }}" alt="Avatar" class="avatar">
+                    </button>
+                {% endif %}
 					<ul class="dropdown-menu dropdown-menu-end">
 						<li>
 							<a class="dropdown-item link-animation" href="{{ path('app_profil')}}">Mon profil</a>
+							<a class="dropdown-item link-animation" href="{{ path('app_profil')}}">Mon profil</a>
 						</li>
 						<li>
+							<a class="dropdown-item link-animation" href="{{ path('app_select_avatar')}}">Choisir mon avatar</a>
 							<a class="dropdown-item link-animation" href="{{ path('app_select_avatar')}}">Choisir mon avatar</a>
 						</li>
 						<li>
@@ -26,9 +33,32 @@
 					</ul>
 				</div>
 			</li>
+			</li>
 		</li>
 	</ul>
 {% else %}
+	<ul class="navbar fixed-top justify-content-between list-unstyled">
+		<li>
+			<div class="ms-5">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+			</div>
+		</li>
+		<li>
+			<div class="btn-group me-5">
+				<button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill link-animation" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fa-solid fa-user fa-2x text-primary"></i>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<li>
+						<a class="dropdown-item link-animation" href="{{ path('app_login') }}">Connexion</a>
+					</li>
+					<li>
+						<a class="dropdown-item link-animation" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
 	<ul class="navbar fixed-top justify-content-between list-unstyled">
 		<li>
 			<div class="ms-5">
@@ -61,7 +91,7 @@
 		</a>
 	</li>
 	<li class="nav-item list-unstyled">
-		<a class="nav-link d-flex align-items-center flex-column-reverse text-light link-animation" href="#">
+		<a class="nav-link d-flex align-items-center flex-column-reverse text-light link-animation" href=javascript:history.go(-1)>
 			Retour
 			<i class="fa-solid fa-arrow-left-long fa-3x"></i>
 		</a>
@@ -74,3 +104,5 @@ window.history.back();
 }
 	</script>
 {% endblock %}
+
+
