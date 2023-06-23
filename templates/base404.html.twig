@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="{{ asset('build/images/logo.png') }}"/>
 
     <title>
-        {% block title %}Admin - Ligne bleue
+        {% block title %}Erreur 404
         {% endblock %}
     </title>
     {% block stylesheets %}
@@ -24,10 +24,12 @@
     <script src="https://kit.fontawesome.com/feed0b9777.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="min-vh-100 d-flex flex-column">
+<body class="bg-info min-vh-100 d-flex flex-column justify-content-center">
+
 {% block nav %}
-    {% include '/admin/include/_navbar.html.twig' %}
+   <div class="bg-primary"> {% include 'include/_navbar.html.twig' %}</div>
 {% endblock nav %}
+
 {% block body %}{% endblock %}
 </body>
 </html>
