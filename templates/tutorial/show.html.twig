@@ -1,38 +1,65 @@
 {% extends 'layout/layout-center.html.twig' %}
 
-{% block title %}Tutoriel - {{ tutorial.name }}
+{% block title %}Tutoriel -
+	{{ tutorial.name }}
 {% endblock %}
 
 {% block body %}
 	<div class="">
 		<h1 class="text-center mb-5 mt-5 text-light">
-			Tutoriel : {{ tutorial.name }}
+			Tutoriel :
+			{{ tutorial.name }}
 		</h1>
 	</div>
 	<div class="bg-secondary rounded m-auto col-10">
 		<h2 class="text-center mb-5 mt-3 text-light">
-			Objectifs <br>
-					{{ tutorial.objective }}
+			Objectifs
+			<br>
+			{{ tutorial.objective }}
 		</h2>
 		<div class="container">
 			<div class="row row-cols-md-2 row-cols-1">
-				<div class="col m-auto fw-bold text-center h4 text-light">Clique sur cette vidéo ! <br><br>
-				<video width="320" height="240" controls>
-      <source src=”https://www.youtube.com/watch?v=Rl1mk-AaR8Q” type=video/ogg> <source src="/build/videos/arcnet.io(7-sec).mp4" type=video/mp4>
-    </video>
-  <video width="320" height="240" controls>
-      <source src=”https://www.youtube.com/watch?v=Rl1mk-AaR8Q” type=video/ogg> <source src="/build/videos/arcnet.io(7-sec).mp4" type=video/mp4>
-    </video>
+				<div class="col m-auto fw-bold text-center h4 text-light">Clique sur cette vidéo !
+					<br><br>
+					<video width="320" height="240" controls>
+						<source src="”https://www.youtube.com/watch?v=Rl1mk-AaR8Q”" type="video/ogg">
+						<source src="/build/videos/arcnet.io(7-sec).mp4" type="video/mp4">
+					</video>
+					<video width="320" height="240" controls>
+						<source src="”https://www.youtube.com/watch?v=Rl1mk-AaR8Q”" type="video/ogg">
+						<source src="/build/videos/arcnet.io(7-sec).mp4" type="video/mp4">
+					</video>
 				</div>
 				<div class="col m-auto text-center">
-					“Quel est l’utilité d’une adresse e-mail ? <br>
-										Une adresse e-mail est un élément clé de notre communication numérique quotidienne. Elle permet d’envoyer et de recevoir des messages avec des personnes situées n’importe où dans le monde, que ce soit pour des échanges personnels ou professionnels. <br><br>
-										Ressources :<br>
-										https://créer_un_mail.fr<br>
-																									https://a_quoi_sert_un_mail.fr
+					“Quel est l’utilité d’une adresse e-mail ?
+					<br>
+					Une adresse e-mail est un élément clé de notre communication numérique quotidienne. Elle permet d’envoyer et de recevoir des messages avec des personnes situées n’importe où dans le monde, que ce soit pour des échanges personnels ou professionnels.
+					<br><br>
+					Ressources :<br>
+					https://créer_un_mail.fr<br>
+					https://a_quoi_sert_un_mail.fr
 
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="container bg-primary d-flex justify-content-center">
+        <h1>Quizz</h1>
+
+        <div id="quiz" class="mt-4;">
+		<div class="question">
+		{% for question in tutorial.questions %}
+		<li>
+			<strong>Question:{{ question.title }}<br></strong>
+		</li>
+		<div class="options">
+		<br>
+		{% for answer in answers %}
+		<li>
+		 <input type="radio" name="q1" value="a"><strong>Réponse:{{ answer.text }}<br></strong></a>
+		</li>
+		<br>
+		{% endfor %}
+	{% endfor %}
+	
 {% endblock %}

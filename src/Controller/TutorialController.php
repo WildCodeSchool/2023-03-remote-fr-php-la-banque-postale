@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Tutorial;
+use App\Repository\AnswerRepository;
+use App\Repository\QuestionRepository;
 use App\Repository\TutorialRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,11 +21,22 @@ class TutorialController extends AbstractController
             'tutorials' => $tutorials,
         ]);
     }
+
     #[Route('/{slug}', name: 'tutorial_show')]
-    public function show(Tutorial $tutorial): Response
+    public function show(Tutorial $tutorial, AnswerRepository $answerrepo, QuestionRepository $questionrepo): Response
     {
+        $answers = $answerrepo->findAll();
+        $questions = $questionrepo->findAll();
+
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        // }
+
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
+            'answers' => $answers,
+            'questions' => $questions,
         ]);
     }
 }

@@ -21,6 +21,10 @@ class Question
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, orphanRemoval: true)]
     private Collection $answers;
 
+    #[ORM\ManyToOne(inversedBy: 'questions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Tutorial $tutorial = null;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -69,6 +73,18 @@ class Question
                 $answer->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTutorial(): ?Tutorial
+    {
+        return $this->tutorial;
+    }
+
+    public function setTutorial(?Tutorial $tutorial): static
+    {
+        $this->tutorial = $tutorial;
 
         return $this;
     }

@@ -7,8 +7,9 @@ use Faker\Factory;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TutorialFixtures extends Fixture
+class TutorialFixtures extends Fixture implements DependentFixtureInterface
 {
     public const TUTORIALS = [
         [
@@ -91,6 +92,7 @@ class TutorialFixtures extends Fixture
                 $tutorial->setDescription($faker->paragraphs(3, true));
                 $tutorial->setPublic((bool) rand(0, 1));
                 $tutorial->setCategory($this->getReference('category_' . $key));
+                $this->addReference('tutorial_' . $tutorialName[$i], $tutorial);
                 $manager->persist($tutorial);
             }
         }
@@ -107,5 +109,12 @@ class TutorialFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+        CategoryFixtures::class
+        ];
     }
 }

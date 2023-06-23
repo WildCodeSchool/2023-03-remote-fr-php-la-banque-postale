@@ -5,8 +5,10 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Question;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class QuestionFixtures extends Fixture
+
+class QuestionFixtures extends Fixture implements DependentFixtureInterface
 {
     public const QUESTIONS = [
         'Suis je numériquement dépressif ?',
@@ -19,9 +21,17 @@ class QuestionFixtures extends Fixture
         foreach (self::QUESTIONS as $key => $questionTitle) {
             $question = new Question();
             $question->setTitle($questionTitle);
-            $manager->persist($question);
+            $question->setTutorial($this->getReference('tutorial_Faire une photo'));
+            $manager->persist($question); 
             $this->addReference('question_' . $key, $question);
         }
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+        TutorialFixtures::class
+        ];
     }
 }
