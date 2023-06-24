@@ -20,7 +20,7 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
         foreach (self::QUESTIONS as $key => $questionTitle) {
             $question = new Question();
             $question->setTitle($questionTitle);
-            $question->setTutorial($this->getReference('tutorial_0'));
+            $question->setTutorial($this->getReference('tutorial_1'));
             $manager->persist($question);
             $this->addReference('question_' . $key, $question);
         }
