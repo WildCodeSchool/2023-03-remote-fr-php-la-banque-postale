@@ -8,7 +8,7 @@
 		<li>
 				<div class="btn-group me-5 d-flex align-items-center">
 					<p class='text-white font-weight-bold m-0 me-4'>
-						{{ app.user.name }}</p>
+						{{ app.user.name|title }}</p>
                 {% if app.user.avatar is null %}
                     <button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill link-animation overflow-hidden" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user fa-2x text-primary"></i>
