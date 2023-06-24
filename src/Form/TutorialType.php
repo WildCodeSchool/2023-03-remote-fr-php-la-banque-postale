@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Tutorial;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class TutorialType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name')
+            ->add('description', CKEditorType::class)
+            ->add('public')
+            ->add('objective', CKEditorType::class)
+            ->add('category', null, ['choice_label' => 'title'])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Tutorial::class,
+        ]);
+    }
+}

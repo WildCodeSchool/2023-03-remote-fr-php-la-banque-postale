@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
+
+    <link rel="icon" type="image/png" href="{{ asset('build/images/logo.png') }}"/>
+
+    <title>
+        {% block title %}Admin - Ligne bleue
+        {% endblock %}
+    </title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/feed0b9777.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="min-vh-100 d-flex flex-column">
+{% block nav %}
+    {% include '/admin/include/_navbar.html.twig' %}
+{% endblock nav %}
+{% block body %}{% endblock %}
+</body>
+</html>

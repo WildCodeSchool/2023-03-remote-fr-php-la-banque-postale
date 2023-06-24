@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Ligne bleue
+{% block title %}Bienvenue - Ligne bleue
 {% endblock %}
 
 {% block body %}
+    {% if not app.user %}
 	<div class="white-stripe text-center mt-3">
-		<img src="{{ asset('build/images/logo.png') }}" alt="">
+		<img src="{{ asset('build/images/logo-rond.png') }}" alt="">
 	</div>
+    {% endif %}
 	<div class="">
 		<h1 class="text-center mb-5 mt-3 text-light">
 			Bienvenue sur
@@ -17,17 +19,17 @@
 	<div class="bg-secondary p-4 mb-5 text-center">{{ slogan }}</div>
 	<div class="container">
 		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1">
-			<div class="col m-auto fw-bold text-center h4 text-light">Prêt à te former 
+			<div class="col m-auto fw-bold text-center h4 text-light mb-4">Prêt à te former
 				au numérique ?<br>Enregistre toi !</div>
 			<div class="col m-auto text-center">
-				<a href="{{ path('app_connexion') }}" class="btn btn-secondary m-auto mb-3 btn-lg w-75 text-uppercase">Connexion</a>
-				<a href="{{ path('app_mail_choice') }}" class="btn btn-secondary m-auto mb-3 btn-lg w-75 text-uppercase">Inscription</a>
-				<a href="{{ path('index_category') }}" class="btn btn-success m-auto mb-3 btn-lg w-75 text-uppercase">Je veux essayer sans m'enregistrer</a>
+				<a href="{{ path('app_login') }}" class="link-animation btn btn-secondary m-auto mb-3 btn-lg w-75 text-uppercase">Connexion</a>
+				<a href="{{ path('app_mail_choice') }}" class="link-animation btn btn-secondary m-auto mb-3 btn-lg w-75 text-uppercase">Inscription</a>
+				<a href="{{ path('index_category') }}" class="link-animation btn btn-success m-auto mb-3 btn-lg w-75 text-uppercase">Je veux essayer sans m'enregistrer</a>
 			</div>
 			<div class="col m-auto d-none d-lg-block text-light">“La Ligne Bleue est un site dédié à accompagner les personnes qui rencontrent
-            des difficultés avec les nouvelles technologies. Il offre une variété de tutoriels pour aider les 
-            utilisateurs à maîtriser différents outils et applications. En créant un compte, les utilisateurs 
-            peuvent suivre leur progression et accéder à des formations personnalisées, leur permettant ainsi 
+            des difficultés avec les nouvelles technologies. Il offre une variété de tutoriels pour aider les
+            utilisateurs à maîtriser différents outils et applications. En créant un compte, les utilisateurs
+            peuvent suivre leur progression et accéder à des formations personnalisées, leur permettant ainsi
             de développer leurs compétences technologiques à leur propre rythme.”</div>
 		</div>
 	</div>
