@@ -1,6 +1,6 @@
 {% extends 'layout/layout-top.html.twig' %}
 
-{% block title %}Profil
+{% block title %}Profil - Ligne bleue
 {% endblock %}
 
 {% block content %}
@@ -8,8 +8,8 @@
         <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
             <div class="text-white">
                 <div class="text-center text-lg-start">
-                    <p>Harry beau</p>
-                    <p>Harrybeau@hotmail.fr</p>
+                    <p>{{app.user.name}}</p>
+                    <p>{{app.user.email}}</p>
                     <p>Membre depuis 06/06/2023</p>
                 </div>
             </div>

@@ -4,6 +4,7 @@ services:
   web:
     env_file:
       - .env
+      - ../envs/.env-${GITHUB_REPOSITORY_NAME}
     environment:
       # @todo add APP_ENV default dev
       DATABASE_URL: mysql://${USER_NAME}:${USER_PASSWORD}@${DATABASE_SUBDOMAIN_NAME}-db:3306/${DB_NAME}?serverVersion=8&charset=utf8mb4
