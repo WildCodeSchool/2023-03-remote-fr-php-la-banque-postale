@@ -42,19 +42,18 @@
 			{% for question in tutorial.questions %}
 				<div id="quiz" class="mt-4;">
 					<div class="question">
-						<li>
+						<div>
 							<strong>Question:
 								{{ question.title }}<br></strong>
-						</li>
-						<div class="options">
-							<br>
+						</div>
+						<ul class="options">
 							{% for answer in answers %}
 								<li>
-									<input type="checkbox" name="{{ question.id }}" value="{{ answer.id }}"><strong>Réponse:
+									<input type="radio" name="{{ question.id }}" value="{{ answer.id }}"><strong>Réponse:
 										{{ answer.text }}<br></strong>
 								</li>
 							{% endfor %}
-						</div>
+						</ul>
 						<br>
 					</div>
 				</div>

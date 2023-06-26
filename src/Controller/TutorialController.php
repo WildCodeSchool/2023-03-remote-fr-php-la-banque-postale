@@ -36,29 +36,18 @@ class TutorialController extends AbstractController
         $answers = $answerrepo->findAll();
         $questions = $questionrepo->findAll();
         $choices = [];
+        $points = 0;
 
         if ($request->getMethod() === 'POST') {
             $quizz = $request->request->all();
-            $points = 0;
             $values = array_values($quizz);
 
-            foreach ($values as $results) {
-                $result = $answerrepo->findOneBy(['id' => $results]);
-                dump($result);
-                if ($result instanceof Answer && $result->isCorrect() === true) {
+            foreach ($values as $answerId) {
+                $answer = $answerrepo->findOneBy(['id' => $answerId]);
+                if ($answer instanceof Answer && $answer->isCorrect() === true) {
                     $points++;
                 }
-                if ($points === 3) {
-                    return $this->render('tutorial/champion.html.twig');
-                }
             }
-            return $this->render('tutorial/show.html.twig', [
-                'tutorial' => $tutorial,
-                'choice' => $choices,
-                'answers' => $answers,
-                'questions' => $questions,
-                'point' => $points,
-            ]);
         }
 
         return $this->render('tutorial/show.html.twig', [
@@ -66,6 +55,7 @@ class TutorialController extends AbstractController
             'choice' => $choices,
             'answers' => $answers,
             'questions' => $questions,
+            'point' => $points,
         ]);
     }
 }
