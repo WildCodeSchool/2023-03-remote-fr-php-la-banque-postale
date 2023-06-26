@@ -13,7 +13,7 @@ class AnswerFixtures extends Fixture implements DependentFixtureInterface
     {
         $answer1 = new Answer();
         $answer1->setText('Oui');
-        $answer1->setIsCorrect(false);
+        $answer1->setIsCorrect(true);
         $answer1->setQuestion($this->getReference('question_' . 1));
         $manager->persist($answer1);
         $answer2 = new Answer();
@@ -23,7 +23,7 @@ class AnswerFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($answer2);
         $answer3 = new Answer();
         $answer3->setText('Peut être');
-        $answer3->setIsCorrect(false);
+        $answer3->setIsCorrect(true);
         $answer3->setQuestion($this->getReference('question_' . 1));
         $manager->persist($answer3);
         $manager->flush();

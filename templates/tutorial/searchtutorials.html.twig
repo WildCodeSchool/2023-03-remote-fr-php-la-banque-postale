@@ -9,7 +9,7 @@
 		{% if pagination is defined and pagination|length > 0 %}
 			{% for article in pagination %}
 				<tr {% if loop.index is odd %} class="color" {% endif %}>
-					{% if article.ispublic %}
+					{% if article.ispublic or app.user %}
 						<div class=" col d-flex justify-content-center">
 							<a href="{{ path("tutorial_show", { 'slug': article.slug })}}" class="btn btn-secondary p-4 mb-5 w-75">{{ article.name }}</a>
 						</div>

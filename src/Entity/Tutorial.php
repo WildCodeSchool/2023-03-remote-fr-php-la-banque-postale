@@ -36,11 +36,15 @@ class Tutorial
     private ?string $slug = null;
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'favorites')]
     private Collection $favorite;
+
+    #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Question::class)]
+    private Collection $questions;
+
     public function __construct()
     {
         $this->favorite = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +142,36 @@ class Tutorial
     public function removeFavorite(User $favorite): static
     {
         $this->favorite->removeElement($favorite);
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Question>
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): static
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions->add($question);
+            $question->setTutorial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): static
+    {
+        if ($this->questions->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getTutorial() === $this) {
+                $question->setTutorial(null);
+            }
+        }
+
         return $this;
     }
 }
