@@ -1,31 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }}</h1>
+    <h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }}</h1>
 
-	{% if not app.user %}
-		<div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
-			Pour avoir accès à tous nos tutos, <a href="{{path("app_mail_choice")}}"> inscris-toi !</a>
-		</div>
-	{% endif %}
-	<div class="container mt-5">
-		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
-			{% for tutorial in category.tutorials %}
-				{% if tutorial.ispublic or app.user %}
-					<div class="col text-center">
-						<a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="link-animation btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}</a>
-					</div>
-				{% else %}
-					<div class="col text-center">
-						<a href="#" class="btn btn-dark p-4 mb-5 w-75 position-relative data-bs-toggle=" tooltip" data-bs-placement=" top" title=" connectez-vous pour y avoir accès"">
-							<i class="fa-solid fa-lock position-absolute bottom-0 end-0 fa-2x"></i>
-							{{ tutorial.name }}</a>
-					</div>
-				{% endif %}
-			{% else %}
-				Aucun tutoriel trouvé dans cette catégorie.
-				<br>
-			{% endfor %}
-		</div>
-	</div>
-</div>{% endblock %}
+    {% if not app.user %}
+        <div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
+            Pour avoir accès à tous nos tutos, <a href="{{ path("app_mail_choice") }}">inscris-toi !</a>
+        </div>
+    {% endif %}
+    <div class="container mt-5">
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
+            {% for tutorial in category.tutorials %}
+                {% if tutorial.ispublic or app.user %}
+                    <div class="col text-center">
+                        <a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}"
+                           class="link-animation btn btn-secondary p-4 mb-5 w-75">{{ tutorial.name }}
+                            {% if is_granted("ROLE_USER") %}
+                                {% set addFavorite = false %}
+                                {% for favorite in tutorial.favorite %}
+                                    {% if favorite.id == app.user.id %}
+                                        {% set addFavorite = true %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if addFavorite %}
+                                    <i class="fa-solid fa-star fa-1x ms-3"
+                                       data-tutorial-id="{{ tutorial.id }}"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star fa-1x ms-3"
+                                       data-tutorial-id="{{ tutorial.id }}"></i>
+                                {% endif %}
+                            {% else %}
+                                <i class="far fa-heart"></i>
+                            {% endif %}
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="col text-center">
+                        <a href="#" class="btn btn-dark p-4 mb-5 w-75 position-relative data-bs-toggle=" tooltip"
+                        data-bs-placement="top" title="connectez-vous pour y avoir accès">
+                        <i class="fas fa-lock position-absolute bottom-0 end-0 fa-2x"></i>
+                        {{ tutorial.name }}</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

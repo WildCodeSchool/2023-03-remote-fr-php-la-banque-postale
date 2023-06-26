@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TutorialRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,12 @@ class Tutorial
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'favorites')]
+    private Collection $favorite;
+    public function __construct()
+    {
+        $this->favorite = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,6 +115,29 @@ class Tutorial
     {
         $this->slug = $slug;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->favorite;
+    }
+
+    public function addFavorite(User $favorite): static
+    {
+        if (!$this->favorite->contains($favorite)) {
+            $this->favorite->add($favorite);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(User $favorite): static
+    {
+        $this->favorite->removeElement($favorite);
         return $this;
     }
 }
