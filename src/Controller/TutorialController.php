@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
-use App\Form\QuizzType;
-use App\Entity\Question;
 use App\Entity\Tutorial;
 use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
@@ -33,9 +31,7 @@ class TutorialController extends AbstractController
         QuestionRepository $questionrepo,
         Request $request
     ): Response {
-        $answers = $answerrepo->findAll();
         $questions = $questionrepo->findAll();
-        $choices = [];
         $points = 0;
 
         if ($request->getMethod() === 'POST') {
@@ -43,19 +39,22 @@ class TutorialController extends AbstractController
             $values = array_values($quizz);
 
             foreach ($values as $answerId) {
-                $answer = $answerrepo->findOneBy(['id' => $answerId]);
-                if ($answer instanceof Answer && $answer->isCorrect() === true) {
+                $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
+                if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
                     $points++;
                 }
             }
+            //sauvegarder les points en BDD;
+            // return $this->redirectToRoute('nom-delaroute');
+            // return $this->render('tutorial/tutorialquizz.html.twig', [
+            //     'tutorial' => $tutorial,
+            //     'questions' => $questions,
+            //     'point' => $points,
+            // ]);
         }
-
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
-            'choice' => $choices,
-            'answers' => $answers,
             'questions' => $questions,
-            'point' => $points,
         ]);
     }
 }
