@@ -1,0 +1,14 @@
+<div{{ attributes }} class="position-absolute top-0 end-0 me-3 z-2 ">
+    <button
+        data-action="live#action"
+        data-action-name="toggleBookmark"
+        class="btn btn-{{ this.isBookmarked ? 'text-primary' : 'text-light' }} btn-sm shadow-sm fa-2x p-0
+        bg-transparent exception">
+
+        {% if this.isBookmarked %}
+            <i class="fa-solid fa-bookmark text-primary bg-transparent"></i>
+        {% else %}
+            <i class="fa-regular fa-bookmark"></i>
+        {% endif %}
+    </button>
+</div>
