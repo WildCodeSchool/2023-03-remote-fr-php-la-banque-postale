@@ -47,10 +47,13 @@
 								{{ question.title }}<br></strong>
 						</div>
 						<ul class="options">
-							{% for answer in answers %}
+							{% for answer in question.answers %}
 								<li>
-									<input type="radio" name="{{ question.id }}" value="{{ answer.id }}"><strong>Réponse:
-										{{ answer.text }}<br></strong>
+                                    <label for="answer-{{ answer.id }}">
+                                        <input type="radio"
+                                               name="{{ question.id }}" value="{{ answer.id }}" id="answer-{{ answer.id }}">
+                                        {{ answer.text }}
+                                    </label>
 								</li>
 							{% endfor %}
 						</ul>
@@ -59,8 +62,4 @@
 				</div>
 			{% endfor %}
 			<button type="submit">Submit</button>
-
-			score ={{ point }}
-
-		</form>
-	{% endblock %}
+		{% endblock %}
