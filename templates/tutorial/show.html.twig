@@ -1,34 +1,66 @@
 {% extends 'layout/layout-center.html.twig' %}
 
-{% block title %}Tutoriel - {{ tutorial.name }}
+{% block title %}Tutoriel -
+	{{ tutorial.name }}
 {% endblock %}
 
 {% block body %}
-    <div class="">
-        <h1 class="text-center text-light mt-5">
-            Tutoriel : {{ tutorial.name }}
-        </h1>
-    </div>
-    <div class="container">
-        <div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
-            <h2 class="text-center mb-2 mt-3"> Objectifs </h2>
-            <ul class="text-center list-unstyled mb-5">
-                <li>
-                    {{ tutorial.objective }}
-                </li>
-            </ul>
+	<div class="">
+		<h1 class="text-center text-light mt-5">
+			Tutoriel :
+			{{ tutorial.name }}
+		</h1>
+	</div>
+	<div class="container">
+		<div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
+			<h2 class="text-center mb-2 mt-3">Objectifs
+			</h2>
+			<ul class="text-center list-unstyled mb-5">
+				<li>
+					{{ tutorial.objective }}
+				</li>
+			</ul>
 
+			<div class="row-cols-md-2 d-flex flex-column flex-md-row">
+				<div class="col m-auto fw-bold text-center">
+					<p>Clique sur cette vidéo
+						<i class="fa-solid fa-arrow-down"></i>
+					</p>
+					<iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-            <div class="row-cols-md-2 d-flex flex-column flex-md-row">
-                <div class="col m-auto fw-bold text-center">
-                    <p>Clique sur cette vidéo <i class="fa-solid fa-arrow-down"></i></p>
-                    <iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                <div class="col m-auto">
-                    <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }} </p>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+				</div>
+				<div class="col m-auto">
+					<p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container bg-primary d-flex justify-content-center">
+		<h1>Quizz</h1>
+		<form method="post">
+			{% for question in tutorial.questions %}
+				<div id="quiz" class="mt-4;">
+					<div class="question">
+						<div>
+							<strong>Question:
+								{{ question.title }}<br></strong>
+						</div>
+						<ul class="options">
+							{% for answer in answers %}
+								<li>
+									<input type="radio" name="{{ question.id }}" value="{{ answer.id }}"><strong>Réponse:
+										{{ answer.text }}<br></strong>
+								</li>
+							{% endfor %}
+						</ul>
+						<br>
+					</div>
+				</div>
+			{% endfor %}
+			<button type="submit">Submit</button>
 
+			score ={{ point }}
+
+		</form>
+	{% endblock %}

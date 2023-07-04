@@ -1,19 +1,19 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}Tutorial index{% endblock %}
+{% block title %}Admin - Tutoriels{% endblock %}
 
 {% block body %}
-    <h1>Tutorial index</h1>
+    <h1 class="mt-5 mb-5 text-center">Liste des tutoriels</h1>
+    <a href="{{ path('app_admin_tutorial_new') }}">Ajouter un tutoriel</a>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
                 <th>Public</th>
-                <th>Objective</th>
-                <th>Slug</th>
+                <th>Objectifs</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,12 +23,11 @@
                 <td>{{ tutorial.id }}</td>
                 <td>{{ tutorial.name |purify }}</td>
                 <td>{{ tutorial.description |purify }}</td>
-                <td>{{ tutorial.public ? 'Yes' : 'No' }}</td>
+                <td>{{ tutorial.public ? 'Oui' : 'Non' }}</td>
                 <td>{{ tutorial.objective |purify }}</td>
-                <td>{{ tutorial.slug }}</td>
                 <td>
-                    <a href="{{ path('app_admin_tutorial_show', {'id': tutorial.id}) }}">show</a>
-                    <a href="{{ path('app_admin_tutorial_edit', {'id': tutorial.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_tutorial_show', {'id': tutorial.id}) }}">Voir</a>
+                    <a href="{{ path('app_admin_tutorial_edit', {'id': tutorial.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +38,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_tutorial_new') }}">Create new</a>
 {% endblock %}
