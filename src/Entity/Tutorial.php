@@ -37,10 +37,13 @@ class Tutorial
 
     #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Question::class)]
     private Collection $questions;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'tutorialsBookmarked')]
+    private Collection $users;
 
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +148,33 @@ class Tutorial
             if ($question->getTutorial() === $this) {
                 $question->setTutorial(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addTutorialsBookmarked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeTutorialsBookmarked($this);
         }
 
         return $this;
