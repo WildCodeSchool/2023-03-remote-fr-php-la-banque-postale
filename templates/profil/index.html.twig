@@ -10,7 +10,7 @@
 			<div class="text-start text-white mb-5">
 				<p>{{ app.user.name }}</p>
 				<p>{{ app.user.email }}</p>
-				{# <p>Membre depuis {{ app.user.createdAt|date('d/m/Y') }}</p> #}
+				<p>Inscrit depuis le {{ app.user.dateInscription|date('d/m/Y')}}</p>
 			</div>
 		</div>
 
