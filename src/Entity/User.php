@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,6 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->tutorialsBookmarked = new ArrayCollection();
     }
+
+    #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
+    private ?\DateTimeInterface $dateInscription = null;
 
     public function getId(): ?int
     {
@@ -139,6 +143,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
     /**
      * @return Collection<int, Tutorial>
      */

@@ -2,9 +2,10 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
@@ -19,6 +20,7 @@ class UserFixtures extends Fixture
         $user
             ->setEmail('user@test.com')
             ->setName('test')
+            ->setDateInscription(new DateTime())
             ->setPassword($this->passwordHasher->hashPassword(
                 $user,
                 'test1'
@@ -29,6 +31,7 @@ class UserFixtures extends Fixture
         $admin
             ->setEmail('admin@test.com')
             ->setName('admin')
+            ->setDateInscription(new DateTime())
             ->setPassword($this->passwordHasher->hashPassword(
                 $admin,
                 'test1'

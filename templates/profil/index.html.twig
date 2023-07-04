@@ -1,30 +1,56 @@
-{% extends 'layout/layout-top.html.twig' %}
-
+{% extends 'layout/layout-center.html.twig' %}
 {% block title %}Profil - Ligne bleue
 {% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
-            <div class="text-white">
-                <div class="text-center text-lg-start">
-                    <p>{{app.user.name}}</p>
-                    <p>{{app.user.email}}</p>
-                    <p>Membre depuis 06/06/2023</p>
-                </div>
-            </div>
+{% block body %}
+	<div class="container">
 
-            <div class="text-center fw-bold">
-                <button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
-                    <i class="fa-solid fa-people-group"></i>
-                    Ajoute tes amis !
-                </button>
-                <button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
-                    <i class="fa-sharp fa-solid fa-globe"></i>
-                    Partage ta progression
-                </button>
-            </div>
-        </div>
-    </div>
+		<h1 class="text-center text-secondary mb-5 text-uppercase">Mon Profil</h1>
+		<div class="d-flex justify-content-center">
+			<div class="text-start text-white mb-5">
+				<p>{{ app.user.name }}</p>
+				<p>{{ app.user.email }}</p>
+				<p>Inscrit depuis le
+					{{ app.user.dateInscription|date('d/m/Y')}}</p>
+			</div>
+		</div>
 
+		<div class="text-center mb-3">
+			<button type="button" class="btn btn-danger btn-lg text-uppercase w-50">
+				<i class="fa-solid fa-people-group"></i>
+				Ajoute tes amis !
+			</button>
+		</div>
+		<div class="text-center">
+			<button type="button" class="btn btn-danger btn-lg text-uppercase w-50">
+				<i class="fa-sharp fa-solid fa-globe"></i>
+				Partage ta progression
+			</button>
+		</div>
+
+		<div class="row justify-content-center mt-5">
+			<div class="col-lg-6">
+				<div class="text-center">
+					<h1 class="text-light">Ma progression</h1>
+					<div class="bg-secondary rounded m-auto col-10 p-5"></div>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="text-center">
+					<h1 class="text-light">Mes favoris</h1>
+					<div class="bg-secondary rounded m-auto col-10 p-5"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-center mt-5">
+			<div class="col-lg-6">
+				<div class="text-center">
+					<h1 class="text-light">Mes Amis</h1>
+					<div class="bg-secondary rounded m-auto col-10 p-5"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
