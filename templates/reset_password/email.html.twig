@@ -1,0 +1,20 @@
+<h1>Bonjour	!</h1>
+
+<p>Vous avez oublié votre mot de passe ! Pas de problème ! Notre équipe est là pour vous aider !</p>
+<p>Pour réinitialiser votre mot de passe, il vous suffit de cliquer sur le lien ci-dessous :</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>
+	<strong>
+		🔥 Attention 🔥
+	</strong>
+	: ce lien expirera dans
+	<strong>{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}
+	</strong>! ⏰ Alors assurez-vous de l'utiliser rapidement !</p>
+
+<p>Si vous rencontrez des difficultés ou si vous avez des questions, n'hésitez pas à nous contacter.</p>
+
+<p>À tout de suite sur Ligne Bleue !</p>
+
+<p>Cordialement,<br>L'équipe Ligne Bleue</p>
