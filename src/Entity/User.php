@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,6 +38,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Avatar $avatar = null;
+    #[ORM\ManyToMany(targetEntity: Tutorial::class, inversedBy: 'users')]
+    private Collection $tutorialsBookmarked;
+    public function __construct()
+    {
+        $this->tutorialsBookmarked = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +136,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->avatar = $avatar;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tutorial>
+     */
+    public function getTutorialsBookmarked(): Collection
+    {
+        return $this->tutorialsBookmarked;
+    }
+
+    public function addTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
+    {
+        if (!$this->tutorialsBookmarked->contains($tutorialsBookmarked)) {
+            $this->tutorialsBookmarked->add($tutorialsBookmarked);
+        }
+
+        return $this;
+    }
+
+    public function removeTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
+    {
+        $this->tutorialsBookmarked->removeElement($tutorialsBookmarked);
         return $this;
     }
 }
