@@ -9,11 +9,11 @@
         </div>
     {% endif %}
     <div class="container mt-5">
-        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 m-auto">
             {% for tutorial in category.tutorials %}
                 {% if tutorial.ispublic or app.user %}
                     <div class="col text-center">
-                        <div class="w-75 position-relative">
+                        <div class="w-75 position-relative m-auto">
                             <a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="link-animation
                             btn btn-secondary p-4 mb-5 w-100 stretched-link">{{ tutorial.name }}
                             </a>
@@ -27,11 +27,12 @@
                     </div>
                 {% else %}
                     <div class="col text-center">
-                        <a href="#" class="btn btn-dark p-4 mb-5 w-75 position-relative" data-bs-toggle="tooltip"
+                        <div class="w-75 position-relative m-auto">
+                        <a href="#" class="btn btn-dark p-4 mb-5 w-100" data-bs-toggle="tooltip"
                            data-bs-placement="top" title="Connectez-vous pour y avoir accès">
-                            <i class="fa-solid fa-lock position-absolute bottom-0 end-0 fa-2x"></i>
-                            {{ tutorial.name }}</a>
-                    </div>
+                            {{ tutorial.name }}<i class="fa-solid fa-lock fa-2x"></i>
+                           </a>
+                    </div></div>
                 {% endif %}
             {% else %}
                 Aucun tutoriel trouvé dans cette catégorie.
