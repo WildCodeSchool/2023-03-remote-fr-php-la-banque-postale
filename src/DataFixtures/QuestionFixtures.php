@@ -19,33 +19,32 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
         "Qu'est-ce qu'un logiciel antivirus ?",
     ];
 
-    public static int $numQuestion = 0;
-
+    public static int $numRealQuestion = 0;
+    public static int $numFakeQuestion = 0;
 
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
 
-        $allQuestions = $manager->getRepository(Tutorial::class)->findAll();
-        $fakerTutorial = array_slice($allQuestions, 1);
-
-        foreach ($fakerTutorial as $question) {
-            for ($i = 0; $i < 5; $i++) {
+        for ($i = 2; $i < TutorialFixtures::$numTutorial; $i++) {
+            for ($q = 0; $q < 5; $q++) {
+                self::$numFakeQuestion++;
                 $fakequestion = new Question();
                 $fakequestion->setTitle($faker->sentence(7));
-                $fakequestion->setTutorial($question);
+                $fakequestion->setTutorial($this->getReference('tutorial_' . $i));
+                $this->addReference('fake_question_' . self::$numFakeQuestion, $fakequestion);
                 $manager->persist($fakequestion);
             }
         }
-        foreach (self::QUESTIONS as $key => $questionTitle) {
-            self::$numQuestion++;
+
+        foreach (self::QUESTIONS as $questionTitle) {
+            self::$numRealQuestion++;
             $question = new Question();
             $question->setTitle($questionTitle);
             $question->setTutorial($this->getReference('tutorial_1'));
             $manager->persist($question);
-            $this->addReference('question_' . $key, $question);
+            $this->addReference('real_question_' . self::$numRealQuestion, $question);
         }
-
         $manager->flush();
     }
 

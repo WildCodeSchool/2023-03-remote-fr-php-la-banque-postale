@@ -22,7 +22,7 @@ class AnswerFixtures extends Fixture implements DependentFixtureInterface
             ['text' => "Un mot de passe facile à deviner", 'isCorrect' => false],
             ['text' => "Un mot de passe composé de chiffres uniquement", 'isCorrect' => false],
             [
-                'text' => "Un mot de passe contenant des lettres majuscules et minuscules, 
+                'text' => "Un mot de passe contenant des lettres majuscules et minuscules,
                 des chiffres et des caractères spéciaux",'isCorrect' => true
             ],
             ['text' => "Un mot de passe que vous partagez avec vos amis", 'isCorrect' => false],
@@ -55,14 +55,12 @@ class AnswerFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
 
-        $allAnswers = $manager->getRepository(Question::class)->findAll();
-
-        foreach ($allAnswers as $answer) {
-            for ($i = 0; $i < 5; $i++) {
+        for ($i = 1; $i < QuestionFixtures::$numFakeQuestion; $i++) {
+            for ($a = 0; $a < 5; $a++) {
                 $fakeanswer = new Answer();
                 $fakeanswer->setText($faker->sentence(3));
                 $fakeanswer->setIsCorrect(true);
-                $fakeanswer->setQuestion($answer);
+                $fakeanswer->setQuestion($this->getReference('fake_question_' . $i));
                 $manager->persist($fakeanswer);
             }
         }
@@ -71,14 +69,14 @@ class AnswerFixtures extends Fixture implements DependentFixtureInterface
                 $answer = new Answer();
                 $answer->setText($answerValue['text']);
                 $answer->setIsCorrect($answerValue['isCorrect']);
-                $answer->setQuestion($this->getReference('question_' . $index));
+                $answer->setQuestion($this->getReference('real_question_' . ($index + 1)));
                 $manager->persist($answer);
             }
         }
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             QuestionFixtures::class
