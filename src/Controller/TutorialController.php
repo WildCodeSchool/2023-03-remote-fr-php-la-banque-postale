@@ -45,7 +45,7 @@ class TutorialController extends AbstractController
                 }
             }
             //sauvegarder les points en BDD;
-            // return $this->redirectToRoute('nom-delaroute');
+            return $this->redirectToRoute('result.html.twig');
             // return $this->render('tutorial/tutorialquizz.html.twig', [
             //     'tutorial' => $tutorial,
             //     'questions' => $questions,
