@@ -41,7 +41,6 @@ class TutorialController extends AbstractController
         $questions = $questionrepo->findAll();
         $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
         $newUpdatedAt = new DateTimeImmutable('now');
-        $points = 0;
 
         if ($request->getMethod() === 'POST') {
             $quizz = $request->request->all();

@@ -60,9 +60,9 @@ class Progress
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_At): static
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
-        $this->updatedAt = $updated_At;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
