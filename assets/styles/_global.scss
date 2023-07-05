@@ -1,9 +1,13 @@
 .body-classic {
     background-image: url("/assets/images/background.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 @media only screen and (max-width: 800px) {
     .licorne {
         width: 15rem;
     }
+    .logo{
+        width: 5rem;
+    }
 }
-
