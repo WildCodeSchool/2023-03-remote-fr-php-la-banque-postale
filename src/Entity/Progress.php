@@ -21,7 +21,7 @@ class Progress
     private ?Tutorial $tutorial = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $updated_At = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $score = null;
@@ -57,12 +57,12 @@ class Progress
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->updated_At;
+        return $this->updatedAt;
     }
 
     public function setUpdatedAt(\DateTimeImmutable $updated_At): static
     {
-        $this->updated_At = $updated_At;
+        $this->updatedAt = $updated_At;
 
         return $this;
     }
