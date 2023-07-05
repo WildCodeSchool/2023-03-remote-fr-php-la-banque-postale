@@ -40,10 +40,14 @@ class Tutorial
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'tutorialsBookmarked')]
     private Collection $users;
 
+    #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Progress::class)]
+    private Collection $progress;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->progress = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +179,36 @@ class Tutorial
     {
         if ($this->users->removeElement($user)) {
             $user->removeTutorialsBookmarked($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Progress>
+     */
+    public function getProgress(): Collection
+    {
+        return $this->progress;
+    }
+
+    public function addProgress(Progress $progress): static
+    {
+        if (!$this->progress->contains($progress)) {
+            $this->progress->add($progress);
+            $progress->setTutorial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgress(Progress $progress): static
+    {
+        if ($this->progress->removeElement($progress)) {
+            // set the owning side to null (unless already changed)
+            if ($progress->getTutorial() === $this) {
+                $progress->setTutorial(null);
+            }
         }
 
         return $this;
