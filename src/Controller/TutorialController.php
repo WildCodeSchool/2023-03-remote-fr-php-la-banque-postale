@@ -37,6 +37,7 @@ class TutorialController extends AbstractController
         EntityManagerInterface $entityManager,
         Request $request
     ): Response {
+
         $user = $this->getUser();
         $questions = $questionrepo->findAll();
         $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
@@ -64,10 +65,10 @@ class TutorialController extends AbstractController
                 foreach ($values as $answerId) {
                     $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
                     if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
-                            $progress->setScore(0);
-                            $progress->setUpdatedAt($newUpdatedAt);
-                            $progress->setScore($progress->getScore() + 1);
-                            $entityManager->persist($progress);
+                        $progress->setScore(0);
+                        $progress->setUpdatedAt($newUpdatedAt);
+                        $progress->setScore($progress->getScore() + 1);
+                        $entityManager->persist($progress);
                     }
                 }
                 $entityManager->flush();
@@ -77,9 +78,21 @@ class TutorialController extends AbstractController
                 'progressId' => $progressId,
             ]);
         }
-        return $this->render('tutorial/show.html.twig', [
-            'tutorial' => $tutorial,
-            'questions' => $questions,
-        ]);
+        if (!empty($progress)) {
+            $lastscore = $progress->getScore();
+            $lastsession = $progress->getUpdatedAt();
+
+            return $this->render('tutorial/show.html.twig', [
+                'tutorial' => $tutorial,
+                'questions' => $questions,
+                'lastscore' => $lastscore,
+                'lastsession' => $lastsession,
+            ]);
+        } else {
+            return $this->render('tutorial/show.html.twig', [
+                'tutorial' => $tutorial,
+                'questions' => $questions,
+            ]);
+        }
     }
 }
