@@ -1,32 +1,22 @@
 {% extends 'layout/layout-center.html.twig' %}
 
-{% block title %}Tutoriel -
-    {{ tutorial.name }}
-{% endblock %}
+{% block title %}Tutoriel - {{ tutorial.name }}{% endblock %}
 
 {% block body %}
     <div>
-        <h1 class="text-center text-light mt-5">
-            Tutoriel :
-            {{ tutorial.name }}
-        </h1>
+        <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
     </div>
 
     <div class="container">
         <div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
-            <h2 class="text-center mb-2 mt-3">Objectifs
-            </h2>
+            <h2 class="text-center mb-2 mt-3">Objectifs</h2>
             <ul class="text-center list-unstyled mb-5">
-                <li>
-                    {{ tutorial.objective }}
-                </li>
+                <li>{{ tutorial.objective }}</li>
             </ul>
 
             <div class="row-cols-md-2 d-flex flex-column flex-md-row">
                 <div class="col m-auto fw-bold text-center">
-                    <p>Clique sur cette vidéo
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </p>
+                    <p>Clique sur cette vidéo <i class="fa-solid fa-arrow-down"></i></p>
                     <iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -34,44 +24,65 @@
                 </div>
 
                 <div class="col m-auto">
-                    <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}
-                    </p>
+                    <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}</p>
                 </div>
             </div>
 
-            <div>
-                <h1 class="text-center">Quizz</h1>
+            <h1 class="text-center mt-3 mt-md-5">Quiz</h1>
 
-                <form method="post">
-                    {% for question in tutorial.questions %}
-                        <div id="quiz" class="mt-4 d-flex flex-column justify-content-center">
-
-                            <div class="border text-center w-75 m-auto p-3">
-                                <p>Question :
-                                    {{ question.title }}</p>
+            <form method="post">
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        {% for question in tutorial.questions %}
+                            <div class="carousel-item question{% if loop.first %} active{% endif %}"
+                                 data-question-index="{{ loop.index }}">
+                                <div id="quiz"
+                                     class="mb-5 d-flex flex-column justify-content-center question-wrapper">
+                                    <div class="question-quiz text-center w-100 m-auto p-md-3 mt-1 mt-md-3">
+                                        <h3>{{ question.title }}</h3>
+                                    </div>
+                                    <div class="quiz-content">
+                                        <ul class="options list-unstyled">
+                                            <div class="w-100 m-auto">
+                                                {% for answer in question.answers %}
+                                                        <li class="p-3 bg-primary mt-3 text-white rounded-4">
+                                                            <label for="answer-{{ answer.id }}">
+                                                                <input type="radio" name="{{ question.id }}"
+                                                                       value="{{ answer.id }}"
+                                                                       id="answer-{{ answer.id }}">
+                                                                {{ answer.text }}
+                                                            </label>
+                                                        </li>
+                                                {% endfor %}
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="button-set d-flex flex-column justify-content-between">
+                                        <button class="m-auto prev-btn p-2 mb-1 border-0 bg-success rounded-4 w-75 text-light bg-opacity-50" type="button"
+                                                data-bs-target="#carouselExample"
+                                                data-bs-slide="prev">
+                                            Question précédente
+                                        </button>
+                                        {% if loop.last %}
+                                        <button type="submit" class="m-auto submit-btn border-0 p-2 bg-success w-75 rounded-4 text-light">
+                                            Valider
+                                        </button>
+                                        {% else %}
+                                        <button type="button" class="m-auto next-btn p-2 border-0 bg-success rounded-4 w-75 text-light"
+                                                data-bs-target="#carouselExample"
+                                                data-bs-slide="next">Question suivante
+                                        </button>
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="w-100">
-                                <ul class="options list-unstyled">
-                                    {% for answer in question.answers %}
-                                        <li class="border mt-3 p-3 w-50 m-auto">
-                                            <label for="answer-{{ answer.id }}">
-                                                <input type="radio"
-                                                       name="{{ question.id }}" value="{{ answer.id }}"
-                                                       id="answer-{{ answer.id }}">
-                                                {{ answer.text }}
-                                            </label>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="container bg-primary">
+    <div class="container bg-primary"></div>
 
-    </div>
+
 {% endblock %}

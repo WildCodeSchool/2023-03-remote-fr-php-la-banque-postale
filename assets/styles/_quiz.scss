@@ -1,0 +1,23 @@
+@media screen and (min-width: 768px) {
+    .question-quiz {
+        width: 75%;
+    }
+    .quiz-content {
+        width: 75%;
+        margin: auto;
+    }
+    .button-set {
+        width: 75%;
+        margin: auto;
+    }
+}
+@media screen and (min-width: 1200px)  {
+    .quiz-content {
+        width: 50%;
+        margin: auto;
+    }
+    .button-set {
+        width: 50%;
+        margin: auto;
+    }
+}
