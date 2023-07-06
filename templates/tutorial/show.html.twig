@@ -40,9 +40,9 @@
 		<h1>Quizz</h1>
 		<form method="post">
 			{% if lastscore is defined and lastscore >= 4 %}
-				<i class="fa-solid fa-circle-check fa-bounce fa-2xl" style="color: #00eb1b;"></i>
+				 éalisé le: {{ lastsession }} <i class="fa-solid fa-circle-check fa-bounce fa-2xl" style="color: #00eb1b;"></i>
 			{% else %}
-				<i class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i>
+				réalisé le: {{ lastsession }}<i class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i>
 			{% endif %}
 			{% for question in tutorial.questions %}
 				<div id="quiz" class="mt-4;">
