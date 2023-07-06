@@ -40,9 +40,9 @@
 		<h1>Quizz</h1>
 		<form method="post">
 			{% if lastscore is defined and lastscore >= 4 %}
-				 éalisé le: {{ lastsession|date('Y-m-d H:i:s') }} <i class="fa-solid fa-circle-check fa-bounce fa-2xl" style="color: #00eb1b;"></i>
+				 Réalisé le: {{ lastsession|date('Y-m-d H:i:s') }} <i class="fa-solid fa-circle-check fa-bounce fa-2xl" style="color: #00eb1b;"></i> Validé !
 			{% elseif lastscore is defined and lastscore < 4 %}
-				réalisé le: {{ lastsession|date('Y-m-d H:i:s') }}<i class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i>
+				Réalisé le: {{ lastsession|date('Y-m-d H:i:s') }} <i class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i> Pas validé !
 			{% else %}
 			{% endif %}
 			{% for question in tutorial.questions %}
