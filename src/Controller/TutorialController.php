@@ -34,48 +34,35 @@ class TutorialController extends AbstractController
         AnswerRepository $answerrepo,
         QuestionRepository $questionrepo,
         ProgressRepository $progressrepo,
-        EntityManagerInterface $entityManager,
         Request $request
     ): Response {
 
         $user = $this->getUser();
         $questions = $questionrepo->findAll();
         $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
-        $newUpdatedAt = new DateTimeImmutable('now');
-
         if ($request->getMethod() === 'POST') {
             $quizz = $request->request->all();
             $values = array_values($quizz);
 
-            if (!($progress)) {
+            if (!$progress) {
                 $progress = new Progress();
                 $progress->setUser($user);
                 $progress->setTutorial($tutorial);
-                $progress->setUpdatedAt($newUpdatedAt);
-                $progress->setScore(0);
-                $entityManager->persist($progress);
-                foreach ($values as $answerId) {
-                    $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
-                    if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
-                        $progress->setScore($progress->getScore() + 1);
-                    }
-                }
-                $entityManager->flush();
-            } else {
-                foreach ($values as $answerId) {
-                    $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
-                    if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
-                        $progress->setScore(0);
-                        $progress->setUpdatedAt($newUpdatedAt);
-                        $progress->setScore($progress->getScore() + 1);
-                        $entityManager->persist($progress);
-                    }
-                }
-                $entityManager->flush();
             }
-            $progressId = $progress->getId();
+
+            $score = 0;
+            foreach ($values as $answerId) {
+                $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
+                if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
+                    $score++;
+                }
+            }
+            $progress->setScore($score);
+            $progress->setUpdatedAt(new DateTimeImmutable('now'));
+            $progressrepo->save($progress, true);
+
             return $this->redirectToRoute('app_score', [
-                'progressId' => $progressId,
+                'slug' => $tutorial->getSlug(),
             ]);
         }
 

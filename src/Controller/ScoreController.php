@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tutorial;
 use App\Repository\ProgressRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,18 +11,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ScoreController extends AbstractController
 {
-    #[Route('/score/', name: 'app_score')]
+    #[Route('/score/{slug}', name: 'app_score')]
     public function index(
-        ProgressRepository $progressRepository,
-        Request $request,
+        Tutorial $tutorial,
+        ProgressRepository $progressRepository
     ): Response {
-        $totalQuestion = 5;
-        $progressId = $request->query->get('progressId');
-        $progress = $progressRepository->findOneBy(['id' => $progressId]);
-        $score = $progress->getScore();
+        $totalQuestion = count($tutorial->getQuestions());
+        $user = $this->getUser();
+        $progress = $progressRepository->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
+        $score = $progress?->getScore() ?: 0;
         $successPercentage = ( $score / $totalQuestion ) * 100;
-        $tutorial = $progress->getTutorial();
-
 
         return $this->render('score/result.html.twig', [
             'score' => $score,
