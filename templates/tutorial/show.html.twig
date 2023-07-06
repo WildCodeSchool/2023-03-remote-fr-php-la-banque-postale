@@ -39,6 +39,12 @@
 	<div class="container bg-primary d-flex justify-content-center">
 		<h1>Quizz</h1>
 		<form method="post">
+			{% if lastscore is defined and lastscore >= 4 %}
+				 Réalisé le: {{ lastsession|date('Y-m-d H:i:s') }} <i class="fa-solid fa-circle-check fa-bounce fa-2xl" style="color: #00eb1b;"></i> Validé !
+			{% elseif lastscore is defined and lastscore < 4 %}
+				Réalisé le: {{ lastsession|date('Y-m-d H:i:s') }} <i class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i> Pas validé !
+			{% else %}
+			{% endif %}
 			{% for question in tutorial.questions %}
 				<div id="quiz" class="mt-4;">
 					<div class="question">
@@ -49,11 +55,10 @@
 						<ul class="options">
 							{% for answer in question.answers %}
 								<li>
-                                    <label for="answer-{{ answer.id }}">
-                                        <input type="radio"
-                                               name="{{ question.id }}" value="{{ answer.id }}" id="answer-{{ answer.id }}">
-                                        {{ answer.text }}
-                                    </label>
+									<label for="answer-{{ answer.id }}">
+										<input type="radio" name="{{ question.id }}" value="{{ answer.id }}" id="answer-{{ answer.id }}">
+										{{ answer.text }}
+									</label>
 								</li>
 							{% endfor %}
 						</ul>

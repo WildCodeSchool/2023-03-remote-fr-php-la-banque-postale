@@ -36,6 +36,7 @@ class TutorialController extends AbstractController
         ProgressRepository $progressrepo,
         Request $request
     ): Response {
+
         $user = $this->getUser();
         $questions = $questionrepo->findAll();
         $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
@@ -64,9 +65,12 @@ class TutorialController extends AbstractController
                 'slug' => $tutorial->getSlug(),
             ]);
         }
+
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
             'questions' => $questions,
+            'lastscore' => (!empty($progress)) ? $progress->getScore() : null,
+            'lastsession' => (!empty($progress)) ? $progress->getUpdatedAt() : null,
         ]);
     }
 }
