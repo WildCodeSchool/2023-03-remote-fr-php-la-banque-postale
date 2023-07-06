@@ -1,0 +1,8 @@
+.swiper {
+    width: 100%;
+}
+
+.swiper-pagination-progressbar-fill {
+    --swiper-theme-color : green;
+    background: var(--swiper-theme-color);
+}

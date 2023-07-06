@@ -28,61 +28,40 @@
                 </div>
             </div>
 
-            <h1 class="text-center mt-3 mt-md-5">Quiz</h1>
+            <h1 class="text-center mt-3 mb-md-3 mt-md-5">Quiz</h1>
 
-            <form method="post">
-                <div id="carouselExample" class="carousel slide">
-                    <div class="carousel-inner">
+            <form method="post" class="mb-5">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
                         {% for question in tutorial.questions %}
-                            <div class="carousel-item question{% if loop.first %} active{% endif %}"
-                                 data-question-index="{{ loop.index }}">
-                                <div id="quiz"
-                                     class="mb-5 d-flex flex-column justify-content-center question-wrapper">
-                                    <div class="question-quiz text-center w-100 m-auto p-md-3 mt-1 mt-md-3">
-                                        <h3>{{ question.title }}</h3>
-                                    </div>
-                                    <div class="quiz-content">
-                                        <ul class="options list-unstyled">
-                                            <div class="w-100 m-auto">
-                                                {% for answer in question.answers %}
-                                                        <li class="p-3 bg-primary mt-3 text-white rounded-4">
-                                                            <label for="answer-{{ answer.id }}">
-                                                                <input type="radio" name="{{ question.id }}"
-                                                                       value="{{ answer.id }}"
-                                                                       id="answer-{{ answer.id }}">
-                                                                {{ answer.text }}
-                                                            </label>
-                                                        </li>
-                                                {% endfor %}
-                                            </div>
-                                        </ul>
-                                    </div>
-                                    <div class="button-set d-flex flex-column justify-content-between">
-                                        <button class="m-auto prev-btn p-2 mb-1 border-0 bg-success rounded-4 w-75 text-light bg-opacity-50"
-                                                data-bs-target="#carouselExample"
-                                                data-bs-slide="prev">
-                                            Question précédente
-                                        </button>
-                                        {% if loop.last %}
-                                        <button type="submit" class="m-auto submit-btn border-0 p-2 bg-success w-75 rounded-4 text-light">
-                                            Valider
-                                        </button>
-                                        {% else %}
-                                        <button class="m-auto next-btn p-2 border-0 bg-success rounded-4 w-75 text-light"
-                                                data-bs-target="#carouselExample"
-                                                data-bs-slide="next">Question suivante
-                                        </button>
-                                    </div>
-                                    {% endif %}
+                            <div class="swiper-slide d-flex flex-column justify-content-center align-items-center">
+                                <div class="text-center mb-2 mb-md-5 mt-3 mt-md-5">
+                                    <h3>{{ question.title }}</h3>
                                 </div>
+                                <ul class="options list-unstyled w-75">
+                                    {% for answer in question.answers %}
+                                        <li class="answer-list bg-primary text-light mb-2 p-2 rounded-4 m-auto">
+                                            <label for="answer-{{ answer.id }}">
+                                                <input type="radio" class="me-2" name="{{ question.id }}" value="{{ answer.id }}" id="answer-{{ answer.id }}">
+                                                {{ answer.text }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                {% if loop.last %}
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success">Valider</button>
+                                    </div>
+                                {% endif %}
                             </div>
                         {% endfor %}
                     </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </form>
         </div>
     </div>
-    <div class="container bg-primary"></div>
-
 
 {% endblock %}
