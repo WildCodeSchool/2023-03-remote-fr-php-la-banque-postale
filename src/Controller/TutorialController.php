@@ -78,21 +78,12 @@ class TutorialController extends AbstractController
                 'progressId' => $progressId,
             ]);
         }
-        if (!empty($progress)) {
-            $lastscore = $progress->getScore();
-            $lastsession = $progress->getUpdatedAt();
 
-            return $this->render('tutorial/show.html.twig', [
-                'tutorial' => $tutorial,
-                'questions' => $questions,
-                'lastscore' => $lastscore,
-                'lastsession' => $lastsession,
-            ]);
-        } else {
-            return $this->render('tutorial/show.html.twig', [
-                'tutorial' => $tutorial,
-                'questions' => $questions,
-            ]);
-        }
+        return $this->render('tutorial/show.html.twig', [
+            'tutorial' => $tutorial,
+            'questions' => $questions,
+            'lastscore' => (!empty($progress)) ? $progress->getScore() : null,
+            'lastsession' => (!empty($progress)) ? $progress->getUpdatedAt() : null,
+        ]);
     }
 }
