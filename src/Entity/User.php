@@ -44,10 +44,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->tutorialsBookmarked = new ArrayCollection();
+        $this->progress = new ArrayCollection();
     }
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Progress::class)]
+    private Collection $progress;
 
     public function getId(): ?int
     {
@@ -174,6 +178,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
     {
         $this->tutorialsBookmarked->removeElement($tutorialsBookmarked);
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Progress>
+     */
+    public function getProgress(): Collection
+    {
+        return $this->progress;
+    }
+
+    public function addProgress(Progress $progress): static
+    {
+        if (!$this->progress->contains($progress)) {
+            $this->progress->add($progress);
+            $progress->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgress(Progress $progress): static
+    {
+        if ($this->progress->removeElement($progress)) {
+            // set the owning side to null (unless already changed)
+            if ($progress->getUser() === $this) {
+                $progress->setUser(null);
+            }
+        }
+
         return $this;
     }
 }
