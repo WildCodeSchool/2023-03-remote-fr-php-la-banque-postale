@@ -150,10 +150,12 @@ class ResetPasswordController extends AbstractController
         // Do not reveal whether a user account was found or not.
         if (!$user) {
             $errorMessage = 'Aucun utilisateur n\'a été trouvé pour cette adresse mail.'
-                . "\n" . "fa1" . ' Vérifiez que vous avez bien tapé la bonne adresse,
-                le bon nom de domaine et la bonne extension (.com / .fr / .org) '
-                . "fa1" . "\n" . 'Réessayez ' . "fa2" . "\n" . 'Si le problème persiste
-                n\'hésitez pas à nous contacter !';
+                . "\n" . "fa1" . ' Vérifiez que vous avez bien tapé : ' . "fa1"
+                . "\n" . ' - la bonne adresse '
+                . "\n" . ' - le bon nom de domaine '
+                . "\n" . ' - la bonne extension (.com / .fr / .org) '
+                . "\n" . 'Réessayez ' . "fa2"
+                . "\n" . 'Si le problème persiste n\'hésitez pas à nous contacter !';
             $this->addFlash('reset_password_error', $errorMessage);
 
             return $this->redirectToRoute('app_forgot_password_request');
