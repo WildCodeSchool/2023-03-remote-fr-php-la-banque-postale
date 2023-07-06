@@ -6,3 +6,19 @@
     --swiper-theme-color : green;
     background: var(--swiper-theme-color);
 }
+
+@media only screen and (max-width: 991px) {
+    .button-set {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+@media only screen and (min-width: 991px) {
+.button-set {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+}

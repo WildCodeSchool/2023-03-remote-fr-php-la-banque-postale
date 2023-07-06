@@ -8,8 +8,8 @@ const swiper = new Swiper(".mySwiper", {
         type: "progressbar",
     },
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".button-next",
+        prevEl: ".button-prev",
     },
 });
 
