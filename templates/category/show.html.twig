@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }}</h1>
+    <h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }} {{ percentSucess[category.id]}} %</h1> 
 
     {% if not app.user %}
         <div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">

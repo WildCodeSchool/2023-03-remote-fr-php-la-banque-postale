@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\SearchType;
+use App\Services\PercenTool;
 use App\Model\SearchData;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
 use App\Repository\TutorialRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/categorie')]
 class CategoryController extends AbstractController
@@ -53,11 +54,41 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
     #[Route('/{slug}', name: 'category_show')]
-    public function show(Category $category): Response
-    {
+    public function show(
+        Category $category,
+        CategoryRepository $categoryRepository,
+        PercenTool $percenTool
+    ): Response {
+        $categories = $categoryRepository->findAll();
+        $percentSuccess = [];
+
+        foreach ($categories as $categorie) {
+            $tutorials = $categorie->getTutorials();
+
+            $totalScore = 0;
+            $totalTutorials = count($tutorials);
+
+            foreach ($tutorials as $tutorial) {
+                $progress = $tutorial->getProgress();
+
+                foreach ($progress as $progresstuto) {
+                    $score = $progresstuto->getScore();
+
+                    if ($score >= 4) {
+                        $totalScore++;
+                    }
+                }
+            }
+
+            $percent = $percenTool->calculate($totalScore, $totalTutorials);
+            $percentSuccess[$categorie->getId()] = $percent;
+        }
+
         return $this->render('category/show.html.twig', [
             'category' => $category,
+            'percentSuccess' => $percentSuccess,
         ]);
     }
 }
