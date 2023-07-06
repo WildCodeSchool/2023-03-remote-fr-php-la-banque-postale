@@ -61,10 +61,10 @@ class TutorialController extends AbstractController
                 }
                 $entityManager->flush();
             } else {
+                $progress->setScore(0);
                 foreach ($values as $answerId) {
                     $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
                     if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
-                            $progress->setScore(0);
                             $progress->setUpdatedAt($newUpdatedAt);
                             $progress->setScore($progress->getScore() + 1);
                             $entityManager->persist($progress);
