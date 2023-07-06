@@ -59,7 +59,7 @@ class TutorialController extends AbstractController
             $progress->setScore($score);
             $progress->setUpdatedAt(new DateTimeImmutable('now'));
             $progressrepo->save($progress, true);
-            
+
             return $this->redirectToRoute('app_score', [
                 'slug' => $tutorial->getSlug(),
             ]);
