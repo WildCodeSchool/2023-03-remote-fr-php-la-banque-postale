@@ -16,7 +16,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'user' => $user,
-            'favoris' => $favoris, // Passer les tutoriels favoris à la vue
+            'favoris' => $favoris,
         ]);
     }
 }
