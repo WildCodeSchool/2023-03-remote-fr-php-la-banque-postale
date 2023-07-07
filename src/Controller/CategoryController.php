@@ -58,37 +58,14 @@ class CategoryController extends AbstractController
     #[Route('/{slug}', name: 'category_show')]
     public function show(
         Category $category,
-        CategoryRepository $categoryRepository,
         PercenTool $percenTool
     ): Response {
-        $categories = $categoryRepository->findAll();
-        $percentSuccess = [];
 
-        foreach ($categories as $categorie) {
-            $tutorials = $categorie->getTutorials();
-
-            $totalScore = 0;
-            $totalTutorials = count($tutorials);
-
-            foreach ($tutorials as $tutorial) {
-                $progress = $tutorial->getProgress();
-
-                foreach ($progress as $progresstuto) {
-                    $score = $progresstuto->getScore();
-
-                    if ($score >= 4) {
-                        $totalScore++;
-                    }
-                }
-            }
-
-            $percent = $percenTool->calculate($totalScore, $totalTutorials);
-            $percentSuccess[$categorie->getId()] = $percent;
-        }
+        $successByCategory = $percenTool->calculatePercentage($category);
 
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'percentSuccess' => $percentSuccess,
+            'successByCategory' => $successByCategory,
         ]);
     }
 }
