@@ -10,7 +10,6 @@ use App\Repository\AnswerRepository;
 use App\Repository\ProgressRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\TutorialRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
