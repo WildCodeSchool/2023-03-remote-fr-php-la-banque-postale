@@ -5,17 +5,22 @@
 
 {% block body %}
 	{% for flash_error in app.flashes('reset_password_error') %}
-		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+		{% set flash_error = flash_error|replace({'\n': '<br>', 'fa1':'<i class="fa-solid fa-hand fa-beat"></i>', 'fa2':'<i class="fa-solid fa-hand-fist"></i>'}) %}
+		<div class="alert alert-info text-center" role="alert">
+			<i class="fa-solid fa-triangle-exclamation fa-2x"></i>
+			<br>
+			{{ flash_error|purify }}
+		</div>
 	{% endfor %}
 	<div class="container">
 		<div class="row text-center">
 			<h1 class="text-light text-center">Réinitialiser votre mot de passe</h1>
 
 			{{ form_start(requestForm, {'attr': {'class': 'text-light'}}) }}
-			{{ form_widget(requestForm.email, {'attr': {'class': 'form-control bg-dark border-0 text-light mx-auto text-center m-3 w-25', 'placeholder': 'Tape ton adresse mail ici'}}) }}
+			{{ form_widget(requestForm.email, {'attr': {'class': 'form-control bg-dark border-0 text-light mx-auto text-center m-3 w-25', 'placeholder': 'Tapez votre adresse e-mail ici'}}) }}
 			<div>
 				<small class="text-light">
-					Saisissez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+					Saisissez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
 				</small>
 			</div>
 

@@ -149,7 +149,16 @@ class ResetPasswordController extends AbstractController
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {
-            return $this->redirectToRoute('app_check_email');
+            $errorMessage = 'Aucun utilisateur n\'a été trouvé pour cette adresse mail.'
+                . "\n" . "fa1" . ' Vérifiez que vous avez bien tapé : ' . "fa1"
+                . "\n" . ' - la bonne adresse '
+                . "\n" . ' - le bon nom de domaine '
+                . "\n" . ' - la bonne extension (.com / .fr / .org) '
+                . "\n" . 'Réessayez ' . "fa2"
+                . "\n" . 'Si le problème persiste n\'hésitez pas à nous contacter !';
+            $this->addFlash('reset_password_error', $errorMessage);
+
+            return $this->redirectToRoute('app_forgot_password_request');
         }
 
         try {
@@ -158,13 +167,16 @@ class ResetPasswordController extends AbstractController
             // If you want to tell the user why a reset email was not sent, uncomment
             // the lines below and change the redirect to 'app_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
-            //
-            // $this->addFlash('reset_password_error', sprintf(
-            //     '%s - %s',
-            //     $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE,
-            // [], 'ResetPasswordBundle'),
-            //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
-            // ));
+
+            $this->addFlash('reset_password_error', sprintf(
+                '%s - %s',
+                $translator->trans(
+                    ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE,
+                    [],
+                    'ResetPasswordBundle'
+                ),
+                $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
+            ));
 
             return $this->redirectToRoute('app_check_email');
         }
@@ -172,7 +184,7 @@ class ResetPasswordController extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address('mailer@lignebleue.com', 'Reset-Mail-Bot'))
             ->to($user->getEmail())
-            ->subject('Your password reset request')
+            ->subject('Votre demande de réinitialisation de mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
