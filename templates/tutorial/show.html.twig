@@ -49,13 +49,11 @@
                                 </div>
                                 <div class="w-75 d-flex flex-column m-auto">
                                     {% for answer in question.answers %}
-                                        <a type="button" class="link-animation bg-primary text-light mb-2 p-2 rounded-4">
-                                            <label for="answer-{{ answer.id }}">
+                                            <label class="link-animation bg-primary text-light mb-2 p-2 rounded-4" for="answer-{{ answer.id }}">
                                                 <input type="radio" class="me-2" name="{{ question.id }}"
                                                        value="{{ answer.id }}" id="answer-{{ answer.id }}">
                                                 {{ answer.text }}
                                             </label>
-                                        </a>
                                     {% endfor %}
                                 </div>
                                 {% if loop.last %}
