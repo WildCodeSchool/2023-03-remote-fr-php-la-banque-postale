@@ -13,8 +13,12 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function index(QuestionRepository $questionRepository, ProgressRepository $progressRepository): Response
     {
+        $user = $this->getUser();
+        $favoris = $user->getTutorialsBookmarked();
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
+            'user' => $user,
+            'favoris' => $favoris,
         ]);
     }
 }
