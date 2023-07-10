@@ -39,23 +39,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Avatar $avatar = null;
+
     #[ORM\ManyToMany(targetEntity: Tutorial::class, inversedBy: 'users')]
     private Collection $tutorialsBookmarked;
-    public function __construct()
-    {
-        $this->tutorialsBookmarked = new ArrayCollection();
-        $this->addFriends = new ArrayCollection();
-        $this->Friends = new ArrayCollection();
-    }
+
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
 
-    #[ORM\ManyToMany(targetEntity: self::class)]
-    private Collection $addFriends;
+    #[ORM\OneToMany(mappedBy: 'sendBy', targetEntity: Friend::class, orphanRemoval: true)]
+    private Collection $friends;
 
-    #[ORM\ManyToMany(targetEntity: self::class)]
-    private Collection $Friends;
+    #[ORM\OneToMany(mappedBy: 'sendTo', targetEntity: Friend::class, orphanRemoval: true)]
+    private Collection $friendOf;
+
+    public function __construct()
+    {
+        $this->friends = new ArrayCollection();
+        $this->friendOf = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -186,25 +189,61 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection<int, Friend>
      */
     public function getFriends(): Collection
     {
-        return $this->Friends;
+        return $this->friends;
     }
 
-    public function addFriend(self $friend): static
+    public function addFriend(Friend $friend): static
     {
-        if (!$this->Friends->contains($friend)) {
-            $this->Friends->add($friend);
+        if (!$this->friends->contains($friend)) {
+            $this->friends->add($friend);
+            $friend->setSendBy($this);
         }
 
         return $this;
     }
 
-    public function removeFriend(self $friend): static
+    public function removeFriend(Friend $friend): static
     {
-        $this->Friends->removeElement($friend);
+        if ($this->friends->removeElement($friend)) {
+            // set the owning side to null (unless already changed)
+            if ($friend->getSendBy() === $this) {
+                $friend->setSendBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friend>
+     */
+    public function getFriendOf(): Collection
+    {
+        return $this->friendOf;
+    }
+
+    public function addFriendOf(Friend $friendOf): static
+    {
+        if (!$this->friendOf->contains($friendOf)) {
+            $this->friendOf->add($friendOf);
+            $friendOf->setSendTo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendOf(Friend $friendOf): static
+    {
+        if ($this->friendOf->removeElement($friendOf)) {
+            // set the owning side to null (unless already changed)
+            if ($friendOf->getSendTo() === $this) {
+                $friendOf->setSendTo(null);
+            }
+        }
 
         return $this;
     }

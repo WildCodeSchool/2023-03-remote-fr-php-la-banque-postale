@@ -24,14 +24,18 @@ class AddFriendController extends AbstractController
         AddFriendType $addFriendType
 
     ): Response {
-        $user = $this->getUser();
+        $sendBy = $this->getUser();
         $form = $this->createForm(AddFriendType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $friend = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
-            if ($friend) {
-                $friendList= new FriendList();
+            $sendTo = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
+            if ($sendTo) {
+                $friend = new Friend();
+
+                //set valeurs à $friend
+                ///persist friend
+                //flush $fiend
 
                 $email = (new Email())
                     ->from($this->getParameter('mailer_from'))
@@ -39,7 +43,8 @@ class AddFriendController extends AbstractController
                     ->subject("Demande d'ami")
                     ->html($this->renderView('add_friend/email.html.twig', [
                         'userSource' => $user,
-                        'userTarget' => $friend
+                        'userTarget' => $friend,
+                       // 'friendId' => $friend->getId()
                     ]));
 
                 $this->addFlash('sendOK', 'Demande d\'ami envoyée avec succès !');
