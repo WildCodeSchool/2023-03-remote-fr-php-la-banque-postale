@@ -28,32 +28,57 @@
         <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
             <div class="w-100">
                 <h2 class="text-light text-center">Ma progression</h2>
-                {# <div class="bg-secondary rounded m-auto col-10 p-5">
-						<strong>{{ calculPercent|number_format(0, '.', '')  }}
+                <div class="bg-secondary rounded m-auto col-10 p-5">
+                    {#    <strong>{{ calculPercent|number_format(0, '.', '')  }}
 							%
 						</strong>
 						<div class="progress">
 							<div class="progress-bar bg-success" role="progressbar" style="width:{{ calculPercent|number_format(0, '.', '') }}%" aria-valuenow="{{ calculPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div> #}
-            </div>
-
-            <div class="w-100">
-                <h2 class="text-light text-center">Mes favoris</h2>
-                <div class="bg-secondary rounded ms-1 p-2">
-                    <ul>
-                    {% for tutorial in favoris %}
-                            <li>
-                                <a class="text-decoration-none"
-                                   href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
-                                    {{ tutorial.name }}</a>
-                            </li>
-                    {% endfor %}
-                    </ul>
+						</div> #}
                 </div>
             </div>
+            <div class="w-100">
+                <h2 class="text-light text-center">Mes favoris</h2>
+                <div class="bg-secondary rounded ms-1 p-4">
+                    <div class="swiperFavorite mySwiperFavorite">
+                        <div class="swiper-wrapper">
+                            {% set favorisCount = 0 %}
+                            {% for tutorial in favoris %}
+                                {% if favorisCount % 5 == 0 %}
+                                    <div class="swiper-slide">
+                                    <ul class="w-50 m-auto">
+                                {% endif %}
+                                <li>
+                                    <a class="text-decoration-none" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+                                        {{ tutorial.name }}
+                                    </a>
+                                </li>
+                                {% set favorisCount = favorisCount + 1 %}
+                                {% if favorisCount % 5 == 0 or loop.last %}
+                                    </ul>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="swiper-slide">
+                                    <ul class="w-50 m-auto">
+                                        <li>
+                                            Aucun favori pour le moment
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Placez les boutons à l'extérieur de la div avec la classe "swiper-wrapper" -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-        <div class="">
+        <div>
             <div class="text-center">
                 <h2 class="text-light">Mes Amis</h2>
                 <div class="bg-secondary rounded m-auto p-5"></div>
