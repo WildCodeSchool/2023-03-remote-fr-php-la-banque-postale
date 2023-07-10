@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ResetPasswordRequestFormType extends AbstractType
 {
@@ -18,6 +19,9 @@ class ResetPasswordRequestFormType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez taper votre adresse e-mail',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}$/'
                     ]),
                 ],
             ]);
