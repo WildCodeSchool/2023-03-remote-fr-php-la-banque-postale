@@ -1,8 +1,9 @@
 {% if app.user %}
+    <nav>
 	<ul class="navbar fixed-top justify-content-between list-unstyled">
 		<li>
 			<div class="ms-5">
-				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="logo mt-2 rounded-circle">
 			</div>
 		</li>
 		<li>
@@ -32,11 +33,13 @@
 				</div>
 			</li>
 	</ul>
+    </nav>
 {% else %}
+    <nav>
 	<ul class="navbar fixed-top justify-content-between list-unstyled">
 		<li>
 			<div class="ms-5">
-				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
+				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="logo mt-2 rounded-circle">
 			</div>
 		</li>
 		<li>
@@ -55,44 +58,25 @@
 			</div>
 		</li>
 	</ul>
-	<ul class="navbar fixed-top justify-content-between list-unstyled">
-		<li>
-			<div class="ms-5">
-				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="mt-2 rounded-circle">
-			</div>
-		</li>
-		<li>
-			<div class="btn-group me-5">
-				<button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill link-animation" data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="fa-solid fa-user fa-2x text-primary"></i>
-				</button>
-				<ul class="dropdown-menu dropdown-menu-end">
-					<li>
-						<a class="dropdown-item link-animation" href="{{ path('app_login') }}">Connexion</a>
-					</li>
-					<li>
-						<a class="dropdown-item link-animation" href="{{ path('app_register') }}">Inscription</a>
-					</li>
-				</ul>
-			</div>
-		</li>
-	</ul>
+    </nav>
 {% endif %}
-
-<ul class="navbar fixed-bottom navbar-light bg-blue d-flex justify-content-around">
+<footer>
+<ul class="footer fixed-bottom navbar-light bg-blue d-flex justify-content-around mb-0 p-2">
 	<li class="nav-item list-unstyled ">
 		<a class="nav-link d-flex align-items-center flex-column-reverse text-light link-animation" href="{{ path('index_category') }}">
 			Accueil
-			<i class="fa-solid fa-home fa-3x"></i>
+			<i class="fa-solid fa-home fa-2x"></i>
 		</a>
 	</li>
 	<li class="nav-item list-unstyled">
 		<a class="nav-link d-flex align-items-center flex-column-reverse text-light link-animation" href=javascript:history.go(-1)>
 			Retour
-			<i class="fa-solid fa-arrow-left-long fa-3x"></i>
+			<i class="fa-solid fa-arrow-left-long fa-2x"></i>
 		</a>
 	</li>
 </ul>
+</footer>
+
 {% block javascripts %}
 	<script>
 		function rtn() {
@@ -100,5 +84,3 @@ window.history.back();
 }
 	</script>
 {% endblock %}
-
-

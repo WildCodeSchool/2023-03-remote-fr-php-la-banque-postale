@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -11,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Avatar;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cet e-mail')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -36,6 +39,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Avatar $avatar = null;
+    #[ORM\ManyToMany(targetEntity: Tutorial::class, inversedBy: 'users')]
+    private Collection $tutorialsBookmarked;
+    public function __construct()
+    {
+        $this->tutorialsBookmarked = new ArrayCollection();
+        $this->progress = new ArrayCollection();
+    }
+
+    #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
+    private ?\DateTimeInterface $dateInscription = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Progress::class)]
+    private Collection $progress;
 
     public function getId(): ?int
     {
@@ -127,6 +143,70 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?Avatar $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Tutorial>
+     */
+    public function getTutorialsBookmarked(): Collection
+    {
+        return $this->tutorialsBookmarked;
+    }
+
+    public function addTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
+    {
+        if (!$this->tutorialsBookmarked->contains($tutorialsBookmarked)) {
+            $this->tutorialsBookmarked->add($tutorialsBookmarked);
+        }
+
+        return $this;
+    }
+
+    public function removeTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
+    {
+        $this->tutorialsBookmarked->removeElement($tutorialsBookmarked);
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Progress>
+     */
+    public function getProgress(): Collection
+    {
+        return $this->progress;
+    }
+
+    public function addProgress(Progress $progress): static
+    {
+        if (!$this->progress->contains($progress)) {
+            $this->progress->add($progress);
+            $progress->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgress(Progress $progress): static
+    {
+        if ($this->progress->removeElement($progress)) {
+            // set the owning side to null (unless already changed)
+            if ($progress->getUser() === $this) {
+                $progress->setUser(null);
+            }
+        }
 
         return $this;
     }

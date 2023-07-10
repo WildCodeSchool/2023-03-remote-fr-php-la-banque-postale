@@ -2,8 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
+use DateTimeImmutable;
+use App\Entity\Progress;
 use App\Entity\Tutorial;
+use App\Repository\AnswerRepository;
+use App\Repository\ProgressRepository;
+use App\Repository\QuestionRepository;
 use App\Repository\TutorialRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +26,50 @@ class TutorialController extends AbstractController
             'tutorials' => $tutorials,
         ]);
     }
+
     #[Route('/{slug}', name: 'tutorial_show')]
-    public function show(Tutorial $tutorial): Response
-    {
+    public function show(
+        Tutorial $tutorial,
+        AnswerRepository $answerrepo,
+        QuestionRepository $questionrepo,
+        ProgressRepository $progressrepo,
+        Request $request
+    ): Response {
+
+        $user = $this->getUser();
+        $questions = $questionrepo->findAll();
+        $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
+        if ($request->getMethod() === 'POST') {
+            $quizz = $request->request->all();
+            $values = array_values($quizz);
+
+            if (!$progress) {
+                $progress = new Progress();
+                $progress->setUser($user);
+                $progress->setTutorial($tutorial);
+            }
+
+            $score = 0;
+            foreach ($values as $answerId) {
+                $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
+                if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
+                    $score++;
+                }
+            }
+            $progress->setScore($score);
+            $progress->setUpdatedAt(new DateTimeImmutable('now'));
+            $progressrepo->save($progress, true);
+
+            return $this->redirectToRoute('app_score', [
+                'slug' => $tutorial->getSlug(),
+            ]);
+        }
+
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
+            'questions' => $questions,
+            'lastscore' => (!empty($progress)) ? $progress->getScore() : null,
+            'lastsession' => (!empty($progress)) ? $progress->getUpdatedAt() : null,
         ]);
     }
 }

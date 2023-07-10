@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TutorialRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,21 @@ class Tutorial
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Question::class)]
+    private Collection $questions;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'tutorialsBookmarked')]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Progress::class)]
+    private Collection $progress;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->progress = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,6 +123,93 @@ class Tutorial
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Question>
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): static
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions->add($question);
+            $question->setTutorial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): static
+    {
+        if ($this->questions->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getTutorial() === $this) {
+                $question->setTutorial(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addTutorialsBookmarked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeTutorialsBookmarked($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Progress>
+     */
+    public function getProgress(): Collection
+    {
+        return $this->progress;
+    }
+
+    public function addProgress(Progress $progress): static
+    {
+        if (!$this->progress->contains($progress)) {
+            $this->progress->add($progress);
+            $progress->setTutorial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgress(Progress $progress): static
+    {
+        if ($this->progress->removeElement($progress)) {
+            // set the owning side to null (unless already changed)
+            if ($progress->getTutorial() === $this) {
+                $progress->setTutorial(null);
+            }
+        }
 
         return $this;
     }
