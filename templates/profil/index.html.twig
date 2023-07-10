@@ -3,88 +3,94 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="text-secondary mt-5 mb-5 text-uppercase text-center">Mon Profil</h1>
-        <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
-            <div class="text-white">
-                <div class="text-center text-lg-start">
-                    <p>{{ app.user.name }}</p>
-                    <p>{{ app.user.email }}</p>
-                    <p>Membre depuis le
-                        {{ app.user.dateInscription|date('d/m/Y') }}</p>
-                </div>
-            </div>
-            <div class="text-center fw-bold">
-                <button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
-                    <i class="fa-solid fa-people-group me-2"></i>
-                    Ajouter un ami
-                </button>
-                <button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
-                    <i class="fa-regular fa-share-from-square me-2"></i>
-                    Partager ma progression
-                </button>
-            </div>
-        </div>
-        <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
-            <div class="w-100">
-                <h2 class="text-light text-center">Ma progression</h2>
-                <div class="bg-secondary rounded m-auto col-10 p-5">
-                    {#    <strong>{{ calculPercent|number_format(0, '.', '')  }}
-							%
-						</strong>
-						<div class="progress">
-							<div class="progress-bar bg-success" role="progressbar" style="width:{{ calculPercent|number_format(0, '.', '') }}%" aria-valuenow="{{ calculPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
-						</div> #}
-                </div>
-            </div>
-            <div class="w-100">
-                <h2 class="text-light text-center">Mes favoris</h2>
-                <div class="bg-secondary rounded ms-1 p-2">
-                    <div class="swiper mySwiperFavorite">
-                        <div class="swiper-wrapper">
-                            {% set numberOfFavorites = 0 %}
-                            <div class="swiper-slide w-100 pt-4">
-                                <ul class="w-50 m-auto pb-4 list-unstyled">
-                                    {% for tutorial in favoris %}
-                                    {% if numberOfFavorites < 5 %}
-                                    <li class="link-animation">
-                                        <i class="fa-solid fa-star me-3"></i><a class="text-decoration-none text-dark" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
-                                            {{ tutorial.name }}
-                                        </a>
-                                    </li>
-                                    {% set numberOfFavorites = numberOfFavorites + 1 %}
-                                    {% else %}
-                                </ul>
-                            </div>
-                            <div class="swiper-slide w-100 pt-4">
-                                <ul class="w-50 m-auto pb-4 list-unstyled">
-                                    {% set numberOfFavorites = 1 %}
-                                    <li class="link-animation">
-                                        <i class="fa-solid fa-star me-3"></i><a class="text-decoration-none text-dark" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
-                                            {{ tutorial.name }}
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="swiper-button-next text-success"></div>
-                        <div class="swiper-button-prev text-success"></div>
-                        <div class="swiper-pagination-favorite text-center"></div>
-                    </div>
-                </div>
-            </div>
+	<div class="container">
+		<h1 class="text-secondary mt-5 mb-5 text-uppercase text-center">Mon Profil</h1>
+		<div class="d-flex justify-content-lg-around flex-column flex-lg-row">
+			<div class="text-white">
+				<div class="text-center text-lg-start">
+					<p>{{ app.user.name }}</p>
+					<p>{{ app.user.email }}</p>
+					<p>Membre depuis le
+						{{ app.user.dateInscription|date('d/m/Y') }}</p>
+				</div>
+			</div>
+			<div class="text-center fw-bold">
+				<button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
+					<i class="fa-solid fa-people-group me-2"></i>
+					Ajouter un ami
+				</button>
+				<button type="button" class="btn btn-danger m-auto mb-3 btn-lg w-75 text-uppercase">
+					<i class="fa-regular fa-share-from-square me-2"></i>
+					Partager ma progression
+				</button>
+			</div>
+		</div>
+		<div class="d-flex justify-content-lg-around flex-column flex-lg-row">
+			<div class="w-100">
+				<h2 class="text-light text-center">Ma progression</h2>
+				<div class="bg-secondary rounded m-auto col-10 p-5">
+					<strong>{{ calculPercent|number_format(0, '.', '')  }}
+						%
+					</strong>
+					<div class="progress mb-2">
+						<div class="progress-bar bg-success" role="progressbar" style="width:{{ calculPercent|number_format(0, '.', '') }}%" aria-valuenow="{{ calculPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					{% for key, successByCategory in success %}
+						{{ categoryName[key] }}
+						<div class="progress mb-4">
+							<div class="progress-bar bg-success" role="progressbar" style="width:{{ successByCategory|number_format(0, '.', '') }}%" aria-valuenow="{{ successByCategory }}" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="w-100">
+				<h2 class="text-light text-center">Mes favoris</h2>
+				<div class="bg-secondary rounded ms-1 p-2">
+					<div class="swiper mySwiperFavorite">
+						<div class="swiper-wrapper">
+							{% set numberOfFavorites = 0 %}
+							<div class="swiper-slide w-100 pt-4">
+								<ul class="w-50 m-auto pb-4 list-unstyled">
+									{% for tutorial in favoris %}
+										{% if numberOfFavorites < 5 %}
+											<li class="link-animation">
+												<i class="fa-solid fa-star me-3"></i>
+												<a class="text-decoration-none text-dark" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+													{{ tutorial.name }}
+												</a>
+											</li>
+											{% set numberOfFavorites = numberOfFavorites + 1 %}
+									{% else %}
+										</ul>
+									</div>
+									<div class="swiper-slide w-100 pt-4">
+										<ul class="w-50 m-auto pb-4 list-unstyled">
+											{% set numberOfFavorites = 1 %}
+											<li class="link-animation">
+												<i class="fa-solid fa-star me-3"></i>
+												<a class="text-decoration-none text-dark" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+													{{ tutorial.name }}
+												</a>
+											</li>
+										{% endif %}
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+						<div class="swiper-button-next text-success"></div>
+						<div class="swiper-button-prev text-success"></div>
+						<div class="swiper-pagination-favorite text-center"></div>
+					</div>
+				</div>
+			</div>
 
 
-
-
-        </div>
-        <div>
-            <div class="text-center">
-                <h2 class="text-light">Mes Amis</h2>
-                <div class="bg-secondary rounded m-auto p-5"></div>
-            </div>
-        </div>
-    </div>
+		</div>
+		<div>
+			<div class="text-center">
+				<h2 class="text-light">Mes Amis</h2>
+				<div class="bg-secondary rounded m-auto p-5"></div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
