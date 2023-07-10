@@ -4,7 +4,11 @@
 
 {% block body %}
 	<div class="container">
-
+		{% for messages in app.flashes ('sendOK') %}
+			<div class="alert alert-success">
+				{{ messages }}
+			</div>
+		{% endfor %}
 		<h1 class="text-center text-secondary mb-5 text-uppercase">Mon Profil</h1>
 		<div class="d-flex justify-content-center">
 			<div class="text-start text-white mb-5">
@@ -16,10 +20,10 @@
 		</div>
 
 		<div class="text-center mb-3">
-			<button type="button" class="btn btn-danger btn-lg text-uppercase w-50">
+			<a href="{{ path('app_add_friend') }}" class="btn btn-danger btn-lg text-uppercase w-50">
 				<i class="fa-solid fa-people-group"></i>
 				Ajoute tes amis !
-			</button>
+			</a>
 		</div>
 		<div class="text-center">
 			<button type="button" class="btn btn-danger btn-lg text-uppercase w-50">
@@ -48,9 +52,14 @@
 			<div class="col-lg-6">
 				<div class="text-center">
 					<h1 class="text-light">Mes Amis</h1>
-					<div class="bg-secondary rounded m-auto col-10 p-5"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-{% endblock %}
+					<div class="bg-secondary rounded m-auto col-10 p-5">
+						{# <ul>
+							{% for friend in friends %}
+								<li>
+									<img src="{{ friend.avatar }}" alt="{{ friend.name }}" width="50" height="50">
+									{{ friend.name }}
+								</li>
+							{% endfor %} #}
+						</ul>
+					</div>
+				{% endblock %}

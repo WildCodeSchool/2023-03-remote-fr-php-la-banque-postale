@@ -44,10 +44,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->tutorialsBookmarked = new ArrayCollection();
+        $this->addFriends = new ArrayCollection();
+        $this->Friends = new ArrayCollection();
     }
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
+
+    #[ORM\ManyToMany(targetEntity: self::class)]
+    private Collection $addFriends;
+
+    #[ORM\ManyToMany(targetEntity: self::class)]
+    private Collection $Friends;
 
     public function getId(): ?int
     {
@@ -174,6 +182,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
     {
         $this->tutorialsBookmarked->removeElement($tutorialsBookmarked);
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFriends(): Collection
+    {
+        return $this->Friends;
+    }
+
+    public function addFriend(self $friend): static
+    {
+        if (!$this->Friends->contains($friend)) {
+            $this->Friends->add($friend);
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(self $friend): static
+    {
+        $this->Friends->removeElement($friend);
+
         return $this;
     }
 }

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un ami{% endblock %}
+
+{% block body %}
+	<div class="bg-secondary rounded m-auto col-10 p-5 text-center">
+		<h1 class="mb-5 text-uppercase">Ajouter un ami</h1>
+		{{ form_start(addFriendForm) }}
+		{{ form_row(addFriendForm) }}
+			<div class="mt-5">
+				<button type="submit">Envoyer</button>
+			</div>
+		{{ form_end(addFriendForm) }}
+	</div>
+
+{% endblock %}
