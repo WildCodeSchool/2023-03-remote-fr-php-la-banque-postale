@@ -31,7 +31,7 @@
             <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
 {% if app.user %}
             <form method="post" class="mb-5">
-                <div class="text-center mb-5">
+                <div class="text-center">
                 {% if lastscore is defined and lastscore >= 4 %}
                     Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i class="fa-solid fa-circle-check fa-bounce fa-2xl text-success" style="color: #00eb1b;"></i><br> Bravo !
                 {% elseif lastscore is defined and lastscore < 4 %}

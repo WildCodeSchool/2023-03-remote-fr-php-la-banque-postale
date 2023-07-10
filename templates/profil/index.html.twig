@@ -39,42 +39,44 @@
             </div>
             <div class="w-100">
                 <h2 class="text-light text-center">Mes favoris</h2>
-                <div class="bg-secondary rounded ms-1 p-4">
-                    <div class="swiperFavorite mySwiperFavorite">
+                <div class="bg-secondary rounded ms-1 p-2">
+                    <div class="swiper mySwiperFavorite">
                         <div class="swiper-wrapper">
-                            {% set favorisCount = 0 %}
-                            {% for tutorial in favoris %}
-                                {% if favorisCount % 5 == 0 %}
-                                    <div class="swiper-slide">
-                                    <ul class="w-50 m-auto">
-                                {% endif %}
-                                <li>
-                                    <a class="text-decoration-none" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
-                                        {{ tutorial.name }}
-                                    </a>
-                                </li>
-                                {% set favorisCount = favorisCount + 1 %}
-                                {% if favorisCount % 5 == 0 or loop.last %}
-                                    </ul>
-                                    </div>
-                                {% endif %}
-                            {% else %}
-                                <div class="swiper-slide">
-                                    <ul class="w-50 m-auto">
-                                        <li>
-                                            Aucun favori pour le moment
-                                        </li>
-                                    </ul>
-                                </div>
-                            {% endfor %}
+                            {% set numberOfFavorites = 0 %}
+                            <div class="swiper-slide w-100 pt-4">
+                                <ul class="w-50 m-auto pb-4 list-unstyled">
+                                    {% for tutorial in favoris %}
+                                    {% if numberOfFavorites < 5 %}
+                                    <li class="link-animation">
+                                        <i class="fa-solid fa-star me-3"></i><a class="text-decoration-none text-dark" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+                                            {{ tutorial.name }}
+                                        </a>
+                                    </li>
+                                    {% set numberOfFavorites = numberOfFavorites + 1 %}
+                                    {% else %}
+                                </ul>
+                            </div>
+                            <div class="swiper-slide w-100 pt-4">
+                                <ul class="w-50 m-auto pb-4 list-unstyled">
+                                    {% set numberOfFavorites = 1 %}
+                                    <li class="link-animation">
+                                        <i class="fa-solid fa-star me-3"></i><a class="text-decoration-none text-dark" href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+                                            {{ tutorial.name }}
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                        <!-- Placez les boutons à l'extérieur de la div avec la classe "swiper-wrapper" -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next text-success"></div>
+                        <div class="swiper-button-prev text-success"></div>
+                        <div class="swiper-pagination-favorite text-center"></div>
                     </div>
                 </div>
             </div>
+
+
 
 
         </div>

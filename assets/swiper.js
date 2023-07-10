@@ -2,7 +2,7 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle'
 import './styles/swiper.scss'
 
-/*const swiper = new Swiper(".mySwiper", {
+const swiper = new Swiper(".mySwiper", {
     pagination: {
         el: ".swiper-pagination",
         type: "progressbar",
@@ -12,16 +12,15 @@ import './styles/swiper.scss'
         prevEl: ".button-prev",
     },
 });
-*/
 
-const swiperFavorite = new Swiper(".mySwiperFavorite", {
+const swiper2 = new Swiper(".mySwiperFavorite", {
     cssMode: true,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
     pagination: {
-        el: ".swiper-pagination",
+        el: ".swiper-pagination-favorite",
     },
     mousewheel: true,
     keyboard: true,
