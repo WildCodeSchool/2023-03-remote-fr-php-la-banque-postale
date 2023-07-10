@@ -23,6 +23,7 @@ class ProfilController extends AbstractController
         $questions = $questionRepository->findAll();
         $progress = $progressRepository->findBy(['user' => $user]);
         $categories = $categoryRepository->findAll();
+        $favoris = $user->getTutorialsBookmarked();
         $success = [];
         $categoryName = [];
 
@@ -49,6 +50,7 @@ class ProfilController extends AbstractController
             'calculPercent' => $calculPercent,
             'success' => $success,
             'categoryName' => $categoryName,
+            'favoris' => $favoris,
         ]);
     }
 }
