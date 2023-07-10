@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Services\PercenTool;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgressRepository;
