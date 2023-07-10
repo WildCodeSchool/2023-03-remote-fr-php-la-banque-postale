@@ -2,7 +2,17 @@
     background-image: url("/assets/images/background.svg");
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 90px;
 }
+.logo {
+    max-width: 60px;
+    height: auto;
+}
+.footer {
+    background-color: #132C5C;
+    box-shadow: -0.5px -0.5rem 1rem 2px;
+}
+
 @media only screen and (max-width: 800px) {
     .licorne {
         width: 15rem;
