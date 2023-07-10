@@ -3,12 +3,10 @@
 {% block title %}Tutoriel - {{ tutorial.name }}{% endblock %}
 
 {% block body %}
-    <div>
-        <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
-    </div>
+    <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
 
     <div class="container">
-        <div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
+        <div class="bg-secondary rounded m-auto mt-4 p-4 col-10">
             <h2 class="text-center mb-2 mt-3">Objectifs</h2>
             <ul class="text-center list-unstyled mb-5">
                 <li>{{ tutorial.objective }}</li>
@@ -29,56 +27,66 @@
             </div>
 
             <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
-{% if app.user %}
-            <form method="post" class="mb-5">
-                <div class="text-center mb-5">
-                {% if lastscore is defined and lastscore >= 4 %}
-                    Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i class="fa-solid fa-circle-check fa-bounce fa-2xl text-success" style="color: #00eb1b;"></i><br> Bravo !
-                {% elseif lastscore is defined and lastscore < 4 %}
-                    Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i>
-                    <br> Malheureusement, tu n'as pas réussi à le valider... Retentes ta chance !
-                {% else %}
-                {% endif %}
-                </div>
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper align-items-center">
-                        {% for question in tutorial.questions %}
-                            <div class="swiper-slide d-flex flex-column justify-content-center align-items-center">
-                                <div class="text-center mb-2 mb-md-5 mt-3 mt-md-5">
-                                    <h3>{{ question.title }}</h3>
-                                </div>
-                                <div class="w-75 d-flex flex-column m-auto">
-                                    {% for answer in question.answers %}
-                                            <label class="link-animation bg-primary text-light mb-2 p-2 rounded-4" for="answer-{{ answer.id }}">
+            {% if app.user %}
+                <form method="post" class="mb-5">
+                    <div class="text-center mb-5">
+                        {% if lastscore is defined and lastscore >= 4 %}
+                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i
+                            class="fa-solid fa-circle-check fa-bounce fa-2xl text-success" style="color: #00eb1b;"></i>
+                            <br> Bravo !
+                        {% elseif lastscore is defined and lastscore < 4 %}
+                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i
+                            class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i>
+                            <br> Malheureusement, tu n'as pas réussi à le valider... Retentes ta chance !
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper align-items-center">
+                            {% for question in tutorial.questions %}
+                                <div class="swiper-slide d-flex flex-column justify-content-center align-items-center">
+                                    <div class="text-center mb-2 mb-md-5 mt-3 mt-md-5">
+                                        <h3>{{ question.title }}</h3>
+                                    </div>
+                                    <div class="w-75 d-flex flex-column m-auto">
+                                        {% for answer in question.answers %}
+                                            <label class="link-animation bg-primary text-light mb-2 p-2 rounded-4"
+                                                   for="answer-{{ answer.id }}">
                                                 <input type="radio" class="me-2" name="{{ question.id }}"
                                                        value="{{ answer.id }}" id="answer-{{ answer.id }}">
                                                 {{ answer.text }}
                                             </label>
-                                    {% endfor %}
-                                </div>
-                                {% if loop.last %}
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-success mb-2">Valider</button>
+                                        {% endfor %}
                                     </div>
-                                {% endif %}
+                                    {% if loop.last %}
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-success mb-2">Valider</button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="w-100">
+                            <div class="button-set w-75 m-auto text-center">
+                                <button class="button-prev bg-success p-2 border-0 rounded-2 text-light mb-2">Question
+                                    précédente
+                                </button>
+                                <button class="button-next bg-success border-0 p-2 rounded-2 text-light">Question
+                                    suivante
+                                </button>
                             </div>
-                        {% endfor %}
+                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
-                    <div class="w-100">
-                        <div class="button-set w-75 m-auto text-center">
-                        <button class="button-prev bg-success p-2 border-0 rounded-2 text-light mb-2">Question précédente</button>
-                            <button class="button-next bg-success border-0 p-2 rounded-2 text-light">Question suivante</button>
-                    </div></div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </form>
+                </form>
             {% else %}
 
-                    Ne manquez pas l'occasion de tester
-                    vos connaissances ! Rejoignez-nous en vous inscrivant dès maintenant pour accéder au quiz exclusif
-                    et découvrez si vous êtes prêt à relever le défi. <a href="{{ path('app_mail_choice') }}">Inscrivez-vous </a> et préparez-vous à vous surpasser !
+                Ne manquez pas l'occasion de tester
+                vos connaissances ! Rejoignez-nous en vous inscrivant dès maintenant pour accéder au quiz exclusif
+                et découvrez si vous êtes prêt à relever le défi. <a
+                href="{{ path('app_mail_choice') }}">Inscrivez-vous </a> et préparez-vous à vous surpasser !
 
-{% endif %}
+            {% endif %}
         </div>
     </div>
 
