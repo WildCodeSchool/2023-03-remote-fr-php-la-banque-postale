@@ -25,20 +25,35 @@
                     <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}</p>
                 </div>
             </div>
+            {% if app.user %}
+            {% if lastscore is not null and lastscore >= 4 %}
+                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
+                        class="fa-solid fa-circle-check fa-bounce text-success ms-3" style="color: #00eb1b;"></i></h1>
+            {% elseif lastscore is not null and lastscore < 4 %}
+                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
+                        class="fa-solid fa-circle-xmark fa-bounce ms-3" style="color: #ff0000;"></i></h1>
+            {% else %}
+                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
+            {% endif %}
+            {% endif %}
 
-            <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
             {% if app.user %}
                 <form method="post" class="mb-5">
+                    {% if errors %}
+                        {% for error in errors %}
+                            <p class="errors bg-danger bg-opacity-50 p-2 rounded-3 text-center"><i
+                                    class="fa-solid fa-triangle-exclamation me-2"></i>{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
                     <div class="text-center mb-5">
-                        {% if lastscore is defined and lastscore >= 4 %}
-                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i
-                            class="fa-solid fa-circle-check fa-bounce fa-2xl text-success" style="color: #00eb1b;"></i>
+                        {% if lastscore is not null and lastscore >= 4 %}
+                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br>
                             <br> Bravo !
-                        {% elseif lastscore is defined and lastscore < 4 %}
-                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br><i
-                            class="fa-solid fa-circle-xmark fa-bounce fa-2xl" style="color: #ff0000;"></i>
+                        {% elseif lastscore is not null and lastscore < 4 %}
+                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br>
                             <br> Malheureusement, tu n'as pas réussi à le valider... Retentes ta chance !
-                        {% else %}
+                        {% elseif progress is null %}
+                            Vous n'avez pas encore tenté de réaliser ce quiz.
                         {% endif %}
                     </div>
                     <div class="swiper mySwiper">
