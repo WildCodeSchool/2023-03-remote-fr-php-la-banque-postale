@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="bg-secondary rounded m-auto col-10 p-5 text-center">
-    <h1 class="mb-5 text-uppercase">Accepter une demande d'ami</h1>
+    <h1 class="mb-5 text-uppercase">user vous a envoyé une demande d'ami :</h1>
 
 		{{ form_start(choiceFriendForm) }}
 		{{ form_row(choiceFriendForm) }}
@@ -12,13 +12,5 @@
 				<button type="submit">Envoyer</button>
 			</div>
 		{{ form_end(choiceFriendForm) }}
-
-    {# <p>Vous avez reçu une demande d'ami de {{ friend.username }}</p>
-
-    <div class="mt-5">
-        <a href="{{ path('app_accept_friend', {id: friend.id}) }}" class="btn btn-success">Accepter</a>
-        <a href="{{ path('app_decline_friend', {id: friend.id}) }}" class="btn btn-danger">Refuser</a>
-    </div>
-</div> #}
 {% endblock %}
 

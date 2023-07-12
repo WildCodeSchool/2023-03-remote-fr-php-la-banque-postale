@@ -40,7 +40,9 @@ class AcceptFriendController extends AbstractController
             throw $this->createNotFoundException('Utilisateur non trouvé.');
         }
 
-        $form = $this->createForm(ChoiceFriendType::class);
+        $form = $this->createForm(ChoiceFriendType::class, null, [
+            'label' => false,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

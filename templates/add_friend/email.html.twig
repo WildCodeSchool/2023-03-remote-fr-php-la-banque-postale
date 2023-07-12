@@ -1,9 +1,9 @@
-<h1>Bonjour app_user!</h1>
+<h1>Bonjour {{ userSource.name }}!</h1>
 
-<p>Vous avez reçu une demande d'ami de la part de {{ app.sendBy.name }} !</p>
+<p>Vous avez reçu une demande d'ami de la part de {{ userTarget.name }}!</p>
 <p>Pour accepter la demande, cliquez sur le lien ci-dessous :</p>
 
-{% set url = url('app_accept_friend', {userSourceId: userSource.id, userTargetId: userTarget.id}) %}
+{% set url = url('app_accept_friend', {friendId: friendId}) %}
 <a href="{{ url }}">
 {{ url }}
 </a>

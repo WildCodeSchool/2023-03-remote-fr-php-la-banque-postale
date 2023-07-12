@@ -4,6 +4,11 @@
 
 {% block body %}
 	<div class="bg-secondary rounded m-auto col-10 p-5 text-center">
+	{% for messages in app.flashes ('sendStatus') %}
+			<div class="alert alert-success">
+				{{ messages }}
+			</div>
+		{% endfor %}
 		<h1 class="mb-5 text-uppercase">Ajouter un ami</h1>
 		{{ form_start(addFriendForm) }}
 		{{ form_row(addFriendForm) }}
