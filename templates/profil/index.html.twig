@@ -20,13 +20,13 @@
 		</div>
 
 		<div class="text-center mb-3">
-			<a href="{{ path('app_add_friend') }}" class="btn btn-danger btn-lg text-uppercase w-50">
+			<a href="{{ path('app_add_friend') }}" class="btn btn-dark btn-lg text-uppercase w-50">
 				<i class="fa-solid fa-people-group"></i>
 				Ajoute tes amis !
 			</a>
 		</div>
 		<div class="text-center">
-			<button type="button" class="btn btn-danger btn-lg text-uppercase w-50">
+			<button type="button" class="btn btn-dark btn-lg text-uppercase w-50">
 				<i class="fa-sharp fa-solid fa-globe"></i>
 				Partage ta progression
 			</button>
@@ -53,13 +53,23 @@
 				<div class="text-center">
 					<h1 class="text-light">Mes Amis</h1>
 					<div class="bg-secondary rounded m-auto col-10 p-5">
-						{# <ul>
-							{% for friend in friends %}
+						<ul>
+							{% for friend in app.user.friends %}
 								<li>
-									<img src="{{ friend.avatar }}" alt="{{ friend.name }}" width="50" height="50">
-									{{ friend.name }}
+									{{ friend.sendTo.name }}
+									{{ friend.sendTo.getAvatar() }}
+
+									{% if friend.status is same as ('accepted') %}
+										{{ friend. status }}
+									{% elseif friend.status is same as ('pending') %}
+										{{ friend. status }}
+									{% elseif friend.status is same as ('decline') %}
+										{{ friend. status }}
+									{% endif %}
 								</li>
-							{% endfor %} #}
+							{% endfor %}
+
+
 						</ul>
 					</div>
 				{% endblock %}

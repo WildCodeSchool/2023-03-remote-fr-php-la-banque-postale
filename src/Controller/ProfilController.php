@@ -2,22 +2,25 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Friend;
+use App\Repository\FriendRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ProfilController extends AbstractController
 {
     #[Route('/profil', name: 'app_profil')]
-    public function index(): Response
+    public function index(
+        Request $request,
+        FriendRepository $friendRepository,
+    ): Response
     {
-        $user = $this->getUser();
-        // $friends = $user->getFriends();
-
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
-            // 'friends' => $friends,
         ]);
     }
 }

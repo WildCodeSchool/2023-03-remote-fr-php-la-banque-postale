@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\FriendList;
+use App\Entity\User;
+use App\Entity\Friend;
+use DateTimeImmutable;
+use App\Form\AddFriendType;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\AddFriendType;
-use App\Entity\User;
 
 
 class AddFriendController extends AbstractController
@@ -21,8 +23,8 @@ class AddFriendController extends AbstractController
         Request $request,
         MailerInterface $mailer,
         UserRepository $userRepository,
-        AddFriendType $addFriendType
-
+        AddFriendType $addFriendType,
+        EntityManagerInterface $entityManager
     ): Response {
         $sendBy = $this->getUser();
         $form = $this->createForm(AddFriendType::class);
@@ -30,21 +32,28 @@ class AddFriendController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sendTo = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
+
+            // if ($sendTo)
+            // elseif
+
+
             if ($sendTo) {
                 $friend = new Friend();
-
-                //set valeurs à $friend
-                ///persist friend
-                //flush $fiend
+                $friend->setSendBy($sendBy);
+                $friend->setSendTo($sendTo);
+                $friend->setCreatedAt(new DateTimeImmutable('now'));
+                $friend->setStatus('pending');
+                $entityManager->persist($friend);
+                $entityManager->flush();
 
                 $email = (new Email())
                     ->from($this->getParameter('mailer_from'))
-                    ->to($friend->getEmail())
+                    ->to($sendTo->getEmail())
                     ->subject("Demande d'ami")
                     ->html($this->renderView('add_friend/email.html.twig', [
-                        'userSource' => $user,
-                        'userTarget' => $friend,
-                       // 'friendId' => $friend->getId()
+                        'userSource' => $sendBy,
+                        'userTarget' => $sendTo,
+                        'friendId' => $friend->getId(),
                     ]));
 
                 $this->addFlash('sendOK', 'Demande d\'ami envoyée avec succès !');
