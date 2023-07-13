@@ -47,70 +47,39 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row justify-content-center mt-5">
-			<div class="col-lg-6">
-				<div class="text-center">
-					<h1 class="text-light">Mes Amis</h1>
-					<div class="bg-secondary rounded m-auto p-5">
-						{% set friendAccepted = app.user.friends|filter(friend => friend.status == 'accepted') %}
-						<div class="row">
-							{% for friend in friendAccepted %}
-								<div class="col-md-4">
-									<div class="card mb-4">
-										<div class="card-body">
-											<h5 class="card-title">{{ friend.sendTo.name|title }}</h5>
-											<p>
-												{% if friend.sendTo.avatar is null and friend.sendBy.avatar is null%}
-													<i class="fa-solid fa-user fa-2x text-primary"></i>
-												{% else %}
-													<img src="{{ asset('build/avatars/' ~ friend.sendTo.avatar.getPath()) }}" alt="Avatar" class="avatar">
-												{% endif %}
-											</p>
-                                               <a href="{{ path('app_remove_friend', { id: friend.id }) }}" class="btn btn-danger btn-sm">
-                                        Retirer
-                                    </a>
-									<h5 class="card-title">{{ friend.sendBy }}</h5>
+		{% for status in ['accepted', 'pending'] %}
+			<div class="row justify-content-center mt-5">
+				<div class="col-lg-6">
+					<div class="text-center">
+						<h1 class="text-light">{{status == 'accepted' ? 'Mes amis' : 'Demandes en attente' }}</h1>
+						<div class="bg-secondary rounded m-auto p-5">
+							{% set friends = app.user.friends|filter(friend => friend.status == status)|merge(app.user.friendOf|filter(friend => friend.status == status)) %}
+							<div class="row">
+								{% for friend in friends %}
+									{% set userFriend = friend.sendTo == app.user ? friend.sendBy : friend.sendTo %}
+									<div class="col-md-4">
+										<div class="card mb-4" style="min-height: 14rem;">
+											<div class="card-body">
+												<h5 class="card-title">{{ userFriend.name|title }}</h5>
+												<p>
+													{% if userFriend.avatar is null%}
+														<i class="fa-solid fa-user fa-2x text-primary"></i>
+													{% else %}
+														<img src="{{ asset('build/avatars/' ~ userFriend.avatar.getPath()) }}" alt="Avatar" class="avatar">
+													{% endif %}
+												</p>
+												<a href="{{ path('app_remove_friend', { id: friend.id }) }}" class="btn btn-danger btn-sm">
+													Retirer
+												</a>
+											</div>
 										</div>
 									</div>
-								</div>
-							{% endfor %}
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-
-        	<div class="row justify-content-center mt-5">
-			<div class="col-lg-6">
-				<div class="text-center">
-					<h1 class="text-light">Demandes en attentes</h1>
-					<div class="bg-secondary rounded m-auto p-5">
-						{% set friendPending = app.user.friends|filter(friend => friend.status == 'pending') %}
-						<div class="row">
-							{% for friend in friendPending %}
-								<div class="col-md-4">
-									<div class="card mb-4">
-										<div class="card-body">
-											<h5 class="card-title">{{ friend.sendTo.name|title }}</h5>
-											<p>
-												{% if friend.sendTo.avatar is null %}
-													<i class="fa-solid fa-user fa-2x text-primary"></i>
-												{% else %}
-													<img src="{{ asset('build/avatars/' ~ friend.sendTo.avatar.getPath()) }}" alt="Avatar" class="avatar">
-												{% endif %}
-											</p>
-                                            <a href="{{ path('app_remove_friend', { id: friend.id }) }}" class="btn btn-danger btn-sm">
-                                        Retirer
-                                    </a>
-										</div>
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{% endfor %}
 
 	{% endblock %}

@@ -62,12 +62,10 @@ class AcceptFriendController extends AbstractController
                     $this->entityManager->flush();
 
                     // Créer une nouvelle instance de Friend
-                    $newFriend = new Friend();
-                    $newFriend->setSendBy($userSource);
-                    $newFriend->setSendTo($userTarget);
-                    $newFriend->setCreatedAt(new DateTimeImmutable('now'));
-                    $newFriend->setStatus('accepted');
-                    $this->entityManager->persist($newFriend);
+                    $friendship->setCreatedAt(new DateTimeImmutable('now'));
+                    $friendship->setStatus('accepted');
+
+                    $this->entityManager->persist($friendship);
                     $this->entityManager->flush();
 
                     $this->addFlash('success', 'Demande d\'ami acceptée avec succès !');
