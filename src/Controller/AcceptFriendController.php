@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class AcceptFriendController extends AbstractController
 {
@@ -25,18 +26,19 @@ class AcceptFriendController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/accept/friend/{userSourceId}/{userTargetId}', name: 'app_accept_friend')]
-    public function acceptFriend(Request $request, int $userSourceId, int $userTargetId): Response
+    #[Route('/accept/friend/{friendId}', name: 'app_accept_friend')]
+    #[Entity('friend', options: ['mapping' => ['friendId' => 'id']])]
+    public function acceptFriend(Request $request, Friend $friend): Response
     {
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
             throw new AccessDeniedException('Vous devez être connecté pour accéder à cette page.');
         }
 
-        $userSource = $this->userRepository->find($userSourceId);
-        $userTarget = $this->userRepository->find($userTargetId);
+        $userSource = $friend->getSendBy();
+        $userTarget = $friend->getSendTo();
 
-        if (!$userSource || !$userTarget) {
+        if (!$userTarget) {
             throw $this->createNotFoundException('Utilisateur non trouvé.');
         }
 
@@ -94,6 +96,7 @@ class AcceptFriendController extends AbstractController
 
         return $this->render('accept_friend/index.html.twig', [
             'choiceFriendForm' => $form->createView(),
+            'friend' => $friend,
         ]);
     }
 }

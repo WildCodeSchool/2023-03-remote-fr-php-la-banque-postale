@@ -75,4 +75,19 @@ class AddFriendController extends AbstractController
             'addFriendForm' => $form,
         ]);
     }
+    #[Route('/removefriend/{id}', name: 'app_remove_friend')]
+    public function removeFriend(Friend $friend, EntityManagerInterface $entityManager): Response
+    {
+        $currentUser = $this->getUser();
+        $sendBy = $friend->getSendBy();
+        $sendTo = $friend->getSendTo();
+
+
+        $entityManager->remove($friend);
+        $entityManager->flush();
+        $this->addFlash('removeOK', 'Ami supprimé avec succès !');
+
+
+        return $this->redirectToRoute('app_profil');
+    }
 }

@@ -1,6 +1,6 @@
-<h1>Bonjour {{ userSource.name }}!</h1>
+<h1>Bonjour {{ userTarget.name }}!</h1>
 
-<p>Vous avez reçu une demande d'ami de la part de {{ userTarget.name }}!</p>
+<p>Vous avez reçu une demande d'ami de la part de {{ userSource.name }}!</p>
 <p>Pour accepter la demande, cliquez sur le lien ci-dessous :</p>
 
 {% set url = url('app_accept_friend', {friendId: friendId}) %}

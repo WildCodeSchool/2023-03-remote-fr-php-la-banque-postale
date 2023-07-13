@@ -18,7 +18,7 @@ class ChoiceFriendType extends AbstractType
                 'required' => false,
             ])
             ->add('decline', CheckboxType::class, [
-                'label' => 'Décliner',
+                'label' => 'Refuser',
                 'required' => false,
             ]);
     }

@@ -61,12 +61,16 @@
 										<div class="card-body">
 											<h5 class="card-title">{{ friend.sendTo.name|title }}</h5>
 											<p>
-												{% if friend.sendTo.avatar is null %}
+												{% if friend.sendTo.avatar is null and friend.sendBy.avatar is null%}
 													<i class="fa-solid fa-user fa-2x text-primary"></i>
 												{% else %}
 													<img src="{{ asset('build/avatars/' ~ friend.sendTo.avatar.getPath()) }}" alt="Avatar" class="avatar">
 												{% endif %}
 											</p>
+                                               <a href="{{ path('app_remove_friend', { id: friend.id }) }}" class="btn btn-danger btn-sm">
+                                        Retirer
+                                    </a>
+									<h5 class="card-title">{{ friend.sendBy }}</h5>
 										</div>
 									</div>
 								</div>
@@ -96,6 +100,9 @@
 													<img src="{{ asset('build/avatars/' ~ friend.sendTo.avatar.getPath()) }}" alt="Avatar" class="avatar">
 												{% endif %}
 											</p>
+                                            <a href="{{ path('app_remove_friend', { id: friend.id }) }}" class="btn btn-danger btn-sm">
+                                        Retirer
+                                    </a>
 										</div>
 									</div>
 								</div>
