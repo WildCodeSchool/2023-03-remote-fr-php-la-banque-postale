@@ -1,0 +1,12 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Nouvelle réponse{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Ajouter une réponse</h1>
+<div class="container mt-5">
+    {{ include('/admin/admin_answer/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_tutorial_show', {'id': question.tutorial.id}) }}">Retour au tutoriel</a>
+</div>
+    {% endblock %}

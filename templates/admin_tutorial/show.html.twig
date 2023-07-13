@@ -3,10 +3,10 @@
 {% block title %}Tutoriel - {{ tutorial.name }}{% endblock %}
 
 {% block body %}
-    <h1>Tutoriel : {{ tutorial.name }}</h1>
-
-    <table class="table">
-        <tbody>
+    <h1 class="text-center mt-5">Tutoriel : {{ tutorial.name }}</h1>
+    <div class="container mt-5">
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ tutorial.id }}</td>
@@ -31,11 +31,54 @@
                 <th>Slug</th>
                 <td>{{ tutorial.slug }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        <a href="{{ path('app_admin_tutorial_edit', {'id': tutorial.id}) }}">Modifier le tutoriel</a>
+        <br>
+        <a href="{{ path('app_admin_tutorial_index') }}">Retour à la liste des tutoriels</a>
 
-    <a href="{{ path('app_admin_tutorial_index') }}">Retour à la liste des tutoriels</a>
+        <h1 class="text-center mt-5">Quiz associé à ce tutoriel</h1>
 
-    <a href="{{ path('app_admin_tutorial_edit', {'id': tutorial.id}) }}">Modifier</a>
+        <a href="{{ path('app_admin_question_new', {
+            id: tutorial.id
+        }) }}">Ajouter une question à ce quiz</a>
+
+        <table class="table mt-2">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Questions</th>
+                <th>Réponses</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in tutorial.questions %}
+                <tr>
+                    <td>{{ question.id }}</td>
+                    <td>{{ question.title }} <br>
+                        <a href="{{ path('app_admin_question_edit', {id: question.id}) }}">Modifier la question</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_admin_answer_new', {
+                            id: question.id
+                        }) }}">Ajouter une réponse</a>
+                        <br>
+                        {% for answer in question.answers %}
+                            {{ answer.isCorrect ? '✔️' : '❌' }} : {{ answer.text }}
+                            <a href="{{ path('app_admin_answer_edit', {'id': answer.id}) }}">Modifier la réponse</a>
+                            <br>
+                        {% else %}
+                            Aucune réponse trouvée.
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}
