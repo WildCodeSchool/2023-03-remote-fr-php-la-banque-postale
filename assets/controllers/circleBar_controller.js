@@ -4,10 +4,11 @@ const ProgressBar = require("progressbar.js");
 export default class extends Controller {
     connect() {
         const bar = new ProgressBar.SemiCircle(this.element, {
-            strokeWidth: 6,
-            color: '#FFF',
+            
+            strokeWidth: 3,
+            color: '#3CB043',
             trailColor: '#FFF',
-            trailWidth: 1,
+            trailWidth: 3,
             easing: 'easeInOut',
             duration: 1400,
             svgStyle: null,
@@ -15,8 +16,8 @@ export default class extends Controller {
                 value: '',
                 alignToBottom: false
             },
-            from: { color: '#FFF' },
-            to: { color: '#3CB043' },
+            from: { color: '#3CB043' },
+            to: { color: '#FFF' },
             // Set default step function for all animate calls
             step: (state, bar) => {
                 bar.path.setAttribute('stroke', state.color);
@@ -32,7 +33,7 @@ export default class extends Controller {
         });
         bar.text.style.textAlign = 'center';
         bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-        bar.text.style.fontSize = '2rem';
+        bar.text.style.fontSize = '1rem';
 
         bar.animate(this.element.getAttribute('data-value') / 100);  // Number from 0.0 to 1.0
     }
