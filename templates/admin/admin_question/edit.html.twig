@@ -1,0 +1,14 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Admin - Modifier question{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Modifier la question <br> "{{ question.title }}"</h1>
+    <div class="container mt-5">
+        {{ include('/admin/admin_question/_form.html.twig', {'button_label': 'Valider la modification'}) }}
+        {{ include('/admin/admin_question/_delete_form.html.twig') }}
+
+        <a href="{{ path('app_admin_tutorial_show', {'id': question.tutorial.id}) }}">Retour au tutoriel</a>
+    </div>
+{% endblock %}
+

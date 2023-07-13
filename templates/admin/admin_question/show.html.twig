@@ -1,0 +1,40 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Admin - Question{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5 text-center">Qestion "{{ question.title }}"</h1>
+    <div class="container mt-5">
+
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>{{ question.id }}</td>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td>{{ question.title }}</td>
+    </tr>
+    <tr>
+        <th>Réponses associées</th>
+        <td>
+            <ul>
+                {% for answer in question.answers %}
+                <li>{{ answer.text }}</li>
+            {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Tutoriel associé</th>
+        <td>{{ question.tutorial.name }}</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+    <a href="{{ path('app_admin_question_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_admin_question_edit', {'id': question.id}) }}">Modifier</a
+
+{% endblock %}

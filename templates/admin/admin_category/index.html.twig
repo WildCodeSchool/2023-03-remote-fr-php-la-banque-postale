@@ -4,33 +4,34 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="mt-5 mb-5 text-center">Liste des catégories</h1>
-    <a href="{{ path('app_admin_category_new') }}">Ajouter une catégorie</a>
+    <h1 class="mt-5 mb-5 text-center">Liste des catégories</h1>
+    <div class="container mt-5">
+        <a href="{{ path('app_admin_category_new') }}">Ajouter une catégorie</a>
 
-	<table class="table mt-2">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Titre</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for category in categories %}
-				<tr>
-					<td>{{ category.id }}</td>
-					<td>{{ category.title |purify }}</td>
-					<td>
-						<a href="{{ path('app_admin_category_show', {'id': category.id}) }}">Voir</a>
-						<a href="{{ path('app_admin_category_edit', {'id': category.id}) }}">Modifier</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="4">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
+        <table class="table mt-2">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.title |purify }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_category_show', {'id': category.id}) }}">Voir</a>
+                        <a href="{{ path('app_admin_category_edit', {'id': category.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

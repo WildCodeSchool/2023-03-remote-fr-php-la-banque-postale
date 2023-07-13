@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Tutorial;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use App\Form\TutorialType;
+use App\Repository\AnswerRepository;
 use App\Repository\TutorialRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +18,33 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AdminTutorialController extends AbstractController
 {
     #[Route('/', name: 'app_admin_tutorial_index', methods: ['GET'])]
-    public function index(TutorialRepository $tutorialRepository): Response
-    {
+    public function index(
+        TutorialRepository $tutorialRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+    ): Response {
+        $form = $this->createFormBuilder(null, [
+            'method' => 'get'
+        ])
+            ->add('Rechercher_un_tutoriel', SearchType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->get('Rechercher_un_tutoriel')->getData();
+            $query = $tutorialRepository->findLikeName($search);
+        } else {
+            $query = $tutorialRepository->queryFindAll();
+        }
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('admin_tutorial/index.html.twig', [
-            'tutorials' => $tutorialRepository->findAll(),
+            'tutorials' => $pagination,
+            'form' => $form,
         ]);
     }
 
@@ -44,10 +70,12 @@ class AdminTutorialController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_admin_tutorial_show', methods: ['GET'])]
-    public function show(Tutorial $tutorial): Response
+    public function show(Tutorial $tutorial, AnswerRepository $answerRepository): Response
     {
+        $answers = $answerRepository->findAll();
         return $this->render('admin_tutorial/show.html.twig', [
             'tutorial' => $tutorial,
+            'answers' => $answers,
         ]);
     }
 

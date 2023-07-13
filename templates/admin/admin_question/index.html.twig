@@ -1,0 +1,43 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Admin - Questions quiz{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Liste des questions</h1>
+<div class="container mt-5">
+
+    <table class="table mt-2">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Questions</th>
+            <th>Réponses associées</th>
+            <th>Tutoriel associé</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.title }}</td>
+                <td>
+                    {% for answer in question.answers %}
+                        {{ answer.text }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ question.tutorial.name }}</td>
+                <td>
+                    <a href="{{ path('app_admin_question_show', {'id': question.id}) }}">Voir</a>
+                    <a href="{{ path('app_admin_question_edit', {'id': question.id}) }}">Moifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
