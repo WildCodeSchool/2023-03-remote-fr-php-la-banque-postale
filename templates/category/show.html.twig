@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }} {{ successByCategory }} %</h1> 
+    <h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }} {{ successByCategory }} %</h1>
 
     {% if not app.user %}
         <div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
@@ -14,7 +14,7 @@
                 {% if tutorial.ispublic or app.user %}
                     <div class="col text-center">
                         <div class="w-75 position-relative m-auto">
-                            <a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="link-animation
+                            <a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="
                             btn btn-secondary p-4 mb-5 w-100 stretched-link">{{ tutorial.name }}
                             </a>
                             {% if app.user %}
@@ -23,7 +23,6 @@
                                 }) }}
                             {% endif %}
                         </div>
-
                     </div>
                 {% else %}
                     <div class="col text-center">

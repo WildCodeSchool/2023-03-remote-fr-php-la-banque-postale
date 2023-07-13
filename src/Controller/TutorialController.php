@@ -35,41 +35,48 @@ class TutorialController extends AbstractController
         ProgressRepository $progressrepo,
         Request $request
     ): Response {
-
         $user = $this->getUser();
+        $errors = [];
         $questions = $questionrepo->findAll();
         $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
         if ($request->getMethod() === 'POST') {
             $quizz = $request->request->all();
             $values = array_values($quizz);
 
-            if (!$progress) {
-                $progress = new Progress();
-                $progress->setUser($user);
-                $progress->setTutorial($tutorial);
+            if (count($values) < 5) {
+                $errors[] = 'Veuillez répondre à toutes les questions pour avoir accès à votre score.';
             }
 
-            $score = 0;
-            foreach ($values as $answerId) {
-                $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
-                if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
-                    $score++;
+            if (empty($errors)) {
+                if (!$progress) {
+                    $progress = new Progress();
+                    $progress->setUser($user);
+                    $progress->setTutorial($tutorial);
                 }
+
+                $score = 0;
+                foreach ($values as $answerId) {
+                    $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
+                    if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
+                        $score++;
+                    }
+                }
+                $progress->setScore($score);
+                $progress->setUpdatedAt(new DateTimeImmutable('now'));
+                $progressrepo->save($progress, true);
+
+                return $this->redirectToRoute('app_score', [
+                    'slug' => $tutorial->getSlug(),
+                ]);
             }
-            $progress->setScore($score);
-            $progress->setUpdatedAt(new DateTimeImmutable('now'));
-            $progressrepo->save($progress, true);
-
-            return $this->redirectToRoute('app_score', [
-                'slug' => $tutorial->getSlug(),
-            ]);
         }
-
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
             'questions' => $questions,
-            'lastscore' => (!empty($progress)) ? $progress->getScore() : null,
-            'lastsession' => (!empty($progress)) ? $progress->getUpdatedAt() : null,
+            'lastscore' => $progress?->getScore(),
+            'lastsession' => $progress?->getUpdatedAt(),
+            'errors' => $errors,
+            'progress' => $progress,
         ]);
     }
 }

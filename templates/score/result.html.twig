@@ -11,7 +11,7 @@
 			{% if successPercentage>=80 %}
 				<h2 class="text-center mb-md-3 text-uppercase">Score:
 					{{ successPercentage }}
-					% ✅
+					% <i class="fa-solid fa-circle-check text-success"></i>
 				</h2>
 				<div class="bg-primary text-light w-100 m-auto p-md-5 p-3 rounded-4 mb-md-5">
 					<h3 class="mb-3 mb-md-5 text-uppercase">Bravo !</h3>
@@ -24,7 +24,7 @@
 		{% else %}
 			<h2 class="text-center mb-md-3 text-uppercase">Score:
 				{{ successPercentage }}
-				% ❌
+				% <i class="fa-solid fa-circle-xmark text-danger"></i>
 			</h2>
 			<div class="bg-primary text-light w-100 m-auto p-md-5 p-3 rounded-4 mb-md-5">
 				<h3 class="mb-3 mb-md-5 text-uppercase">Essaye encore..</h3>
@@ -34,7 +34,7 @@
 															vous êtes sur la bonne voie ! Reprenez le défi et montrez à tous vos incroyables capacités. Vous êtes plus fort que vous ne le pensez, alors n'abandonnez pas, recommencez et laissez briller votre potentiel !
 				</p>
 				<a type="button" href="javascript:history.go(-1)" class="m-auto next-btn p-2 border-0 bg-success rounded-4 w-75 text-light text-decoration-none">
-					Recommencer
+					Cliques ici pour rééssayer le quiz
 				</a>
 			</div>
 		</div>
