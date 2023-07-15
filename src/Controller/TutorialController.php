@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
+use DateTimeImmutable;
+use App\Entity\Progress;
 use App\Entity\Tutorial;
 use App\Repository\AnswerRepository;
+use App\Repository\ProgressRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\TutorialRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,32 +32,51 @@ class TutorialController extends AbstractController
         Tutorial $tutorial,
         AnswerRepository $answerrepo,
         QuestionRepository $questionrepo,
+        ProgressRepository $progressrepo,
         Request $request
     ): Response {
+        $user = $this->getUser();
+        $errors = [];
         $questions = $questionrepo->findAll();
-        $points = 0;
-
+        $progress = $progressrepo->findOneBy(['tutorial' => $tutorial, 'user' => $user]);
         if ($request->getMethod() === 'POST') {
             $quizz = $request->request->all();
             $values = array_values($quizz);
 
-            foreach ($values as $answerId) {
-                $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
-                if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
-                    $points++;
-                }
+            if (count($values) < 5) {
+                $errors[] = 'Veuillez répondre à toutes les questions pour avoir accès à votre score.';
             }
-            //sauvegarder les points en BDD;
-            // return $this->redirectToRoute('nom-delaroute');
-            // return $this->render('tutorial/tutorialquizz.html.twig', [
-            //     'tutorial' => $tutorial,
-            //     'questions' => $questions,
-            //     'point' => $points,
-            // ]);
+
+            if (empty($errors)) {
+                if (!$progress) {
+                    $progress = new Progress();
+                    $progress->setUser($user);
+                    $progress->setTutorial($tutorial);
+                }
+
+                $score = 0;
+                foreach ($values as $answerId) {
+                    $userAnswer = $answerrepo->findOneBy(['id' => $answerId]);
+                    if ($userAnswer instanceof Answer && $userAnswer->isCorrect() === true) {
+                        $score++;
+                    }
+                }
+                $progress->setScore($score);
+                $progress->setUpdatedAt(new DateTimeImmutable('now'));
+                $progressrepo->save($progress, true);
+
+                return $this->redirectToRoute('app_score', [
+                    'slug' => $tutorial->getSlug(),
+                ]);
+            }
         }
         return $this->render('tutorial/show.html.twig', [
             'tutorial' => $tutorial,
             'questions' => $questions,
+            'lastscore' => $progress?->getScore(),
+            'lastsession' => $progress?->getUpdatedAt(),
+            'errors' => $errors,
+            'progress' => $progress,
         ]);
     }
 }

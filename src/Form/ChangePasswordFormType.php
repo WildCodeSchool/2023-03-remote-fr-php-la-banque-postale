@@ -36,12 +36,19 @@ class ChangePasswordFormType extends AbstractType
                     ],
                     'label' => 'Taper votre nouveau mot de passe',
                     'label_attr' => ['class' => 'p-2'],
-                    'attr' => ['class' => 'text-light bg-danger form-control border-0'],
+                    'attr' => [
+                        'class' => 'text-light bg-warning form-control border-0',
+                        'placeholder' => 'Tape ton mot de passe ici'
+                    ],
                 ],
                 'second_options' => [
                     'label' => 'Répéter votre mot de passe',
                     'label_attr' => ['class' => 'p-2'],
-                    'attr' => ['class' => 'text-light bg-danger form-control border-0'],
+                    'attr' => [
+                        'class' => 'text-light bg-warning form-control border-0',
+                        'placeholder' => 'Répète ton mot de passe ici'
+                    ],
+
                 ],
                 'invalid_message' => 'Les champs du mot de passe doivent correspondre.',
                 // Instead of being set onto the object directly,

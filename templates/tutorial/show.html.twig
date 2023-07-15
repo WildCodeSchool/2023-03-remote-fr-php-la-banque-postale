@@ -1,65 +1,107 @@
 {% extends 'layout/layout-center.html.twig' %}
 
-{% block title %}Tutoriel -
-	{{ tutorial.name }}
-{% endblock %}
+{% block title %}Tutoriel - {{ tutorial.name }}{% endblock %}
 
 {% block body %}
-	<div class="">
-		<h1 class="text-center text-light mt-5">
-			Tutoriel :
-			{{ tutorial.name }}
-		</h1>
-	</div>
-	<div class="container">
-		<div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
-			<h2 class="text-center mb-2 mt-3">Objectifs
-			</h2>
-			<ul class="text-center list-unstyled mb-5">
-				<li>
-					{{ tutorial.objective }}
-				</li>
-			</ul>
+        <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
 
-			<div class="row-cols-md-2 d-flex flex-column flex-md-row">
-				<div class="col m-auto fw-bold text-center">
-					<p>Clique sur cette vidéo
-						<i class="fa-solid fa-arrow-down"></i>
-					</p>
-					<iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="container">
+        <div class="bg-secondary rounded m-auto mt-4 p-4 col-10">
+            <h2 class="text-center mb-2 mt-3">Objectifs</h2>
+            <ul class="text-center list-unstyled mb-5">
+                <li>{{ tutorial.objective }}</li>
+            </ul>
 
-				</div>
-				<div class="col m-auto">
-					<p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container bg-primary d-flex justify-content-center">
-		<h1>Quizz</h1>
-		<form method="post">
-			{% for question in tutorial.questions %}
-				<div id="quiz" class="mt-4;">
-					<div class="question">
-						<div>
-							<strong>Question:
-								{{ question.title }}<br></strong>
-						</div>
-						<ul class="options">
-							{% for answer in question.answers %}
-								<li>
-                                    <label for="answer-{{ answer.id }}">
-                                        <input type="radio"
-                                               name="{{ question.id }}" value="{{ answer.id }}" id="answer-{{ answer.id }}">
-                                        {{ answer.text }}
-                                    </label>
-								</li>
-							{% endfor %}
-						</ul>
-						<br>
-					</div>
-				</div>
-			{% endfor %}
-			<button type="submit">Submit</button>
-		{% endblock %}
+            <div class="row-cols-md-2 d-flex flex-column flex-md-row">
+                <div class="col m-auto fw-bold text-center">
+                    <p>Clique sur cette vidéo <i class="fa-solid fa-arrow-down"></i></p>
+                    <iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                </div>
+
+                <div class="col m-auto">
+                    <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}</p>
+                </div>
+            </div>
+            {% if app.user %}
+            {% if lastscore is not null and lastscore >= 4 %}
+                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
+                        class="fa-solid fa-circle-check fa-bounce text-success ms-3" style="color: #00eb1b;"></i></h1>
+            {% elseif lastscore is not null and lastscore < 4 %}
+                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
+                        class="fa-solid fa-circle-xmark fa-bounce ms-3" style="color: #ff0000;"></i></h1>
+            {% else %}
+                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
+            {% endif %}
+            {% endif %}
+
+            {% if app.user %}
+                <form method="post" class="mb-5">
+                    {% if errors %}
+                        {% for error in errors %}
+                            <p class="errors bg-danger bg-opacity-50 p-2 rounded-3 text-center"><i
+                                    class="fa-solid fa-triangle-exclamation me-2"></i>{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="text-center mb-5">
+                        {% if lastscore is not null and lastscore >= 4 %}
+                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br>
+                            <br> Bravo !
+                        {% elseif lastscore is not null and lastscore < 4 %}
+                            Tu as déjà réalisé ce quiz le {{ lastsession|date('Y-m-d à H:i') }} <br>
+                            <br> Malheureusement, tu n'as pas réussi à le valider... Retentes ta chance !
+                        {% elseif progress is null %}
+                            Vous n'avez pas encore tenté de réaliser ce quiz.
+                        {% endif %}
+                    </div>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper align-items-center">
+                            {% for question in tutorial.questions %}
+                                <div class="swiper-slide d-flex flex-column justify-content-center align-items-center">
+                                    <div class="text-center mb-2 mb-md-5 mt-3 mt-md-5">
+                                        <h3>{{ question.title }}</h3>
+                                    </div>
+                                    <div class="w-75 d-flex flex-column m-auto">
+                                        {% for answer in question.answers %}
+                                            <label class="link-animation bg-primary text-light mb-2 p-2 rounded-4"
+                                                   for="answer-{{ answer.id }}">
+                                                <input type="radio" class="me-2" name="{{ question.id }}"
+                                                       value="{{ answer.id }}" id="answer-{{ answer.id }}">
+                                                {{ answer.text }}
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                    {% if loop.last %}
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-success mb-2">Valider</button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="w-100">
+                            <div class="button-set w-75 m-auto text-center">
+                                <button class="button-prev bg-success p-2 border-0 rounded-2 text-light mb-2">Question
+                                    précédente
+                                </button>
+                                <button class="button-next bg-success border-0 p-2 rounded-2 text-light">Question
+                                    suivante
+                                </button>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </form>
+            {% else %}
+
+                Ne manquez pas l'occasion de tester
+                vos connaissances ! Rejoignez-nous en vous inscrivant dès maintenant pour accéder au quiz exclusif
+                et découvrez si vous êtes prêt à relever le défi. <a
+                href="{{ path('app_mail_choice') }}">Inscrivez-vous </a> et préparez-vous à vous surpasser !
+{% endif %}
+        </div>
+    </div>
+
+{% endblock %}

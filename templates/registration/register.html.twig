@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block body %}
+
 	<div class="container">
+        {{ form_start(registrationForm) }}
 		<h1 class="text-center text-light mb-5">Qui es-tu ?
 			<br>
 			Complète ton pofil !</h1>
@@ -34,8 +36,12 @@
 				</div>
 			</div>
 		</div>
+        <div class="row">
+            <div class="col-4 offset-4 d-flex">
+        <button type="submit" class="btn btn-success rounded-pill ms-auto me-auto mt-3">Clique ici pour t'inscrire</button>
+            </div>
+        </div>
+        {{ form_end(registrationForm) }}
 	</div>
-	<button type="submit" class="btn btn-success rounded-pill ms-auto me-auto mt-3">Clique ici pour t'inscrire</button>
-	{{ form_end(registrationForm) }}
 
 {% endblock %}
