@@ -14,9 +14,17 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegistrationFormType extends AbstractType
 {
+    private UrlGeneratorInterface $urlGenerator;
+
+    public function __construct(UrlGeneratorInterface $urlGenerator)
+    {
+        $this->urlGenerator = $urlGenerator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -48,7 +56,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Veuillez accepter les conditions générales pour vous inscrire.',
                     ]),
                 ],
-                'label' => "J'accepte les conditions générales",
+                'label' => '<a href="' . $this->urlGenerator->generate('app_cgu') .
+                    '">J\'accepte les conditions générales</a>',
+                'label_html' => true,
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,

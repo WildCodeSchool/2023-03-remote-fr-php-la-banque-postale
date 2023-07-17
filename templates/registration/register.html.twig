@@ -6,7 +6,7 @@
 {% block body %}
 
 	<div class="container">
-        {{ form_start(registrationForm) }}
+		{{ form_start(registrationForm) }}
 		<h1 class="text-center text-light mb-5">Qui es-tu ?
 			<br>
 			Complète ton pofil !</h1>
@@ -30,18 +30,18 @@
                             text-light', 'placeholder': 'Tape ton mot de passe ici'}}) }}
 						</div>
 						<div class="form-group mb-2">
-							{{ form_row(registrationForm.conditions, {'attr': {'class': ' ms-2 bg-primary form-check-input'}}) }}
+							{{ form_row(registrationForm.conditions, {'attr': {'class': 'bg-primary form-check-input'}}) }}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-        <div class="row">
-            <div class="col-4 offset-4 d-flex">
-        <button type="submit" class="btn btn-success rounded-pill ms-auto me-auto mt-3">Clique ici pour t'inscrire</button>
-            </div>
-        </div>
-        {{ form_end(registrationForm) }}
+		<div class="row">
+			<div class="col-4 offset-4 d-flex">
+				<button type="submit" class="btn btn-success rounded-pill ms-auto me-auto mt-3">Clique ici pour t'inscrire</button>
+			</div>
+		</div>
+		{{ form_end(registrationForm) }}
 	</div>
 
 {% endblock %}
