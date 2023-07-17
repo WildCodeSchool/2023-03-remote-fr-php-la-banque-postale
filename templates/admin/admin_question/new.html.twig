@@ -1,0 +1,14 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}New Question{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">Ajouter une question au quiz</h1>
+    <div class="container mt-5">
+
+        {{ include('/admin/admin_question/_form.html.twig') }}
+
+        <a href="{{ path('app_admin_tutorial_show', {'id': question.tutorial.id}) }}">Retour au tutoriel</a>
+
+    </div>
+{% endblock %}
