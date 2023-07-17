@@ -11,7 +11,7 @@
     {% endfor %}
     <h1 class="mb-5 text-uppercase">Tape l'adresse mail de ton ami pour l'ajouter</h1>
     {{ form_start(addFriendForm) }}
-    {{ form_row(addFriendForm.email) }}
+    {{ form_row(addFriendForm.email, {'attr': {'placeholder': 'example@example.com'}}) }}
     <div class="mt-5">
         <button type="submit">Envoyer</button>
     </div>
