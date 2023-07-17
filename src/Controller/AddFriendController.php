@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 class AddFriendController extends AbstractController
 {
     #[Route('/addfriend', name: 'app_add_friend')]

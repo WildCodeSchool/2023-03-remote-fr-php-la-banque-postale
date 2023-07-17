@@ -22,7 +22,7 @@ class ChoiceFriendType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'choice_attr' => [
-                    'class' => 'd-flex justify-content-between', // Ajoutez une classe Bootstrap pour la marge inférieure
+                    'class' => 'd-flex justify-content-between',
                 ],
             ]);
     }

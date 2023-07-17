@@ -15,7 +15,6 @@ class AddFriendType extends AbstractType
         ->add('email', EmailType::class, [
             'label' => false,
         ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -25,4 +24,3 @@ class AddFriendType extends AbstractType
         ]);
     }
 }
-
