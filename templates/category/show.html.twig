@@ -1,42 +1,63 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie : <br> {{ category.title }} {{ successByCategory }} %</h1>
+	<h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie :
+		<br>
+		{{ category.title }}
+		{% if app.user %}
+        {% if successByCategory >= 90 %}
+			<div class='d-flex  justify-content-center align-items-center'>
+                <i class="fa-solid fa-trophy text-secondary sm me-2"></i>
+				<div class="progress w-50">
+					<div class="progress-bar bg-success" style="width: {{ successByCategory }}%" aria-valuemin="0" aria-valuemax="100">{{ successByCategory }}%</div>
+				</div>
+				<i class="fa-solid fa-trophy text-secondary sm ms-2"></i>
+			</div>
+            {% else %}
 
-    {% if not app.user %}
-        <div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
-            Pour avoir accès à tous nos tutos, <a href="{{ path("app_mail_choice") }}"> inscris-toi !</a>
-        </div>
-    {% endif %}
-    <div class="container mt-5">
-        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 m-auto">
-            {% for tutorial in category.tutorials %}
-                {% if tutorial.ispublic or app.user %}
-                    <div class="col text-center">
-                        <div class="w-75 position-relative m-auto">
-                            <a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="
-                            btn btn-secondary p-4 mb-5 w-100 stretched-link">{{ tutorial.name }}
-                            </a>
-                            {% if app.user %}
-                                {{ component('bookmark', {
+				<div class="progress w-50 m-auto mt-3">
+					<div class="progress-bar bg-success" style="width: {{ successByCategory }}%" aria-valuemin="0" aria-valuemax="100">{{ successByCategory }}%</div>
+				</div>
+            {% endif %}
+		{% endif %}
+	</h1>
+
+	{% if not app.user %}
+		<div class="alert alert-info alert-dismissible fade show text-center w-75 ms-auto me-auto" role="alert">
+			Pour avoir accès à tous nos tutos,
+			<a href="{{ path("app_mail_choice") }}">
+				inscris-toi !</a>
+		</div>
+	{% endif %}
+	<div class="container mt-5">
+		<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 m-auto">
+			{% for tutorial in category.tutorials %}
+				{% if tutorial.ispublic or app.user %}
+					<div class="col text-center">
+						<div class="w-75 position-relative m-auto">
+							<a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="
+																																								                            btn btn-secondary p-4 mb-5 w-100 stretched-link">{{ tutorial.name }}
+							</a>
+							{% if app.user %}
+								{{ component('bookmark', {
                                     tutorial: tutorial
                                 }) }}
-                            {% endif %}
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="col text-center">
-                        <div class="w-75 position-relative m-auto">
-                        <a href="#" class="btn btn-dark p-4 mb-5 w-100" data-bs-toggle="tooltip"
-                           data-bs-placement="top" title="Connectez-vous pour y avoir accès">
-                            {{ tutorial.name }}<i class="fa-solid fa-lock fa-2x position-absolute end-0 bottom-0 mb-5"></i>
-                           </a>
-                    </div></div>
-                {% endif %}
-            {% else %}
-                Aucun tutoriel trouvé dans cette catégorie.
-                <br>
-            {% endfor %}
-        </div>
-    </div>
-    </div>{% endblock %}
+							{% endif %}
+						</div>
+					</div>
+				{% else %}
+					<div class="col text-center">
+						<div class="w-75 position-relative m-auto">
+							<a href="#" class="btn btn-dark p-4 mb-5 w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Connectez-vous pour y avoir accès">
+								{{ tutorial.name }}<i class="fa-solid fa-lock fa-2x position-absolute end-0 bottom-0 mb-5"></i>
+							</a>
+						</div>
+					</div>
+				{% endif %}
+			{% else %}
+				Aucun tutoriel trouvé dans cette catégorie.
+				<br>
+			{% endfor %}
+		</div>
+	</div>
+</div>{% endblock %}
