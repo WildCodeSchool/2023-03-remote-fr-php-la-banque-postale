@@ -21,3 +21,35 @@
         width: 5rem;
     }
 }
+@media only screen and (max-width: 992px) {
+    .progression, .favorites {
+        height: auto;
+    }
+    .favorite-section {
+        margin-top: 2rem;
+    }
+}
+.friend-section {
+    margin-top: 2rem;
+}
+@media only screen and (min-width: 992px) {
+    .progression, .favorites {
+        height: 20rem;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .liste-favoris {
+        margin-bottom: 0rem;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .liste-favoris {
+        margin-bottom: 1rem;
+    }
+}
+@media only screen and (min-width: 1199px) {
+    .liste-favoris {
+        margin-bottom: 1rem;
+    }
+}

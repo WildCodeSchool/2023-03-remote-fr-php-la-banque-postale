@@ -28,7 +28,7 @@
         <div class="d-flex justify-content-lg-around flex-column flex-lg-row">
             <div class="w-100">
                 <h2 class="text-light text-center">Ma progression</h2>
-                <div class="bg-secondary rounded me-1 p-2">
+                <div class="bg-secondary progression rounded me-1 p-2">
                     <p class="text-center">
                     <strong>Votre progression totale est de
                         {{ calculPercent|number_format(0, '.', '') }}
@@ -43,7 +43,7 @@
                     <div class="swiper mySwiperFavorite">
                         <div class="swiper-wrapper">
                             {% set numberOfSuccessByCategory = 0 %}
-                            <div class="swiper-slide w-100 pt-4">
+                            <div class="swiper-slide swiper-favorites w-100 pt-4">
                                 <div class="m-auto pb-4">
                                     {% for key, successByCategory in success %}
                                     {% if numberOfSuccessByCategory < 3 %}
@@ -73,17 +73,17 @@
                     </div>
                 </div>
             </div>
-            <div class="w-100">
+            <div class="w-100 favorite-section">
                 <h2 class="text-light text-center">Mes favoris</h2>
-                <div class="bg-secondary rounded ms-1 p-2">
+                <div class="bg-secondary favorites rounded ms-1 p-2">
                     <div class="swiper mySwiperFavorite">
                         <div class="swiper-wrapper">
                             {% set numberOfFavorites = 0 %}
-                            <div class="swiper-slide w-100 pt-4">
-                                <ul class="w-50 m-auto pb-4 list-unstyled">
+                            <div class="swiper-slide swiper-favorites w-100 pt-4">
+                                <ul class="w-50 m-auto list-unstyled">
                                     {% for tutorial in favoris %}
-                                    {% if numberOfFavorites < 10 %}
-                                    <li class="link-animation">
+                                    {% if numberOfFavorites < 5 %}
+                                    <li class="link-animation liste-favoris">
                                         <i class="fa-solid fa-star me-3"></i>
                                         <a class="text-decoration-none text-dark"
                                            href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
@@ -95,9 +95,9 @@
                                 </ul>
                             </div>
                             <div class="swiper-slide w-100 pt-4">
-                                <ul class="w-50 m-auto pb-4 list-unstyled">
+                                <ul class="w-50 m-auto list-unstyled">
                                     {% set numberOfFavorites = 1 %}
-                                    <li class="link-animation">
+                                    <li class="link-animation liste-favoris">
                                         <i class="fa-solid fa-star me-3"></i>
                                         <a class="text-decoration-none text-dark"
                                            href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
@@ -115,11 +115,9 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <div>
-            <div class="text-center">
+            <div class="text-center friend-section">
                 <h2 class="text-light">Mes Amis</h2>
                 <div class="bg-secondary rounded m-auto p-5"></div>
             </div>
