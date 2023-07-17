@@ -55,7 +55,7 @@
             {% for question in tutorial.questions %}
                 <tr>
                     <td>{{ question.id }}</td>
-                    <td>{{ question.title |purify }} <br>
+                    <td>{{ question.title }} <br>
                         <a href="{{ path('app_admin_question_edit', {id: question.id}) }}">Modifier la question</a>
                     </td>
                     <td>
@@ -64,7 +64,7 @@
                         }) }}">Ajouter une réponse</a>
                         <br>
                         {% for answer in question.answers %}
-                            {{ answer.isCorrect ? '✔️' : '❌' }} : {{ answer.text |purify }}
+                            {{ answer.isCorrect ? '✔️' : '❌' }} : {{ answer.text }}
                             <a href="{{ path('app_admin_answer_edit', {'id': answer.id}) }}">Modifier la réponse</a>
                             <br>
                         {% else %}

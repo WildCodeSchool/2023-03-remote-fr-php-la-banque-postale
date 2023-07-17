@@ -13,7 +13,7 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', CKEditorType::class)
+            ->add('title')
         ;
     }
 

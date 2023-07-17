@@ -3,7 +3,7 @@
 {% block title %}Admin - Modifier réponse{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mt-5">Modifier la réponse <br> "{{ answer.text }}"</h1>
+    <h1 class="text-center mt-5">Modifier la réponse <br> "{{ answer.text }}" à la question <br> "{{ answer.question.title }}"</h1>
     <div class="container mt-5">
     {{ include('/admin/admin_answer/_form.html.twig', {'button_label': 'Valider la modification'}) }}
     {{ include('/admin/admin_answer/_delete_form.html.twig') }}

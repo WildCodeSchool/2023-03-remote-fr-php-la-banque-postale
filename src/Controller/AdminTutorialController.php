@@ -70,12 +70,10 @@ class AdminTutorialController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_admin_tutorial_show', methods: ['GET'])]
-    public function show(Tutorial $tutorial, AnswerRepository $answerRepository): Response
+    public function show(Tutorial $tutorial): Response
     {
-        $answers = $answerRepository->findAll();
         return $this->render('admin_tutorial/show.html.twig', [
             'tutorial' => $tutorial,
-            'answers' => $answers,
         ]);
     }
 

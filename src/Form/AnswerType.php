@@ -13,7 +13,7 @@ class AnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('text', CKEditorType::class)
+            ->add('text')
             ->add('isCorrect')
         ;
     }
