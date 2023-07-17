@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Tutorial;
 use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -53,6 +54,19 @@ class TutorialRepository extends ServiceEntityRepository
         $results = $query->getResult();
 
         return $results;
+    }
+
+    public function queryFindAll(): Query
+    {
+        return $this->createQueryBuilder('t')->getQuery();
+    }
+
+    public function findLikeName(string $search): Query
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.name LIKE :Rechercher_un_tutoriel')
+            ->setParameter('Rechercher_un_tutoriel', '%' . $search . '%')
+            ->getQuery();
     }
 
 //    /**
