@@ -3,10 +3,15 @@
 {% block title %}Admin - Tutoriels{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5 mb-5 text-center">Liste des tutoriels</h1>
+    <h1 class="mt-5 text-center">Liste des tutoriels</h1>
+    <div class="container mt-5">
+<div class="d-flex flex-column align-items-center justify-content-center">
+    {{ form(form) }}
+        {{ knp_pagination_render(tutorials) }}
+</div>
     <a href="{{ path('app_admin_tutorial_new') }}">Ajouter un tutoriel</a>
 
-    <table class="table">
+    <table class="table mt-2">
         <thead>
             <tr>
                 <th>Id</th>
@@ -37,5 +42,5 @@
         {% endfor %}
         </tbody>
     </table>
-
+    </div>
 {% endblock %}
