@@ -11,35 +11,31 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class AcceptFriendController extends AbstractController
 {
-    private $userRepository;
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
     }
 
     #[Route('/accept/friend/{friendId}', name: 'app_accept_friend')]
     #[Entity('friend', options: ['mapping' => ['friendId' => 'id']])]
+    #[IsGranted('ROLE_USER')]
     public function acceptFriend(Request $request, Friend $friend): Response
     {
-        // Vérifier si l'utilisateur est connecté
-        if (!$this->getUser()) {
-            throw new AccessDeniedException('Vous devez être connecté pour accéder à cette page.');
-        }
-
-        $userSource = $friend->getSendBy();
         $userTarget = $friend->getSendTo();
-
-        if (!$userTarget) {
-            throw $this->createNotFoundException('Utilisateur non trouvé.');
+        // Vérifier si l'utilisateur connecté correspond bien au destinataire $userTarget
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($userTarget !== $user) {
+            throw new AccessDeniedException('Vous n\'avez accès à cette demande.');
         }
 
         $form = $this->createForm(ChoiceFriendType::class, null, [
@@ -48,45 +44,20 @@ class AcceptFriendController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            $choice = $form->get('choice')->getData();
 
-            if ($data['accept']) {
-                $friendship = $this->entityManager->getRepository(Friend::class)->findOneBy([
-                    'sendBy' => $userSource,
-                    'sendTo' => $userTarget,
-                    'status' => 'pending',
-                ]);
+            if ($choice === 'accept') {
+                // Créer une nouvelle instance de Friend
+                $friend->setCreatedAt(new DateTimeImmutable('now'));
+                $friend->setStatus('accepted');
+                $this->entityManager->flush();
 
-                if ($friendship) {
-                    $friendship->setStatus('accepted');
-                    $this->entityManager->flush();
+                $this->addFlash('sendOK', 'Demande d\'ami acceptée avec succès !');
+            } elseif ($choice === 'decline') {
+                $this->entityManager->remove($friend);
+                $this->entityManager->flush();
 
-                    // Créer une nouvelle instance de Friend
-                    $friendship->setCreatedAt(new DateTimeImmutable('now'));
-                    $friendship->setStatus('accepted');
-
-                    $this->entityManager->persist($friendship);
-                    $this->entityManager->flush();
-
-                    $this->addFlash('success', 'Demande d\'ami acceptée avec succès !');
-                } else {
-                    $this->addFlash('error', 'La demande d\'ami n\'existe pas ou a déjà été traitée.');
-                }
-            } elseif ($data['decline']) {
-                $friendship = $this->entityManager->getRepository(Friend::class)->findOneBy([
-                    'sendBy' => $userSource,
-                    'sendTo' => $userTarget,
-                    'status' => 'pending',
-                ]);
-
-                if ($friendship) {
-                    $this->entityManager->remove($friendship);
-                    $this->entityManager->flush();
-
-                    $this->addFlash('success', 'Demande d\'ami déclinée avec succès !');
-                } else {
-                    $this->addFlash('error', 'La demande d\'ami n\'existe pas ou a déjà été traitée.');
-                }
+                $this->addFlash('sendOK', 'Demande d\'ami déclinée avec succès !');
             }
 
             return $this->redirectToRoute('app_profil');

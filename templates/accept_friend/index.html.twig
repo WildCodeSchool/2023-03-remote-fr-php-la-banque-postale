@@ -3,14 +3,15 @@
 {% block title %}Accepter une demande d'ami{% endblock %}
 
 {% block body %}
-<div class="bg-secondary rounded m-auto col-10 p-5 text-center">
-    <h1 class="mb-5 text-uppercase"> {{ friend.SendBy.name }} vous a envoyé une demande d'ami :</h1>
+<div class="bg-secondary rounded m-auto p-5 d-flex flex-column align-items-center justify-content-center">
+    <h1 class="mb-5 text-uppercase text-center"> {{ friend.SendBy.name }} vous a envoyé une demande d'ami</h1>
 
 		{{ form_start(choiceFriendForm) }}
 		{{ form_row(choiceFriendForm) }}
 			<div class="mt-5">
-				<button type="submit">Envoyer</button>
+				<button class="btn btn-primary" type="submit">Envoyer</button>
 			</div>
 		{{ form_end(choiceFriendForm) }}
+</div>
 {% endblock %}
 

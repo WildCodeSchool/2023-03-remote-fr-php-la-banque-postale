@@ -25,6 +25,7 @@ class ProfilController extends AbstractController
         CategoryRepository $categoryRepository,
         PercenTool $percenTool
     ): Response {
+        /** @var User $user */
         $user = $this->getUser();
         $questions = $questionRepository->findAll();
         $progress = $progressRepository->findBy(['user' => $user]);
