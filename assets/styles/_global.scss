@@ -21,6 +21,7 @@
         width: 5rem;
     }
 }
+
 .avatar {
 width: 3rem;
 }
@@ -43,7 +44,7 @@ width: 3rem;
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) and (max-width: 1050px) {
     .liste-favoris {
         margin-bottom: 0rem;
     }
@@ -55,8 +56,13 @@ width: 3rem;
     }
 }
 
-@media only screen and (min-width: 1199px) {
+@media only screen and (min-width: 1050px) {
     .liste-favoris {
         margin-bottom: 1rem;
     }
+}
+
+.iconAdd {
+    top: -8px;
+    right: -8px;
 }
