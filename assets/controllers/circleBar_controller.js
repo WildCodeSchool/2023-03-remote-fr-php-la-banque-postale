@@ -4,7 +4,7 @@ const ProgressBar = require("progressbar.js");
 export default class extends Controller {
     connect() {
         const bar = new ProgressBar.SemiCircle(this.element, {
-            
+
             strokeWidth: 3,
             color: '#3CB043',
             trailColor: '#FFF',
@@ -23,7 +23,7 @@ export default class extends Controller {
                 bar.path.setAttribute('stroke', state.color);
                 var value = Math.round(this.element.getAttribute('data-value'));
                 if (value === 0) {
-                    bar.setText('');
+                    bar.setText(value + ' %');
                 } else {
                     bar.setText(value + ' %');
                 }
