@@ -43,7 +43,7 @@
                         %
                     </strong>
                 </p>
-                <div class="progress mb-4">
+                <div class="progress mb-1">
                     <div class="progress-bar-striped bg-success" role="progressbar"
                          style="width: {{ calculPercent|number_format(0, '.', '') }} %"
                          aria-valuenow="{{ calculPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -52,7 +52,7 @@
                     <div class="swiper-wrapper">
                         {% set numberOfSuccessByCategory = 0 %}
                         <div class="swiper-slide swiper-favorites w-100 pt-4">
-                            <div class="m-auto pb-4">
+                            <div class="m-auto pb-5">
                                 {% for key, successByCategory in success %}
                                 {% if numberOfSuccessByCategory < 3 %}
                                 <div class="category-wrapper">
