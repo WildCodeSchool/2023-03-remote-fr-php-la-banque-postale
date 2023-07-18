@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un ami{% endblock %}
+
+{% block body %}
+	<div class="bg-secondary rounded m-auto col-10 p-5 text-center">
+    {% for messages in app.flashes('sendStatus') %}
+        <div class="alert alert-success">
+            {{ messages }}
+        </div>
+    {% endfor %}
+    <h1 class="mb-5 text-uppercase">Tape l'adresse mail de ton ami pour l'ajouter</h1>
+    {{ form_start(addFriendForm) }}
+    {{ form_row(addFriendForm.email, {'attr': {'placeholder': 'example@example.com'}}) }}
+    <div class="mt-5">
+        <button type="submit">Envoyer</button>
+    </div>
+    {{ form_end(addFriendForm) }}
+</div>
+
+
+{% endblock %}

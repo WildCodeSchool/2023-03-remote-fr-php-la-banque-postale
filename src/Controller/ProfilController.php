@@ -2,23 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Friend;
+use App\Repository\FriendRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use App\Services\PercenTool;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgressRepository;
 use App\Repository\QuestionRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfilController extends AbstractController
 {
     #[Route('/profil', name: 'app_profil')]
     public function index(
+        Request $request,
+        FriendRepository $friendRepository,
         QuestionRepository $questionRepository,
         ProgressRepository $progressRepository,
         CategoryRepository $categoryRepository,
         PercenTool $percenTool
     ): Response {
+        /** @var User $user */
         $user = $this->getUser();
         $questions = $questionRepository->findAll();
         $progress = $progressRepository->findBy(['user' => $user]);
@@ -27,13 +34,12 @@ class ProfilController extends AbstractController
         $success = [];
         $categoryName = [];
 
-        foreach ($categories as $categoryId) {
-            $categoryObject = $categoryRepository->findOneBy(['id' => $categoryId]);
-            $title = $categoryId->getTitle();
+        foreach ($categories as $categoryObject) {
+            $title = $categoryObject->getTitle();
             $percentage = $percenTool->calculatePercentage($categoryObject);
 
-            $success[$categoryId->getId()] = $percentage;
-            $categoryName[$categoryId->getId()] = $title;
+            $success[$categoryObject->getId()] = $percentage;
+            $categoryName[$categoryObject->getId()] = $title;
         }
 
         $score = 0;
