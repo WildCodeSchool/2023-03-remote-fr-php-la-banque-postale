@@ -176,7 +176,7 @@ In summary, the "Ligne Bleue" project is an educational platform focused on digi
  bash script.sh 
 ```
 for the creation of the database and the fixture loader.
-3. Dont forget to implement your mailer for the e-card page.
+3. Create your account (not mandatory).
 4. Enjoy your visit.
 
 ## Login Credentials 
@@ -193,9 +193,9 @@ For the user :
 For this project we used many bundles : 
 
 * ### KNP Paginator Bundle : 
-We have used KNP for the pagination of the galery.
+For the administrable part. This bundle is specifically designed for Symfony and offers pagination functionality, allowing me to manage and display large datasets efficiently.
 * ### FOS CKEditor Bundle :
-To allow users to customize the formatting of their message when they send their e-cards.
+We used for the admin section. It integrates the CKEditor rich text editor into Symfony easily, providing advanced functionality for managing HTML content.
 * ### Doctrine Fixture Bundle :
 Symfony extension for automated loading of test data into the database.
 * ### Exercise HTMLPurifier Bundle :
