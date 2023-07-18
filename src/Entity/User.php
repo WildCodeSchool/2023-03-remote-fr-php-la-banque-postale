@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\Avatar;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cet e-mail')]
@@ -19,13 +18,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     /**
@@ -39,19 +38,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Avatar $avatar = null;
+
     #[ORM\ManyToMany(targetEntity: Tutorial::class, inversedBy: 'users')]
     private Collection $tutorialsBookmarked;
-    public function __construct()
-    {
-        $this->tutorialsBookmarked = new ArrayCollection();
-        $this->progress = new ArrayCollection();
-    }
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
 
+    #[ORM\OneToMany(mappedBy: 'sendBy', targetEntity: Friend::class, orphanRemoval: true)]
+    private Collection $friends;
+
+    #[ORM\OneToMany(mappedBy: 'sendTo', targetEntity: Friend::class, orphanRemoval: true)]
+    private Collection $friendOf;
+
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Progress::class)]
     private Collection $progress;
+
+    public function __construct()
+    {
+        $this->tutorialsBookmarked = new ArrayCollection();
+        $this->friends = new ArrayCollection();
+        $this->friendOf = new ArrayCollection();
+        $this->progress = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -63,7 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -92,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -107,7 +116,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -128,7 +137,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setName(?string $name): static
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -152,12 +161,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->dateInscription;
     }
 
-    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
 
         return $this;
     }
+
     /**
      * @return Collection<int, Tutorial>
      */
@@ -166,7 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->tutorialsBookmarked;
     }
 
-    public function addTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
+    public function addTutorialsBookmarked(Tutorial $tutorialsBookmarked): self
     {
         if (!$this->tutorialsBookmarked->contains($tutorialsBookmarked)) {
             $this->tutorialsBookmarked->add($tutorialsBookmarked);
@@ -175,9 +185,70 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeTutorialsBookmarked(Tutorial $tutorialsBookmarked): static
+    public function removeTutorialsBookmarked(Tutorial $tutorialsBookmarked): self
     {
         $this->tutorialsBookmarked->removeElement($tutorialsBookmarked);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friend>
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+    }
+
+    public function addFriend(Friend $friend): self
+    {
+        if (!$this->friends->contains($friend)) {
+            $this->friends->add($friend);
+            $friend->setSendBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(Friend $friend): self
+    {
+        if ($this->friends->removeElement($friend)) {
+            // set the owning side to null (unless already changed)
+            if ($friend->getSendBy() === $this) {
+                $friend->setSendBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friend>
+     */
+    public function getFriendOf(): Collection
+    {
+        return $this->friendOf;
+    }
+
+    public function addFriendOf(Friend $friendOf): self
+    {
+        if (!$this->friendOf->contains($friendOf)) {
+            $this->friendOf->add($friendOf);
+            $friendOf->setSendTo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendOf(Friend $friendOf): self
+    {
+        if ($this->friendOf->removeElement($friendOf)) {
+            // set the owning side to null (unless already changed)
+            if ($friendOf->getSendTo() === $this) {
+                $friendOf->setSendTo(null);
+            }
+        }
+
         return $this;
     }
 
@@ -189,7 +260,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->progress;
     }
 
-    public function addProgress(Progress $progress): static
+    public function addProgress(Progress $progress): self
     {
         if (!$this->progress->contains($progress)) {
             $this->progress->add($progress);
@@ -199,7 +270,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeProgress(Progress $progress): static
+    public function removeProgress(Progress $progress): self
     {
         if ($this->progress->removeElement($progress)) {
             // set the owning side to null (unless already changed)

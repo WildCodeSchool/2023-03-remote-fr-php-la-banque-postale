@@ -3,7 +3,7 @@
 {% block title %}Tutoriel - {{ tutorial.name }}{% endblock %}
 
 {% block body %}
-        <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
+    <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
 
     <div class="container">
         <div class="bg-secondary rounded m-auto mt-4 p-4 col-10">
@@ -26,15 +26,16 @@
                 </div>
             </div>
             {% if app.user %}
-            {% if lastscore is not null and lastscore >= 4 %}
-                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
-                        class="fa-solid fa-circle-check fa-bounce text-success ms-3" style="color: #00eb1b;"></i></h1>
-            {% elseif lastscore is not null and lastscore < 4 %}
-                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
-                        class="fa-solid fa-circle-xmark fa-bounce ms-3" style="color: #ff0000;"></i></h1>
-            {% else %}
-                <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
-            {% endif %}
+                {% if lastscore is not null and lastscore >= 4 %}
+                    <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
+                            class="fa-solid fa-circle-check fa-bounce text-success ms-3" style="color: #00eb1b;"></i>
+                    </h1>
+                {% elseif lastscore is not null and lastscore < 4 %}
+                    <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz<i
+                            class="fa-solid fa-circle-xmark fa-bounce ms-3" style="color: #ff0000;"></i></h1>
+                {% else %}
+                    <h1 class="text-center mt-3 mb-3 mb-md-3 mt-md-5">Quiz</h1>
+                {% endif %}
             {% endif %}
 
             {% if app.user %}
@@ -100,7 +101,7 @@
                 vos connaissances ! Rejoignez-nous en vous inscrivant dès maintenant pour accéder au quiz exclusif
                 et découvrez si vous êtes prêt à relever le défi. <a
                 href="{{ path('app_mail_choice') }}">Inscrivez-vous </a> et préparez-vous à vous surpasser !
-{% endif %}
+            {% endif %}
         </div>
     </div>
 

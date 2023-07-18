@@ -1,6 +1,6 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle'
-import './styles/swiper.scss'
+import './styles/_swiper.scss'
 
 const swiper = new Swiper(".mySwiper", {
     pagination: {

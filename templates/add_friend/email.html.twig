@@ -1,0 +1,15 @@
+<h1>Bonjour {{ userTarget.name }}!</h1>
+
+<p>Vous avez reçu une demande d'ami de la part de {{ userSource.name }}!</p>
+<p>Pour accepter la demande, cliquez sur le lien ci-dessous :</p>
+
+{% set url = url('app_accept_friend', {friendId: friendId}) %}
+<a href="{{ url }}">
+{{ url }}
+</a>
+
+<p>Si vous rencontrez des difficultés ou si vous avez des questions, n'hésitez pas à nous contacter.</p>
+
+<p>À bientôt sur Ligne Bleue !</p>
+
+<p>Cordialement,<br>L'équipe Ligne Bleue</p>
