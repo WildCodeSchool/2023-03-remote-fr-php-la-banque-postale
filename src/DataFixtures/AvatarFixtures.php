@@ -23,14 +23,12 @@ class AvatarFixtures extends Fixture
             'Avatar_10.png',
             'Avatar_11.png',
             'Avatar_12.png',
-            // Ajoutez les noms de vos images d'avatar supplémentaires ici
         ];
 
         foreach ($avatars as $avatar) {
             $avatarEntity = new Avatar();
             $avatarEntity->setName($avatar);
-            $avatarEntity->setPath($avatar); // Mettez à jour le chemin d'accès approprié à vos images d'avatar
-
+            $avatarEntity->setPath($avatar);
             $manager->persist($avatarEntity);
         }
 

@@ -153,7 +153,6 @@ class Tutorial
     public function removeQuestion(Question $question): static
     {
         if ($this->questions->removeElement($question)) {
-            // set the owning side to null (unless already changed)
             if ($question->getTutorial() === $this) {
                 $question->setTutorial(null);
             }
@@ -210,7 +209,6 @@ class Tutorial
     public function removeProgress(Progress $progress): static
     {
         if ($this->progress->removeElement($progress)) {
-            // set the owning side to null (unless already changed)
             if ($progress->getTutorial() === $this) {
                 $progress->setTutorial(null);
             }
