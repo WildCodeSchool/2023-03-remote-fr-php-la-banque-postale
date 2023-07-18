@@ -26,7 +26,7 @@ class PercenTool
         $score = $this->getScore($category);
         $tutorials = $category->getTutorials();
         $totalTutorials = count($tutorials);
-        $calculPercent = ($score / $totalTutorials) * 100;
+        $calculPercent = $totalTutorials ? ($score / $totalTutorials) * 100 : 0;
         return $calculPercent;
     }
 }
