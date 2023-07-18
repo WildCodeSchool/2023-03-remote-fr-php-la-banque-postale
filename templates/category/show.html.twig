@@ -5,20 +5,20 @@
 		<br>
 		{{ category.title }}
 		{% if app.user %}
-        {% if successByCategory >= 90 %}
-			<div class='d-flex  justify-content-center align-items-center'>
-                <i class="fa-solid fa-trophy text-secondary sm me-2"></i>
-				<div class="progress w-50">
-					<div class="progress-bar bg-success" style="width: {{ successByCategory }}%" aria-valuemin="0" aria-valuemax="100">{{ successByCategory }}%</div>
+			{% if successByCategory >= 90 %}
+				<div class='d-flex  justify-content-center align-items-center'>
+					<i class="fa-solid fa-trophy text-secondary sm me-2"></i>
+					<div class="progress w-50">
+						<div class="progress-bar bg-success" style="width: {{ successByCategory }}%" aria-valuemin="0" aria-valuemax="100">{{ successByCategory }}%</div>
+					</div>
+					<i class="fa-solid fa-trophy text-secondary sm ms-2"></i>
 				</div>
-				<i class="fa-solid fa-trophy text-secondary sm ms-2"></i>
-			</div>
-            {% else %}
+			{% else %}
 
 				<div class="progress w-50 m-auto mt-3">
 					<div class="progress-bar bg-success" style="width: {{ successByCategory }}%" aria-valuemin="0" aria-valuemax="100">{{ successByCategory }}%</div>
 				</div>
-            {% endif %}
+			{% endif %}
 		{% endif %}
 	</h1>
 
@@ -36,7 +36,7 @@
 					<div class="col text-center">
 						<div class="w-75 position-relative m-auto">
 							<a href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}" class="
-																																								                            btn btn-secondary p-4 mb-5 w-100 stretched-link">{{ tutorial.name }}
+																																																																																                            btn btn-secondary p-4 mb-5 w-100 stretched-link iconBookmarkBtn">{{ tutorial.name }}
 							</a>
 							{% if app.user %}
 								{{ component('bookmark', {
@@ -48,7 +48,7 @@
 				{% else %}
 					<div class="col text-center">
 						<div class="w-75 position-relative m-auto">
-							<a href="#" class="btn btn-dark p-4 mb-5 w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Connectez-vous pour y avoir accès">
+							<a href="#" class="btn btn-dark p-5 mb-5 w-100 iconBookmarkBtn" data-bs-toggle="tooltip" data-bs-placement="top" title="Connectez-vous pour y avoir accès">
 								{{ tutorial.name }}<i class="fa-solid fa-lock fa-2x position-absolute end-0 bottom-0 mb-5"></i>
 							</a>
 						</div>
@@ -60,4 +60,4 @@
 			{% endfor %}
 		</div>
 	</div>
-</div>{% endblock %}
+{% endblock %}

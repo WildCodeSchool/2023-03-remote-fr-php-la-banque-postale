@@ -67,7 +67,6 @@ class Category
     public function removeTutorial(Tutorial $tutorial): self
     {
         if ($this->tutorials->removeElement($tutorial)) {
-            // set the owning side to null (unless already changed)
             if ($tutorial->getCategory() === $this) {
                 $tutorial->setCategory(null);
             }
