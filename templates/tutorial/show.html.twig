@@ -7,16 +7,16 @@
 {% block body %}
 <<<<<<< HEAD
 	<h1 class="text-center text-light mt-5">Tutoriel :
-		{{ tutorial.name }}</h1>
+		{{ tutorial.name|purify }}</h1>
 =======
-    <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name }}</h1>
+    <h1 class="text-center text-light mt-5">Tutoriel : {{ tutorial.name|purify }}</h1>
 >>>>>>> a2a339fee8fbf533675b2870b6c6aa5e863299e7
 
 	<div class="container">
 		<div class="bg-secondary rounded m-auto mt-4 p-4 col-10">
 			<h2 class="text-center mb-2 mt-3">Objectifs</h2>
 			<ul class="text-center list-unstyled mb-5">
-				<li>{{ tutorial.objective }}</li>
+				<li>{{ tutorial.objective|purify }}</li>
 			</ul>
 
 			<div class="row-cols-md-2 d-flex flex-column flex-md-row">
@@ -24,12 +24,12 @@
 					<p>Clique sur cette vidéo
 						<i class="fa-solid fa-arrow-down"></i>
 					</p>
-					<iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					<iframe height="250" src="https://www.youtube.com/embed/{{ tutorial.video }}" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 				</div>
 
 <<<<<<< HEAD
 				<div class="col m-auto">
-					<p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}</p>
+					<p class="p-1 p-md-3 p-lg-5">{{ tutorial.description|purify }}</p>
 				</div>
 			</div>
 			{% if app.user %}
@@ -45,7 +45,7 @@
 			{% endif %}
 =======
                 <div class="col m-auto">
-                    <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}</p>
+                    <p class="p-1 p-md-3 p-lg-5">{{ tutorial.description|purify }}</p>
                 </div>
             </div>
             {% if app.user %}
