@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="mt-5 mb-5 text-center">Modifier la catégorie "{{ category.title }}"</h1>
-
-	{{ include('/admin/admin_category/_form.html.twig', {'button_label': 'Valider la modification'}) }}
-    {{ include('/admin/admin_category/_delete_form.html.twig') }}
-    <a href="{{ path('app_admin_category_index') }}">Retour à la liste des catégories</a>
-
+    <h1 class="mt-5 mb-5 text-center">Modifier la catégorie "{{ category.title }}"</h1>
+    <div class="container mt-5">
+        {{ include('/admin/admin_category/_form.html.twig', {'button_label': 'Valider la modification'}) }}
+        {{ include('/admin/admin_category/_delete_form.html.twig') }}
+        <a href="{{ path('app_admin_category_index') }}">Retour à la liste des catégories</a>
+    </div>
 {% endblock %}
