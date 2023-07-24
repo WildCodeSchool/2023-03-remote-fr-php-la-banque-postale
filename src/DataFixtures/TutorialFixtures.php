@@ -93,6 +93,7 @@ class TutorialFixtures extends Fixture implements DependentFixtureInterface
                 $tutorial->setDescription($faker->paragraphs(3, true));
                 $tutorial->setPublic((bool) rand(0, 1));
                 $tutorial->setCategory($this->getReference('category_' . $key));
+                $tutorial->setVideo('7yXKlmKo_qc');
                 $this->addReference('tutorial_' . self::$numTutorial, $tutorial);
                 $manager->persist($tutorial);
             }

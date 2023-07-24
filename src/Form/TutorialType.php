@@ -14,9 +14,10 @@ class TutorialType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description', CKEditorType::class)
+            ->add('description')
+            ->add('video')
             ->add('public')
-            ->add('objective', CKEditorType::class)
+            ->add('objective')
             ->add('category', null, ['choice_label' => 'title'])
         ;
     }
