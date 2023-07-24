@@ -43,6 +43,9 @@ class Tutorial
     #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Progress::class)]
     private Collection $progress;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $video = null;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -213,6 +216,17 @@ class Tutorial
                 $progress->setTutorial(null);
             }
         }
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): static
+    {
+        $this->video = $video;
 
         return $this;
     }

@@ -4,9 +4,9 @@
 
 {% block body %}
     <h1 class="text-center mt-5">Ajouter une réponse à la question <br> {{ question.title }}</h1>
-<div class="container mt-5">
-    {{ include('/admin/admin_answer/_form.html.twig') }}
+    <div class="container mt-5">
+        {{ include('/admin/admin_answer/_form.html.twig') }}
 
-    <a href="{{ path('app_admin_tutorial_show', {'id': question.tutorial.id}) }}">Retour au tutoriel</a>
-</div>
-    {% endblock %}
+        <a href="{{ path('app_admin_tutorial_show', {'id': question.tutorial.id}) }}">Retour au tutoriel</a>
+    </div>
+{% endblock %}
