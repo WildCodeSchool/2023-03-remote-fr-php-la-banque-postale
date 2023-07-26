@@ -4,17 +4,15 @@
 {% endblock %}
 
 {% block body %}
-
 	<div class="container">
 		{{ form_start(registrationForm) }}
 		<h1 class="text-center text-light mb-5">Qui es-tu ?
 			<br>
-			Complète ton pofil !</h1>
+			Inscris-toi !</h1>
 		<div class="row">
-			<div class="col-4 offset-4">
-				<div class="card m-auto bg-secondary align-items-center">
-					<div class="card-body w-75">
-						<h4 class="card-title text-center">Inscription</h4>
+			<div class="col-sm-6 m-auto">
+				<div class="card bg-secondary align-items-center">
+					<div class="card-body col-lg-6">
 						{{ form_errors(registrationForm) }}
 						{{ form_start(registrationForm) }}
 						<div class="form-group mb-2">
@@ -37,11 +35,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-4 offset-4 d-flex">
+			<div class="d-flex justify-content-center align-items-center">
 				<button type="submit" class="btn btn-success rounded-pill ms-auto me-auto mt-3">Clique ici pour t'inscrire</button>
 			</div>
 		</div>
 		{{ form_end(registrationForm) }}
 	</div>
-
 {% endblock %}

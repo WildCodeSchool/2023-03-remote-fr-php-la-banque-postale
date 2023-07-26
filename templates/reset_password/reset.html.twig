@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réinitialiser votre mot de passe
+{% block title %}Ligne bleue - Réinitialisation du mot de passe
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<div class="row">
-			<h1 class="text-center text-light mb-5">Réinitialiser votre mot de passe</h1>
-
+        <h1 class="text-center text-light mb-5">Réinitialiser votre mot de passe</h1>
+		<div class="row col-sm-8 col-md-6 col-lg-4 m-auto">
 			{{ form_start(resetForm, {'attr': {'class': 'form-control bg-dark
-                            text-light m-auto w-50 border-0'}})  }}
+                            text-light m-auto border-0'}})  }}
 			{{ form_row(resetForm.plainPassword) }}
 			<div class="text-center p-3">
-				<button class="btn btn-success">Réinitialiser le mot de passe</button>
+				<button class="btn btn-success">Valider</button>
 			</div>
 			{{ form_end(resetForm) }}
 		</div>

@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Email de réinitialisation du mot de passe envoyé !
+{% block title %}Ligne bleue - Réinitialisation du mot de passe
 {% endblock %}
 
 {% block body %}
 	<div class="container">
 		<div class="row">
-			<h1 class="text-center text-light">Email de réinitialisation du mot de passe envoyé !</h1>
+			<h1 class="text-center text-light">Réinitialisation du mot de passe!</h1>
 			<h2 class="text-center text-light fst-italic">Vérifier votre boîte mail</h2>
 			<p class="text-center text-light m-1">
 				S'il existe un compte correspondant à votre adresse e-mail, un e-mail contenant un lien vous permettant de réinitialiser votre mot de passe vient d'être envoyé.<br>Ce lien expirera dans
@@ -15,7 +15,7 @@
 			</p>
 			<p class="text-light text-center">
 				Si vous ne recevez pas d'e-mail, vérifiez votre dossier spam ou cliquez sur le bouton suivant :</p>
-			<a href="{{ path('app_forgot_password_request') }}" class="btn btn-dark btn-center m-auto col-6 w-25">
+			<a href="{{ path('app_forgot_password_request') }}" class="btn btn-success btn-center m-auto col-6 w-25">
 				Réessayez</a>
 		</div>
 	</div>

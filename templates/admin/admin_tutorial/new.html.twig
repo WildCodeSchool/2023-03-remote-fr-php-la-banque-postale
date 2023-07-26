@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="mt-5 mb-5 text-center">Ajouter un nouveau tutoriel</h1>
     <div class="container mt-5">
-        {{ include('admin_tutorial/_form.html.twig') }}
+        {{ include('/admin/admin_tutorial/_form.html.twig') }}
 
         <a href="{{ path('app_admin_tutorial_index') }}">Retour à la liste des tutoriels</a>
     </div>

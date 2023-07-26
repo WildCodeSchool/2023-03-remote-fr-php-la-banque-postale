@@ -25,7 +25,7 @@ class AcceptFriendController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/accept/friend/{friendId}', name: 'app_accept_friend')]
+    #[Route('/acceptation/ami/{friendId}', name: 'app_accept_friend')]
     #[Entity('friend', options: ['mapping' => ['friendId' => 'id']])]
     #[IsGranted('ROLE_USER')]
     public function acceptFriend(Request $request, Friend $friend): Response

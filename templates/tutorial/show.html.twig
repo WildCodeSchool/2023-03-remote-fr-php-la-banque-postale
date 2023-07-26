@@ -1,15 +1,14 @@
-{% extends 'layout/layout-center.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Tutoriel -
 	{{ tutorial.name }}
 {% endblock %}
 
 {% block body %}
-	<h1 class="text-center text-light mt-5">Tutoriel :
+	<h1 class="titre-haut text-center text-light">Tutoriel :
 		{{ tutorial.name }}</h1>
-
 	<div class="container">
-		<div class="bg-secondary rounded m-auto mt-4 p-4 col-10">
+		<div class="bg-secondary rounded m-auto mt-4 p-4 col-lg-10">
 			<h2 class="text-center mb-2 mt-3">Objectifs</h2>
 			<ul class="text-center list-unstyled mb-5">
 				<li>{{ tutorial.objective }}</li>
@@ -22,7 +21,6 @@
 					</p>
 					<iframe height="250" src="https://www.youtube.com/embed/{{ tutorial.video }}" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 				</div>
-
 				<div class="col m-auto">
 					<p class="p-1 p-md-3 p-lg-5">{{ tutorial.description }}</p>
 				</div>
@@ -72,7 +70,7 @@
 									<div class="text-center mb-2 mb-md-5 mt-3 mt-md-5">
 										<h3>{{ question.title |purify }}</h3>
 									</div>
-									<div class="w-75 d-flex flex-column m-auto">
+									<div class="col-10 col-lg-9 d-flex flex-column m-auto">
 										{% for answer in question.answers %}
 											<label class="link-animation bg-primary text-light mb-2 p-2 rounded-4" for="answer-{{ answer.id }}">
 												<input type="radio" class="me-2" name="{{ question.id }}" value="{{ answer.id }}" id="answer-{{ answer.id }}">
@@ -82,9 +80,9 @@
 									</div>
 									<div class="w-100">
 										<div class="button-set w-75 m-auto text-center">
-											<button class="button-prev bg-success p-2 border-0 rounded-2 text-light mb-2">Question précédente
+											<button class="button-prev bg-success p-2 border-0 rounded-2 text-light mb-2" {% if loop.first %} style="display: none;" {% endif %}>Question précédente
 											</button>
-											<button class="button-next bg-success border-0 p-2 rounded-2 text-light" {% if loop.last %} style="display: none;" {% endif %}>Question suivante
+											<button class="button-next bg-success border-0 p-2 rounded-2 text-light mb-2" {% if loop.last %} style="display: none;" {% endif %} {% if loop.first %} style="width: 10rem; margin: auto;" {% endif %}>Question suivante
 											</button>
 										</div>
 									</div>
@@ -100,7 +98,6 @@
 					</div>
 				</form>
 			{% else %}
-
 				Ne manquez pas l'occasion de tester
 								                vos connaissances ! Rejoignez-nous en vous inscrivant dès maintenant pour accéder au quiz exclusif
 								                et découvrez si vous êtes prêt à relever le défi.
@@ -110,6 +107,5 @@
 			{% endif %}
 		</div>
 	</div>
-
 {% endblock %}
 

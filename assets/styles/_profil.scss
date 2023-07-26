@@ -1,0 +1,68 @@
+@media only screen and (max-width: 992px) {
+
+    .progression,
+    .favorites {
+        height: auto;
+    }
+
+    .favorite-section {
+        margin-top: 2rem;
+    }
+}
+
+.friend-section {
+    margin-top: 2rem;
+}
+
+@media only screen and (min-width: 992px) {
+
+    .progression,
+    .favorites {
+        height: 20rem;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1050px) {
+    .liste-favoris {
+        margin-bottom: 0rem;
+    }
+}
+
+.iconAdd {
+    top: -8px;
+    right: -8px;
+}
+
+.iconBookmark {
+    top: -1%;
+    right: -1%;
+}
+
+.iconBookmarkBtn {
+    margin-right: 6px;
+    margin-top: 10px;
+}
+
+@media only screen and (min-width: 1030px) {
+    .progress-favorites {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .liste-favoris {
+        margin-bottom: 1rem;
+    }
+    .progress-width {
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 1030px) {
+    .progress-favorites {
+        display: flex;
+        flex-direction: column;
+    }
+    .liste-favoris {
+        margin-bottom: 1rem;
+    }
+
+}

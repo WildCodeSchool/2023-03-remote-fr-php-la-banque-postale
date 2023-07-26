@@ -2,16 +2,16 @@
     <nav>
 	<ul class="navbar fixed-top justify-content-between list-unstyled">
 		<li>
-			<div class="ms-5">
+			<div class="ms-2 ms-lg-5">
 				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="logo mt-2 rounded-circle">
 			</div>
 		</li>
 		<li>
-				<div class="btn-group me-5 d-flex align-items-center">
-					<p class='text-white font-weight-bold m-0 me-4'>
+				<div class="btn-group me-2 me-lg-5 d-flex align-items-center">
+					<p class='text-white font-weight-bold m-0 me-2 me-lg-4'>
 						{{ app.user.name|title }}</p>
                 {% if app.user.avatar is null %}
-                    <button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill overflow-hidden" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill overflow-hidden me-2 me-lg-0" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user fa-2x text-primary"></i>
                     </button>
                 {% else %}
@@ -38,12 +38,12 @@
     <nav>
 	<ul class="navbar fixed-top justify-content-between list-unstyled">
 		<li>
-			<div class="ms-5">
+			<div class="ms-2 ms-lg-5">
 				<img src="{{ asset('build/images/logo-rond.png') }}" alt="" class="logo mt-2 rounded-circle">
 			</div>
 		</li>
 		<li>
-			<div class="btn-group me-5">
+			<div class="btn-group me-2 me-lg-5">
 				<button type="button" class="btn btn-light dropdown-toggle text-primary rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
 					<i class="fa-solid fa-user fa-2x text-primary"></i>
 				</button>

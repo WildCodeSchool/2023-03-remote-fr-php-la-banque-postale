@@ -4,21 +4,16 @@
 {% endblock %}
 
 
-{% block content %}
-    <div class="white-stripe fixed-top text-center mt-4">
-        <img src="{{ asset('build/images/logo.png') }}" alt="">
-    </div>
+{% block body %}
     <div class="container">
         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1">
             <div class="col m-auto text-center">
-                <div class="col m-auto fw-bold text-center h4 text-light mb-4">As-tu une adresse mail ?</div>
-                <a href="{{ path('app_register') }}" class="btn btn-secondary mb-4 btn-lg w-100 text-uppercase">J'ai une
+                <div class="col m-auto fw-bold text-center h4 text-light mb-4">As-tu déjà une adresse mail ?</div>
+                <a href="{{ path('app_register') }}" class="btn  btn-secondary mb-4 btn-lg w-100 text-uppercase">J'ai une
                     adresse mail</a>
                 <a href="{{ path('app_mail_tutorial') }}" class="btn btn-secondary mb-4 btn-lg w-100 text-uppercase">Je
                     n'ai pas d'adresse mail</a>
             </div>
         </div>
     </div>
-
-
 {% endblock %}
