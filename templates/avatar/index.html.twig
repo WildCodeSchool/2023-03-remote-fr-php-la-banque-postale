@@ -1,30 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Avatars - Ligne bleue
+{% block title %}Ligne bleue - Choix de l'avatar
 {% endblock %}
 
 {% block body %}
-	<div class="d-flex flex-column">
-		<div class="bg-secondary rounded m-auto col-10 p-5">
-			<h1 class="text-center">Choisissez votre avatar</h1>
-
-			{{ form_start(avatarForm) }}
-			<div class="row justify-content-center">
-				{% for avatar in avatarForm.avatar %}
-					<div class="col-12 col-sm-6 col-md-4 col-lg-2">
-						<div class="form-check mx-3 d-flex flex-column justify-content-center">
-							{{ form_label(avatar, null, {'label_attr': {'class': 'form-check-label p-2 text-center'}}) }}
-							{{ form_widget(avatar, {'attr': {'class': 'd-block mx-auto'}}) }}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-		<div class="row justify-content-center mt-3">
-			<div class="col-12 text-center">
-				<button type="submit" class="btn btn-success rounded-pill">Valider</button>
-			</div>
-		</div>
-		{{ form_end(avatarForm) }}
-	</div>
+    <h1 class="titre-haut text-center mb-3 text-light">Choisissez votre avatar</h1>
+    <div class="me-2 ms-2 me-lg-5 ms-lg-5 bg-secondary rounded m-auto p-2
+        p-lg-5 d-flex flex-column align-items-center justify-content-center">
+        {{ form_start(avatarForm) }}
+        <div class="row justify-content-center">
+            {% for avatar in avatarForm.avatar %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <div class="form-check d-flex flex-column justify-content-center align-items-center">
+                        {{ form_label(avatar, null, {'label_attr': {'class': 'form-check-label text-center'}}) }}
+                        {{ form_widget(avatar, {'attr': {'class': 'd-block'}}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-success rounded-pill">Valider</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(avatarForm) }}
 {% endblock %}

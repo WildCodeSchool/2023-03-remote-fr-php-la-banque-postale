@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ligne bleue - {{ category.title }}
+{% endblock %}
+
 {% block body %}
-	<h1 class="text-center text-secondary mt-5 mb-5 text-uppercase">Catégorie :
-		<br>
+	<h1 class="titre-haut text-center text-secondary mb-5 text-uppercase">Catégorie :
+        <br>
 		{{ category.title }}
 		{% if app.user %}
 			{% if successByCategory >= 90 %}

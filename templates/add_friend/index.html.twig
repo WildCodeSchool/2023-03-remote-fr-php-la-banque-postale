@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un ami
+{% block title %}Ligne bleue - Demande d'ami
 {% endblock %}
 
 {% block body %}
-	<div class="bg-secondary rounded m-auto col-10 p-5 text-center">
+	<div class="me-2 ms-2 me-lg-5 ms-lg-5 bg-secondary rounded m-auto p-5 text-center">
 		{% for messages in app.flashes('sendStatus') %}
 			<div class="alert alert-success">
 				{{ messages }}

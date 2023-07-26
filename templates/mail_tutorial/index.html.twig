@@ -4,15 +4,14 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h1 class="text-center text-light mt-5">
-            Comment créer une adresse mail ?
-        </h1>
-    </div>
+    <h1 class="titre-haut text-center text-light mb-3">
+        Comment créer une adresse mail ?
+    </h1>
     <div class="container">
-        <div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
+        <div
+            class="me-2 ms-2 me-lg-5 ms-lg-5 bg-secondary rounded m-auto p-2 p-lg-5 d-flex flex-column align-items-center justify-content-center">
             <h2 class="text-center mb-2 mt-3"> Objectifs </h2>
-            <ul class="text-center list-unstyled mb-5">
+            <ul class="text-center list-unstyled mb-3 mb-lg-5">
                 <li>
                     Créer une adresse e-mail
                 </li>
@@ -20,8 +19,6 @@
                     Comprendre à quoi sert une adresse e-mail
                 </li>
             </ul>
-
-
             <div class="row-cols-md-2 d-flex flex-column flex-md-row">
                 <div class="col m-auto fw-bold text-center">
                     <p>Clique sur cette vidéo <i class="fa-solid fa-arrow-down"></i></p>
@@ -37,11 +34,15 @@
                         ce
                         soit pour des échanges personnels ou professionnels. </p>
                     <ul>
-                        <li><a href="https://fr.tuto.com/blog/2018/04/creer-un-compte-gmail.htm">Cliques ici pour créer
-                                un compte Gmail</a></li>
-                        <li><a href="{{ path('app_register') }}">Cliques ici pour t'inscrire lorsque tu as créé ton
+                        <li>
+                            <a href="https://fr.tuto.com/blog/2018/04/creer-un-compte-gmail.htm">Cliques ici pour créer
+                                un compte Gmail</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_register') }}">Cliques ici pour t'inscrire lorsque tu as créé ton
                                 adresse
-                                e-mail</a></li>
+                                e-mail</a>
+                        </li>
                     </ul>
 
                 </div>

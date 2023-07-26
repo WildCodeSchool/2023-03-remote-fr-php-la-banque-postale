@@ -14,7 +14,7 @@ use Symfony\Config\Doctrine\Dbal\ConnectionConfig\SlaveConfig;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[IsGranted('ROLE_ADMIN')]
-#[Route('/admin/category')]
+#[Route('/admin/categories')]
 class AdminCategoryController extends AbstractController
 {
     #[Route('/', name: 'app_admin_category_index', methods: ['GET'])]

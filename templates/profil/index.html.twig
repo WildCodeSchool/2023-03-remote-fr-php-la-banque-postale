@@ -10,7 +10,7 @@
                 {{ messages }}
             </div>
         {% endfor %}
-        <h1 class="text-secondary mt-5 mb-5 text-uppercase text-center">Mon Profil</h1>
+        <h1 class="titre-haut text-secondary mb-5 text-uppercase text-center">Mon Profil</h1>
         <div class="d-flex justify-content-lg-around flex-column flex-lg-row mt-5 mb-5 ">
             <div class="text-white col-lg-6">
                 <div class="text-center text-lg-center">
@@ -21,143 +21,145 @@
                 </div>
             </div>
             <div class="text-center m-auto">
-                <a href="{{ path('app_add_friend') }}" class="btn btn-success position-relative m-auto mb-3 btn-lg text-uppercase">
+                <a href="{{ path('app_add_friend') }}"
+                   class="btn btn-success position-relative m-auto mb-3 btn-lg text-uppercase">
                     <i class="fa-solid fa-people-group me-2"></i>
                     Ajoute tes amis !
                     <i class="position-absolute iconAdd fa-solid fa-plus"></i>
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="progress-favorites">
-        <div class="progress-width">
-            <h2 class="text-light text-center mt-5">Ma progression</h2>
-            <div class="bg-secondary progression rounded me-2 ms-2 p-2">
-                <p class="text-center">
-                    <strong>Votre progression totale est de
-                        {{ calculPercent|number_format(0, '.', '') }}
-                        %
-                    </strong>
-                </p>
-                <div class="progress mb-3 ms-2 me-2">
-                    <div class="progress-bar-striped bg-success" role="progressbar"
-                         style="width: {{ calculPercent|number_format(0, '.', '') }} %"
-                         aria-valuenow="{{ calculPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="swiper mySwiperFavorite">
-                    <div class="swiper-wrapper">
-                        {% set numberOfSuccessByCategory = 0 %}
-                        <div class="swiper-slide swiper-favorites w-100">
-                            <div class="m-auto pb-5">
-                                {% for key, successByCategory in success %}
-                                {% if numberOfSuccessByCategory < 3 %}
-                                <div class="category-wrapper mb-1">
-                                    <div class="category-name ms-sm-5">{{ categoryName[key] }}</div>
-                                    <div class="circle-bar me-sm-5" {{ stimulus_controller('circleBar') }}
-                                         data-value="{{ successByCategory }}"></div>
-                                </div>
-                                {% set numberOfSuccessByCategory = numberOfSuccessByCategory + 1 %}
-                                {% else %}
-                            </div>
-                        </div>
-                        <div class="swiper-slide w-100">
-                            <div class="m-auto pb-4">
-                                {% set numberOfSuccessByCategory = 1 %}
-                                <div class="category-wrapper mb-1">
-                                    <div class="category-name ms-sm-5">{{ categoryName[key] }}</div>
-                                    <div class="circle-bar me-sm-5" {{ stimulus_controller('circleBar') }}
-                                         data-value="{{ successByCategory }}"></div>
-                                </div>
-                                {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
+
+        <div class="progress-favorites">
+            <div class="progress-width">
+                <h2 class="text-light text-center mt-5">Ma progression</h2>
+                <div class="bg-secondary progression rounded me-2 ms-2 p-2">
+                    <p class="text-center">
+                        <strong>Votre progression totale est de
+                            {{ calculPercent|number_format(0, '.', '') }}
+                            %
+                        </strong>
+                    </p>
+                    <div class="progress mb-3 ms-2 me-2">
+                        <div class="progress-bar-striped bg-success" role="progressbar"
+                             style="width: {{ calculPercent|number_format(0, '.', '') }} %"
+                             aria-valuenow="{{ calculPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <div class="swiper-button-next text-success"></div>
-                    <div class="swiper-button-prev text-success"></div>
-                    <div class="swiper-pagination-favorite text-center mt-0"></div>
-                </div>
-            </div>
-        </div>
-        <div class="w-100 favorite-section">
-            <h2 class="text-light text-center mt-5">Mes favoris</h2>
-            <div class="bg-secondary favorites rounded ms-2 me-2 p-2">
-                <div class="swiper mySwiperFavorite">
-                    <div class="swiper-wrapper">
-                        {% set numberOfFavorites = 0 %}
-                        <div class="swiper-slide swiper-favorites w-100 pt-4">
-                            <ul class="w-50 m-auto list-unstyled mt-lg-3">
-                                {% for tutorial in favoris %}
-                                {% if numberOfFavorites < 5 %}
-                                <li class="link-animation liste-favoris">
-                                    <i class="fa-solid fa-star me-3"></i>
-                                    <a class="text-decoration-none text-dark"
-                                       href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
-                                        {{ tutorial.name }}
-                                    </a>
-                                </li>
-                                {% set numberOfFavorites = numberOfFavorites + 1 %}
-                                {% else %}
-                            </ul>
-                        </div>
-                        <div class="swiper-slide w-100 pt-4">
-                            <ul class="w-50 m-auto list-unstyled">
-                                {% set numberOfFavorites = 1 %}
-                                <li class="link-animation liste-favoris">
-                                    <i class="fa-solid fa-star me-3"></i>
-                                    <a class="text-decoration-none text-dark"
-                                       href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
-                                        {{ tutorial.name }}
-                                    </a>
-                                </li>
-                                {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="swiper-button-next text-success"></div>
-                    <div class="swiper-button-prev text-success"></div>
-                    <div class="swiper-pagination-favorite text-center"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% for status in ['accepted', 'pending'] %}
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-6">
-                <div class="text-center">
-                    <h1 class="text-light">{{ status == 'accepted' ? 'Mes amis' : 'Demandes en attente' }}</h1>
-                    <div class="bg-secondary rounded m-auto p-2 ms-2 me-2">
-                        {% set friends = app.user.friends|filter(friend => friend.status == status)|merge(app.user.friendOf|filter(friend => friend.status == status)) %}
-                        <div class="row">
-                            {% for friend in friends %}
-                                {% set userFriend = friend.sendTo == app.user ? friend.sendBy : friend.sendTo %}
-                                <div class="col-md-4">
-                                    <div class="card mb-4" style="min-height: 14rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ userFriend.name|title }}</h5>
-                                            <p>
-                                                {% if userFriend.avatar is null %}
-                                                    <i class="fa-solid fa-user fa-2x text-primary"></i>
-                                                {% else %}
-                                                    <img
-                                                        src="{{ asset('build/avatars/' ~ userFriend.avatar.getPath()) }}"
-                                                        alt="Avatar" class="avatar">
-                                                {% endif %}
-                                            </p>
-                                            <a href="{{ path('app_remove_friend', { id: friend.id }) }}"
-                                               class="btn btn-danger btn-sm">
-                                                Retirer
-                                            </a>
-                                        </div>
+                    <div class="swiper mySwiperFavorite">
+                        <div class="swiper-wrapper">
+                            {% set numberOfSuccessByCategory = 0 %}
+                            <div class="swiper-slide swiper-favorites w-100">
+                                <div class="m-auto ">
+                                    {% for key, successByCategory in success %}
+                                    {% if numberOfSuccessByCategory < 3 %}
+                                    <div class="category-wrapper mb-1">
+                                        <div class="category-name ms-sm-5">{{ categoryName[key] }}</div>
+                                        <div class="circle-bar me-sm-5" {{ stimulus_controller('circleBar') }}
+                                             data-value="{{ successByCategory }}"></div>
                                     </div>
+                                    {% set numberOfSuccessByCategory = numberOfSuccessByCategory + 1 %}
+                                    {% else %}
                                 </div>
-                            {% endfor %}
+                            </div>
+                            <div class="swiper-slide w-100">
+                                <div class="m-auto pb-4">
+                                    {% set numberOfSuccessByCategory = 1 %}
+                                    <div class="category-wrapper mb-1">
+                                        <div class="category-name ms-sm-5">{{ categoryName[key] }}</div>
+                                        <div class="circle-bar me-sm-5" {{ stimulus_controller('circleBar') }}
+                                             data-value="{{ successByCategory }}"></div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
+                        <div class="swiper-button-next text-success"></div>
+                        <div class="swiper-button-prev text-success"></div>
+                        <div class="swiper-pagination-favorite text-center mt-0"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 favorite-section">
+                <h2 class="text-light text-center mt-5">Mes favoris</h2>
+                <div class="bg-secondary favorites rounded ms-2 me-2 p-2">
+                    <div class="swiper mySwiperFavorite">
+                        <div class="swiper-wrapper">
+                            {% set numberOfFavorites = 0 %}
+                            <div class="swiper-slide swiper-favorites w-100 pt-4">
+                                <ul class="col-lg-5 col-md-10 col-8 m-auto list-unstyled mt-lg-3">
+                                    {% for tutorial in favoris %}
+                                    {% if numberOfFavorites < 5 %}
+                                    <li class="link-animation liste-favoris">
+                                        <i class="fa-solid fa-star me-3"></i>
+                                        <a class="text-decoration-none text-dark"
+                                           href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+                                            {{ tutorial.name }}
+                                        </a>
+                                    </li>
+                                    {% set numberOfFavorites = numberOfFavorites + 1 %}
+                                    {% else %}
+                                </ul>
+                            </div>
+                            <div class="swiper-slide w-100 pt-4">
+                                <ul class="col-lg-5 col-md-10 col-8 m-auto list-unstyled mt-lg-3">
+                                    {% set numberOfFavorites = 1 %}
+                                    <li class="link-animation liste-favoris">
+                                        <i class="fa-solid fa-star me-3"></i>
+                                        <a class="text-decoration-none text-dark"
+                                           href="{{ path("tutorial_show", {'slug': tutorial.slug}) }}">
+                                            {{ tutorial.name }}
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next text-success"></div>
+                        <div class="swiper-button-prev text-success"></div>
+                        <div class="swiper-pagination-favorite text-center"></div>
                     </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
+            {% for status in ['accepted', 'pending'] %}
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-6">
+                        <div class="text-center">
+                            <h1 class="text-light">{{ status == 'accepted' ? 'Mes amis' : 'Demandes en attente' }}</h1>
+                            <div class="bg-secondary rounded m-auto p-2 ms-2 me-2">
+                                {% set friends = app.user.friends|filter(friend => friend.status == status)|merge(app.user.friendOf|filter(friend => friend.status == status)) %}
+                                <div class="row">
+                                    {% for friend in friends %}
+                                        {% set userFriend = friend.sendTo == app.user ? friend.sendBy : friend.sendTo %}
+                                        <div class="col-6 col-md-4">
+                                            <div class="card mb-4" style="max-height: 14rem;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ userFriend.name|title }}</h5>
+                                                    <p>
+                                                        {% if userFriend.avatar is null %}
+                                                            <i class="fa-solid fa-user fa-2x text-primary"></i>
+                                                        {% else %}
+                                                            <img
+                                                                src="{{ asset('build/avatars/' ~ userFriend.avatar.getPath()) }}"
+                                                                alt="Avatar" class="avatar">
+                                                        {% endif %}
+                                                    </p>
+                                                    <a href="{{ path('app_remove_friend', { id: friend.id }) }}"
+                                                       class="btn btn-danger btn-sm">
+                                                        Supprimer
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
 {% endblock %}
