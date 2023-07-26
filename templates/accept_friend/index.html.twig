@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accepter une demande d'ami{% endblock %}
+{% block title %}Ligne bleue - Demande d'ami{% endblock %}
 
 {% block body %}
-<div class="bg-secondary rounded m-auto p-5 d-flex flex-column align-items-center justify-content-center">
-    <h1 class="mb-5 text-uppercase text-center"> {{ friend.SendBy.name }} vous a envoyé une demande d'ami</h1>
+<div class="me-2 ms-2 me-lg-5 ms-lg-5 bg-secondary rounded m-auto p-2 p-lg-5 d-flex flex-column align-items-center justify-content-center">
+    <h1 class="mb-5 p-2 text-uppercase text-center"> {{ friend.SendBy.name }} vous a envoyé une demande d'ami</h1>
 
 		{{ form_start(choiceFriendForm) }}
 		{{ form_row(choiceFriendForm) }}
 			<div class="mt-5">
-				<button class="btn btn-primary" type="submit">Envoyer</button>
+				<button class="btn btn-success" type="submit">Envoyer</button>
 			</div>
 		{{ form_end(choiceFriendForm) }}
 </div>

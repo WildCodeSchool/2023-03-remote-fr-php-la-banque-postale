@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/admin/tutorial')]
+#[Route('/admin/tutoriels')]
 class AdminTutorialController extends AbstractController
 {
     #[Route('/', name: 'app_admin_tutorial_index', methods: ['GET'])]
@@ -42,7 +42,7 @@ class AdminTutorialController extends AbstractController
             $request->query->getInt('page', 1),
             10
         );
-        return $this->render('admin_tutorial/index.html.twig', [
+        return $this->render('/admin/admin_tutorial/index.html.twig', [
             'tutorials' => $pagination,
             'form' => $form,
         ]);
@@ -63,7 +63,7 @@ class AdminTutorialController extends AbstractController
             return $this->redirectToRoute('app_admin_tutorial_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_tutorial/new.html.twig', [
+        return $this->renderForm('/admin/admin_tutorial/new.html.twig', [
             'tutorial' => $tutorial,
             'form' => $form,
         ]);
@@ -72,7 +72,7 @@ class AdminTutorialController extends AbstractController
     #[Route('/{id}', name: 'app_admin_tutorial_show', methods: ['GET'])]
     public function show(Tutorial $tutorial): Response
     {
-        return $this->render('admin_tutorial/show.html.twig', [
+        return $this->render('/admin/admin_tutorial/show.html.twig', [
             'tutorial' => $tutorial,
         ]);
     }
@@ -89,7 +89,7 @@ class AdminTutorialController extends AbstractController
             return $this->redirectToRoute('app_admin_tutorial_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_tutorial/edit.html.twig', [
+        return $this->renderForm('/admin/admin_tutorial/edit.html.twig', [
             'tutorial' => $tutorial,
             'form' => $form,
         ]);

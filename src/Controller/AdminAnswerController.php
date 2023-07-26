@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/answer')]
+#[Route('/admin/reponses')]
 class AdminAnswerController extends AbstractController
 {
     #[Route('/', name: 'app_admin_answer_index', methods: ['GET'])]

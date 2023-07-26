@@ -4,20 +4,31 @@
     background-size: cover;
     padding-bottom: 90px;
 }
+
 .logo {
     max-width: 60px;
     height: auto;
 }
+
 .footer {
     background-color: #132C5C;
     box-shadow: -0.5px -0.5rem 1rem 2px;
+}
+
+.avatar {
+    width: 3rem;
+}
+
+.titre-haut {
+    margin-top : 6rem;
 }
 
 @media only screen and (max-width: 800px) {
     .licorne {
         width: 15rem;
     }
-    .logo{
+
+    .logo {
         width: 5rem;
     }
 }

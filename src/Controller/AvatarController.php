@@ -19,7 +19,7 @@ class AvatarController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-    #[Route('/select-avatar', name: 'app_select_avatar')]
+    #[Route('/choix-avatar', name: 'app_select_avatar')]
     public function selectAvatar(Request $request): Response
     {
         /** @var User $user */

@@ -43,6 +43,9 @@ class Tutorial
     #[ORM\OneToMany(mappedBy: 'tutorial', targetEntity: Progress::class)]
     private Collection $progress;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $video = null;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -153,7 +156,6 @@ class Tutorial
     public function removeQuestion(Question $question): static
     {
         if ($this->questions->removeElement($question)) {
-            // set the owning side to null (unless already changed)
             if ($question->getTutorial() === $this) {
                 $question->setTutorial(null);
             }
@@ -210,11 +212,21 @@ class Tutorial
     public function removeProgress(Progress $progress): static
     {
         if ($this->progress->removeElement($progress)) {
-            // set the owning side to null (unless already changed)
             if ($progress->getTutorial() === $this) {
                 $progress->setTutorial(null);
             }
         }
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): static
+    {
+        $this->video = $video;
 
         return $this;
     }

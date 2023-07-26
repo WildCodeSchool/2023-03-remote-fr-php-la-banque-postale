@@ -4,33 +4,33 @@
 
 {% block body %}
     <h1 class="text-center mt-5">Liste des réponses</h1>
-<div class="container mt-5">
-    <table class="table">
-        <thead>
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Text</th>
                 <th>IsCorrect</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for answer in answers %}
-            <tr>
-                <td>{{ answer.id }}</td>
-                <td>{{ answer.text }}</td>
-                <td>{{ answer.isCorrect ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_answer_show', {'id': answer.id}) }}">Voir</a>
-                    <a href="{{ path('app_admin_answer_edit', {'id': answer.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+            {% for answer in answers %}
+                <tr>
+                    <td>{{ answer.id }}</td>
+                    <td>{{ answer.text }}</td>
+                    <td>{{ answer.isCorrect ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_answer_show', {'id': answer.id}) }}">Voir</a>
+                        <a href="{{ path('app_admin_answer_edit', {'id': answer.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

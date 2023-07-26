@@ -4,15 +4,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="">
-        <h1 class="text-center text-light mt-5">
-            Comment créer une adresse mail ?
-        </h1>
-    </div>
+    <h1 class="titre-haut text-center text-light mb-3">
+        Comment créer une adresse mail ?
+    </h1>
     <div class="container">
-        <div class="bg-secondary rounded m-auto mt-5 p-4 col-10">
+        <div
+            class="me-2 ms-2 me-lg-5 ms-lg-5 bg-secondary rounded m-auto p-2 p-lg-5 d-flex flex-column align-items-center justify-content-center">
             <h2 class="text-center mb-2 mt-3"> Objectifs </h2>
-            <ul class="text-center list-unstyled mb-5">
+            <ul class="text-center list-unstyled mb-3 mb-lg-5">
                 <li>
                     Créer une adresse e-mail
                 </li>
@@ -20,12 +19,13 @@
                     Comprendre à quoi sert une adresse e-mail
                 </li>
             </ul>
-
-
             <div class="row-cols-md-2 d-flex flex-column flex-md-row">
                 <div class="col m-auto fw-bold text-center">
                     <p>Clique sur cette vidéo <i class="fa-solid fa-arrow-down"></i></p>
-                    <iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe height="250" src="https://www.youtube.com/embed/2LjWULDEpJs" class="rounded w-100"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
                 </div>
                 <div class="col m-auto p-1 p-md-3 p-lg-5">
                     <h3 class="mb-3">A quoi sert une adresse e-mail ? </h3>
@@ -34,15 +34,20 @@
                         ce
                         soit pour des échanges personnels ou professionnels. </p>
                     <ul>
-                        <li><a href="https://fr.tuto.com/blog/2018/04/creer-un-compte-gmail.htm">Cliques ici pour créer
-                                un compte Gmail</a></li>
-                        <li><a href="{{ path('app_register') }}">Cliques ici pour t'inscrire lorsque tu as créé ton adresse e-mail</a></li>
+                        <li>
+                            <a href="https://fr.tuto.com/blog/2018/04/creer-un-compte-gmail.htm">Cliques ici pour créer
+                                un compte Gmail</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_register') }}">Cliques ici pour t'inscrire lorsque tu as créé ton
+                                adresse
+                                e-mail</a>
+                        </li>
                     </ul>
 
                 </div>
             </div>
 
-            <div class>
         </div>
     </div>
 {% endblock %}

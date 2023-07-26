@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AddFriendController extends AbstractController
 {
-    #[Route('/addfriend', name: 'app_add_friend')]
+    #[Route('/ajout/ami', name: 'app_add_friend')]
     public function addfriend(
         Request $request,
         MailerInterface $mailer,
